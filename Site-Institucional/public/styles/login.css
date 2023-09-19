@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;600;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Hind', sans-serif;
+}
+body*{
+    box-sizing: border-box;
+}
+
+.main-login {
+    width: 100vw;
+    height: auto;
+    background-image: url(../img/wave-superior.svg);
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.laft-login {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.laft-login h1 {
+    font-size: 30px;
+    color: #001a24;
+}
+
+.left-login-img {
+    width: 40vw;
+    cursor: pointer;
+}
+
+.raight-login {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px;
+    background: #FFFFFF;
+    border: 1px #001a2476 solid;
+    border-radius: 20px;
+    box-shadow: 15px 15px 20px #00000056;
+    background-image: url(./../img/img-wave.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.card-login h1 {
+    color:#001a24;
+    font-weight: 800;
+    margin: 0;
+}
+
+.textfield {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
+}
+
+.textfield input {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #e7fbff;
+    color: #001a24;
+    font-size: 12pt;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.textfield label {
+    color:#001a24;
+    margin-bottom: 10px;
+}
+
+.textfield input::placeholder {
+    color: #001a24;;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 16px 0px;
+    margin: 25px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #e4f6f8;
+    background: #458b9b;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #527880b9;
+}
+
+@media only screen and (max-width:950px) {
+    .card-login {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .main-login {
+        flex-direction: column;
+    }
+
+    .laft-login h1 {
+        display: none;
+    }
+
+    .laft-login {
+        width: 100vw;
+        height: auto;
+    }
+
+    .raight-login {
+        width: 100vw;
+        height: auto;
+    }
+    .left-login-img{
+        width: 43vh;
+    }
+    .card-login {
+        width: 75%;
+    }
+}

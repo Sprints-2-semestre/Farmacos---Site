@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@500&family=Poppins:wght@300&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container-nav {
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.container-content {
+    width: 75%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: transparent;
+    z-index: 1;
+}
+
+#container-items-Id {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: center;
+
+}
+
+#container-items-Id ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+
+}
+
+#container-items-Id ul li {
+    display: flex;
+    text-decoration: none;
+    color: black;
+
+
+}
+
+
+.itens-menu {
+    display: flex;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+#logo-img {
+    width: 15vw;
+
+}
+
+
+#logo-img:hover {
+    cursor: pointer;
+}
+
+.btn-entrar {
+    width: 8vw;
+    height: 5vh;
+    border-radius: 15px;
+    border: 1px solid white;
+    font-family: 'Arimo', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+}
+
+.btn-entrar:hover,
+.btn-cadastrar:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border-color: black;
+
+}
+
+.btn-cadastrar {
+    width: 8vw;
+    height: 5vh;
+    border: 1px solid white;
+    border-radius: 15px;
+    font-family: 'Arimo', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+}
+
+#btn-menu {
+    display: none;
+}
+
+.icones-menu-mobile {
+    display: none;
+}
+
+#img-x-fechar-menu {
+    display: none;
+}
+
+.menu-ativo {
+    display: none;
+}
+
+@media only screen and (max-width: 896px) {
+    .menu-ativo {
+        display: none;
+        width: 60vw;
+        height: calc(100vh - 70px);
+        background-color: rgb(255, 255, 255);
+        opacity: 95%;
+        z-index: 1000;
+        position: absolute;
+        right: 0;
+        top: 0;
+        align-items: start;
+    }
+
+
+    .icones-menu-mobile {
+        display: flex;
+    }
+
+    #img-x-fechar-menu {
+        display: flex;
+    }
+
+    #container-items-Id {
+        display: none;
+    }
+
+    .menu-ativo ul {
+        flex-direction: column;
+        margin-left: 14%;
+        font-weight: 600;
+        margin-top: 50px;
+
+    }
+
+
+    .itens-menu {
+        padding: 5px 0;
+        font-weight: bold;
+        color: black;
+    }
+
+    .btn-entrar {
+        display: none;
+    }
+
+    .btn-cadastrar {
+        display: none;
+    }
+
+    .container-content {
+        justify-content: space-between;
+    }
+
+    .icones-menu-mobile {
+        width: 5vw;
+        height: 20px;
+        margin-top: 1%;
+        margin-right: 8%;
+    }
+
+    #valores-menu-mobile {
+        width: 6vw;
+        height: 25px;
+    }
+
+    #integrantes-menu-mobile {
+        width: 6vw;
+        height: 25px;
+    }
+
+    #logo-img {
+        width: 40vw;
+        height: 45px;
+    }
+
+    #btn-menu {
+        display: flex;
+        width: 12%;
+    }
+
+    #img-x-fechar-menu {
+        width: 5vw;
+        margin-left: 14%;
+        margin-top: 50px;
+    }
+
+    .btn-cadastrar-menu-mobile {
+        width: 100%;
+        height: 40px;
+        border-radius: 15px;
+        border: 1px solid rgb(0, 0, 0);
+        font-family: 'Arimo', Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+        margin-top: 10px;
+    }
+
+    .btn-entrar-menu-mobile {
+        width: 100%;
+        height: 40px;
+        border-radius: 15px;
+        border: 1px solid rgb(0, 0, 0);
+        font-family: 'Arimo', Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        margin-top: 15px;
+    }
+}

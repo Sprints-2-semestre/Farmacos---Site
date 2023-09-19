@@ -1,0 +1,62 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(35, 35, 35);
+    padding: 15px;
+}
+
+.div-superior{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.div-superior p {
+    color: white;
+}
+
+.paginas{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    gap: 15px;
+}
+
+li a{
+    text-decoration: underline;
+    color: white;
+    font-size: 18px;
+}
+
+.linha-central{
+    width: 100%;
+    margin: 15px;
+}
+
+.div-inferior{
+    display: flex;
+    justify-content: space-around;
+}
+
+.div-inferior p{
+    color: white;
+    font-size: 15px;
+}
+
+
+
+.div-imagens{
+    display: flex;
+}
+
+.div-imagens img {
+    width: 40%;
+}

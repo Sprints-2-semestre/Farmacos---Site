@@ -1,0 +1,92 @@
+.container-section {
+    display: flex;
+    width: 80%;
+    height: auto;
+    align-items: center;
+}
+
+.sidebar {
+    width: auto;
+    margin-left: 10%;
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.content {
+    width: 30%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.vertical {
+    border-bottom: 36vh solid #333;
+    display: flex;
+    height: 91px;
+    width: 2px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.titulo-sobre-empresa{
+    color: black;
+}
+
+.sidebar p {
+    width: 20vw;
+    margin-top: 20px;
+    /* background-color: aqua; */
+
+}
+
+.img-sobre-empresa{
+    width: 40%;
+    height: auto;
+}
+
+#sobre {
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 896px){
+    .container-section{
+        flex-direction: column-reverse;
+        height: 100%;
+    }
+    #sobre {
+        height: auto;
+        padding: 50px 0;
+    }
+    .vertical{display: none;}
+    .content{
+        width: 40%;
+        height: 120px;
+        display: flex;
+        padding: 0;
+    }
+
+    .sidebar p {
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+    }
+    
+    .img-sobre-empresa {
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar {
+        margin-left: 0%;
+    }
+    .titulo-sobre-empresa{
+        text-align: center;
+        justify-content: center;
+    }
+}

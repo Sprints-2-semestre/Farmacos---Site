@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Fármacos</title>
+    <link rel="shortcut icon" type="imagex/png" href="img/logo F png.png">
+    <link rel="stylesheet" href="./styles/login.css">
+</head>
+
+<body>
+    <div class="main-login">
+        <div class="laft-login">
+
+            <img src="./img/logo preta.png" class="left-login-img" alt="logo" onclick="voltar()">
+            <h1>Faça login <br>E entre para nosso time</h1>
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>LOGIN</h1>
+                <div class="textfield">
+                    <label for="email">Email</label>
+                    <input id="input_email" placeholder="Email">
+
+                </div>
+                <div class="textfield">
+                    <label for="senha">Senha</label>
+                    <input type="password"id="input_senha" placeholder="Senha">
+
+                </div>
+                <button class="btn-login" onclick="entrar()">Login</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function voltar() {
+        window.location.href = "farmacos.html";
+    }
+    function entrar() {
+
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            alert("Preencha todos os campos!");
+            return false;
+        }
+        else if (emailVar.indexOf("@adm") == -1 && emailVar.indexOf(".com") == -1) {
+            alert(`Email cadastrado é invalido!! Para cadastrar é preciso que o email tenha @adm.com`)
+            return false;
+        } 
+        else if (emailVar != "farmacos@adm.com" || senhaVar != "SPTech") {
+            alert("Email ou senha incorretos!");
+        }
+        else {
+            alert("Login realizado com sucesso!");
+            window.location.href = "farmacos.html";
+        }
+    }
+
+</script>

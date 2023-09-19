@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;600;700&family=Palanquin+Dark:wght@500;700&display=swap');
+
+.section-servico{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 55px;
+    height: auto;
+    gap: 75px;
+    background-image: url(./../img/wave-inferior.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.introducao{
+    display: flex;
+    flex-direction: column;
+    border-left: 5px #002A38 solid;
+    border-top: 2px #002A38 solid;
+    border-right: 2px #002A38 solid;
+    border-bottom: 2px #002A38 solid;
+    border-radius: 5px;
+    width: 30%;
+    padding: 15px;
+    padding-left: 40px;
+    gap: 35px;
+    box-shadow: 17px 10px 10px 0px rgba(0, 0, 0, 0.215);
+}
+
+.introducao .titulo-introducao{
+    color: #002A38;
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.introducao .texto-introducao{
+    font-size: 18px;
+    color: #002A38;
+}
+
+.sobre-servico{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.servico{
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 35%;
+    gap: 55px;
+}
+
+.servico .titulo-servico{
+    color: #000000;
+    font-weight: bold;
+    font-size: 35px;
+    font-family: 'Hind', sans-serif;
+    font-family: 'Palanquin Dark', sans-serif;
+
+}
+
+.servico .descricao-servico p{
+    font-weight: 400;
+    font-size: 18px;
+    text-align: justify;
+    color: rgb(0, 0, 0);
+}
+
+.btn-servico{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+
+.btn-servico button{
+    padding: 10px;
+    border: 1px #1d798c4c solid;
+    border-radius: 10px;
+    background: none;
+    font-size: 13px;
+    color: rgb(17, 17, 17);
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.5s;
+    background-image: url(./../img/img-wave.svg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.692);
+}
+
+.btn-servico button:hover{
+    border: 1px #1d798c6d solid;
+    border-radius: 15px 15px 15px 15px;
+    color: black;
+    transition: 0.5s;
+}
+
+.img-servico{
+    display: flex;
+    justify-content: center;
+}
+
+.img-servico img{
+    width: 450px;
+    height: 450px;
+}
+
+
+@media only screen and (max-width: 896px){
+
+    .section-servico{
+        padding: 15px;
+    }
+
+    .introducao{
+        width: 80%;
+    }
+
+    .servico{
+        width: 100%;
+    }
+
+    .sobre-servico{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .descricao-servico{
+        padding: 20px;
+    }
+
+    .img-servico img {
+        width: 350px;
+    }
+    .titulo-servico{
+        font-size: 50px;
+    }
+}

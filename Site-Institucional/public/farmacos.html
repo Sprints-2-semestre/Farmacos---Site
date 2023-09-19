@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fármacos | Home</title>
+    <link rel="stylesheet" href="styles/navBar.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/sobreEmpresa.css">
+    <link rel="stylesheet" href="styles/integrantes.css">
+    <link rel="stylesheet" href="styles/servico.css">
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="shortcut icon" type="imagex/png" href="img/logo F png.png">
+    <script src="js/nav.js"></script>
+</head>
+
+<body>
+    <!-- HOME -->
+    <div class="container-home">
+        <!-- MENU -->
+        <header>
+            <nav class="container-nav">
+                <div class="container-content">
+                    <div class="container-logo">
+                        <img src="img/logo farmacos png.png" alt="" id="logo-img">
+                    </div>
+                    <div class="container-items" id="container-items-Id">
+                        <ul>
+                            <li><a href="#section-bem-vindo" class="itens-menu"><img src="img/home.png"
+                                        class="icones-menu-mobile" id="inicio-menu-mobile" alt=""> Inicio</a></li>
+                            <li><a href="#sobre" class="itens-menu"><img src="img/sobre.png" class="icones-menu-mobile"
+                                        id="sobre-menu-mobile" alt="">Sobre</a></li>
+                            <li><a href="#mvv" class="itens-menu"><img src="img/valores-icone.png"
+                                        class="icones-menu-mobile" id="valores-menu-mobile" alt="">Valores</a></li>
+                            <li><a href="#Integrantes-id" class="itens-menu"><img src="img/team.png"
+                                        class="icones-menu-mobile" id="integrantes-menu-mobile" alt="">Integrantes</a>
+                            </li>
+                            <li><a href="#servicos" class="itens-menu"><img src="img/servicos.png"
+                                        class="icones-menu-mobile" id="servicos-menu-mobile" alt="">Serviços</a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-ativo" id="menu-ativo-Id">
+                        <img src="img/x-fechar.png" alt="" id="img-x-fechar-menu" onclick="desativarMenu()">
+                        <ul>
+                            <li><a href="#section-bem-vindo" class="itens-menu" onclick="desativarMenu()"><img
+                                        src="img/home.png" class="icones-menu-mobile" id="inicio-menu-mobile" alt="">
+                                    Inicio</a></li>
+                            <li><a href="#sobre" class="itens-menu" onclick="desativarMenu()"><img src="img/sobre.png"
+                                        class="icones-menu-mobile" id="sobre-menu-mobile" alt="">Sobre</a></li>
+                            <li><a href="#mvv" class="itens-menu" onclick="desativarMenu()"><img
+                                        src="img/valores-icone.png" class="icones-menu-mobile" id="valores-menu-mobile"
+                                        alt="">Valores</a></li>
+                            <li><a href="#Integrantes-id" class="itens-menu" onclick="desativarMenu()"><img
+                                        src="img/team.png" class="icones-menu-mobile" id="integrantes-menu-mobile"
+                                        alt="">Integrantes</a></li>
+                            <li><a href="#servicos" class="itens-menu" onclick="desativarMenu()"><img
+                                        src="img/servicos.png" class="icones-menu-mobile" id="servicos-menu-mobile"
+                                        alt="">Serviços</a>
+                                        <a href="login.html"><button class="btn-entrar-menu-mobile">Entrar</button></a>                                        <a href="cadastro.html"><button class="btn-cadastrar-menu-mobile">Cadastrar</button></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="login.html"><button class="btn-entrar">Entrar</button></a>
+                    <a href="cadastro.html"><button class="btn-cadastrar">Cadastrar</button></a>
+                    <button" id="btn-menu" onclick="ativarMenu()"><img src="img/menu_8832775 (1).png" alt=""></button>
+
+                </div>
+            </nav>
+        </header>
+        <div class="container-video" id="container-video-Id">
+            <div class="div-bem-vindo"
+                style="z-index: 1; display: flex; position: absolute; top: 100px; justify-content: center;"
+                id="section-bem-vindo">
+                <img src="img/icon logo.png" alt="" style="z-index: 1;">
+                <div class="div-texto-slogan">
+                    <h1 class="text-slogan">Ploriferando soluções<br>tecnológicas ao insumo da saúde.</h1>
+                </div>
+                <a href="#sobre">
+                    <a href="#sobre"><img src="img/gif seta para baixo.gif" alt="" class="seta-btn-home"></a>
+                </a>
+            </div>
+            <video src="img/Background-Home.mp4" preload="" loop autoplay muted id="video-home"></video>
+            <img src="img/background-img-cell.png" alt="" class="background-home-mobile">
+        </div>
+    </div>
+    <!-- Tiaki sobre aqui -->
+    <section id="sobre">
+        <div class="container-section">
+            <div class="vertical"></div>
+            <div class="sidebar" data-aos="fade-left" data-aos-duration="700">
+                <h1 class="titulo-sobre-empresa">Sobre a Empresa</h1>
+                <p>Somos uma empresa de monitoramento de computadores, no setor de acompanhamento do AME, que oferece
+                    soluções tecnológicas
+                    voltadas a agilidade de atendimentos.
+                </p>
+            </div>
+            <div class="content" data-aos="fade-right" data-aos-duration="700">
+                <img class="img-sobre-empresa" src="img/web-development_3656887.png" alt="Imagem da Empresa">
+            </div>
+        </div>
+    </section>
+    <!-- Kaua missão visao valores aqui -->
+    <div id="mvv" class="MVV">
+        <div class="container-MVV" data-aos="fade-down" data-aos-duration="700">
+            <div class="missao">
+                <div class="titulos">
+                    Missão
+                </div>
+                <div class="exemplo">
+                    <img src="img/Missão.png">
+                </div>
+                <div class="text-MVV">
+                    Abrandar as intermitências no sistemas, prover ao paciente um atendimento flúido e mitigar a
+                    abdicação dos recursos por estarem sendo lesados.
+                </div>
+            </div>
+            <div class="visao">
+                <div class="titulos">
+                    Visão
+                </div>
+                <div class="exemplo">
+                    <img src="img/Visão.png">
+                </div>
+                <div class="text-MVV">
+                    Alcançar a fluidez no atendimento de todos os AME's do Sudeste, posteriormente escalonar ao Nordeste
+                    e Norte até que se alcance o Brasil todo.
+                </div>
+            </div>
+            <div class="valores">
+                <div class="titulos">
+                    Valores
+                </div>
+                <div class="exemplo">
+                    <img src="img/Valores.png">
+                </div>
+                <div class="text-MVV">
+                    A empresa compactua de valores tais como: Transparência, pois a verdade nos importa, Empatia, tendo
+                    em vista que entendemos o quão necessário é a nossa solução.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diego equipe aqui -->
+    <section class="section-integrantes" id="Integrantes-id">
+        <h1>INTEGRANTES</h1>
+        <div class="linha1">
+            <div class="imgs-integrantes">
+                <img class="foto" src="img/davi.jpg" alt="">
+                <p>Davi</p>
+                <div class="estrelas">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                </div>
+                <div class="redes-sociais">
+                    <a href="https://github.com/Davi-Britto"><img src="./img/github.png"></a>
+                    <a href="https://www.linkedin.com/in/davi-maciel-94b330238/"><img src="./img/linkedin.png"></a>
+                </div>
+            </div>
+            <div class="imgs-integrantes">
+                <img class="foto" src="img/diego.jpg" alt="">
+                <p>Diego</p>
+                <div class="estrelas">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                </div>
+                <div class="redes-sociais">
+                    <a href="https://github.com/DiegoHessel"><img src="./img/github.png"></a>
+                    <a href="https://www.linkedin.com/in/diego-hessel-7111551b6/"><img src="./img/linkedin.png"></a>
+                </div>
+            </div>
+            <div class="imgs-integrantes">
+                <img class="foto" src="img/kaua.jpg" alt="">
+                <p>Kauã</p>
+                <div class="estrelas">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                </div>
+                <div class="redes-sociais">
+                    <a href="https://github.com/KauaQT"><img src="./img/github.png"></a>
+                    <a href="https://www.linkedin.com/in/kau%C3%A3-queiroz-b9aa9619b"><img src="./img/linkedin.png"></a>
+                </div>
+            </div>
+        </div>
+        <div class="linha2">
+            <div class="imgs-integrantes">
+                <img class="foto" src="img/mariana.jpg" alt="">
+                <p>Mariana</p>
+                <div class="estrelas">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                </div>
+                <div class="redes-sociais">
+                    <a href="https://github.com/MarianaNdO"><img src="./img/github.png"></a>
+                    <a href="https://www.linkedin.com/in/mariana-nascimento-de-oliveira/"><img
+                            src="./img/linkedin.png"></a>
+                </div>
+            </div>
+            <div class="imgs-integrantes">
+                <img class="foto" src="img/tiaki.jpg" alt="">
+                <p>Tiaki</p>
+                <div class="estrelas">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                </div>
+                <div class="redes-sociais">
+                    <a href="https://github.com/TiakiWCardozo?tab=repositories"><img src="./img/github.png"></a>
+                    <a href="https://www.linkedin.com/in/tiaki-wauke-cardozo-33482a243"><img
+                            src="./img/linkedin.png"></a>
+                </div>
+            </div>
+            <div class="imgs-integrantes">
+                <img class="foto" src="img/victor.jpg" alt="">
+                <p>Vitor</p>
+                <div class="estrelas">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                    <img class="icon-estrela" src="./img/estrela.png">
+                </div>
+                <div class="redes-sociais">
+                    <a href="https://github.com/VitorQuintans"><img src="./img/github.png"></a>
+                    <a href="https://www.linkedin.com/in/vitor-quintans-a96a64221/"><img src="./img/linkedin.png"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Davi servicos aqui -->
+    <section class="section-servico" id="servicos">
+        <div class="introducao">
+            <h1 class="titulo-introducao">Serviços</h1>
+            <p class="texto-introducao">Explore nosso serviço e descubra como podemos atender às suas necessidades. <br>
+                Venha conhecer o que fazemos . . .
+            </p>
+        </div>
+
+        <div class="sobre-servico">
+            <div class="servico">
+
+                <h1 class="titulo-servico">MONITORAMENTO dos COMPUTADORES do AME </h1>
+
+                <div class="descricao-servico">
+                    <p>Nós fornecemos um serviço essencial de monitoramento dos componentes de hardware dos computadores
+                        do AME (Ambulatório Médico de Especialidades). Garantimos que todos os sistemas críticos
+                        estejam operando de maneira eficiente e confiável para manter o atendimento médico sem
+                        interrupções.
+
+                        Nosso compromisso é garantir que os computadores utilizados na prestação de serviços de saúde
+                        funcionem perfeitamente. Monitoramos regularmente os componentes de hardware, como CPU, memória
+                        e
+                        disco rígido, identificando potenciais problemas antes que afetem o desempenho.
+                    </p>
+                </div>
+
+                <div class="btn-servico">
+                    <button><a href="cadastro.html" style="text-decoration: none; color: black;">SAIBA MAIS</a></button>
+                </div>
+            </div>
+
+            <div class="img-servico">
+                <img src="img/computador.png" alt="">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Mari footer aqui -->
+    <footer>
+        <div class="div-superior">
+            <p>Acesse:</p>
+
+            <div class="paginas">
+                <div class="conteudos1">
+                    <li>
+                        <ul><a href="#section-bem-vindo">Início</a></ul>
+                        <ul><a href="#sobre">Sobre</a></ul>
+                        <ul><a href="#mvv">MVV</a></ul>
+                    </li>
+                </div>
+                <div class="conteudos2">
+                    <li>
+                        <ul><a href="#Integrantes-id">Equipe</a></ul>
+                        <ul><a href="#servicos">Serviço</a></ul>
+                        <ul><a href="./login.html">Login</a></ul>
+                    </li>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="linha-central">
+            <hr>
+        </div>
+
+        <div class="div-inferior">
+            <p>Copyright © 2023 FÁRMACOS</p>
+        </div>
+    </footer>
+</body>
+
+</html>
+
+<script>
+    AOS.init();
+</script>
