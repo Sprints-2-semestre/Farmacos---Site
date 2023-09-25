@@ -84,7 +84,14 @@ p {
 
 @media only screen and (max-width: 992px){
 
+    /* Não exibir a section dos integrantes na versão mobile*/
+    /* CASO QUEIRA EXIBIR, COMENTAR O CÓDIGO A BAIXO E DESCOMENTAR OS DEMAIS*/
+    
     .section-integrantes{
+        display: none;
+    }
+
+    /* .section-integrantes{
         gap: 0px;
     }
 
@@ -95,10 +102,10 @@ p {
 
     .imgs-integrantes{
         width: 330px;
-    }
+    } */
 }
 
-@media only screen and (max-width: 450px){
+/* @media only screen and (max-width: 450px){
 
     .imgs-integrantes{
         width: 240px;
@@ -107,4 +114,4 @@ p {
     .redes-sociais{
         width: 40%;
     }
-}
+} */
