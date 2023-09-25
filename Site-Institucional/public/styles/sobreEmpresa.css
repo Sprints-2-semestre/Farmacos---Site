@@ -3,12 +3,13 @@
     width: 80%;
     height: auto;
     align-items: center;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 .sidebar {
-    width: auto;
+    width: 40%;
     margin-left: 10%;
-    flex: 1;
     padding: 20px;
     box-sizing: border-box;
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
