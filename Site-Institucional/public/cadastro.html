@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
     <title>Cadastro | Fármacos</title>
     <link rel="shortcut icon" type="imagex/png" href="img/logo F png.png">
     <link rel="stylesheet" href="./styles/cadastro.css">
+    <script src="js/valicacoesCadastro.js"></script>
 </head>
 
 <body>
@@ -17,6 +18,8 @@
             <img src="./img/logo preta.png" class="left-cadastro-img" alt="logo" onclick="voltar()">
             <h1>Cadastre-se <br>E entre para nosso time</h1>
         </div>
+
+
         <div class="right-cadastro">
             <div class="card-cadastro">
                 <h1>Cadastre-se
@@ -43,17 +46,8 @@
                             required>
                     </div>
 
-                    <div class="input-group">
-                        <label for="number" style="font-size: 14px;">Cargo</label><br>
-                        <select class="cargos" name="cargo" id="select_cargo">
-                            <option value="1">Gerente</option>
-                            <option value="2">Suporte</option>
-                            <option value="3">Coordenador</option>
-                        </select>
-                    </div>
-
                 </form>
-                <button class="btn-cadastro" onclick="cad()">Cadastrar</button>
+                <button class="btn-cadastro" onclick="cadastro()">Cadastrar</button>
             </div>
         </div>
     </div>
@@ -63,36 +57,5 @@
 <script>
     function voltar() {
         window.location.href = "farmacos.html";
-
-    }
-    function cad() {
-        var nome_Completo = input_Nome_Completo.value;
-        var emailVar = input_email.value;
-        var senhaVar = input_senha.value;
-        var confirmarSenhaVar = input_confirmar_senha.value;
-        var cargoVar = select_cargo.value;
-
-        if (nome_Completo == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "" || cargoVar == "") {
-            alert("Preencha todos os campos!");
-            return false;
-        } else if (nome_Completo.length < 3) {
-            alert('Seu nome tem que ter no mínimo 3 letras!!!')
-            return false;
-        } else if (emailVar.indexOf("@") == -1 && emailVar.indexOf(".com") == -1) {
-            alert(`Email cadastrado é invalido!! Para cadastrar é preciso que o email tenha @adm.com`)
-            return false;
-        } else if (senhaVar != confirmarSenhaVar) {
-            alert(`Os campos de senha e confirmar senha estão diferentes`)
-            return false;
-        } else {
-            window.location.href = "login.html";
-
-            alert("Cadastro realizado com sucesso!");
-
-            return true;
-
-
-        }
-    }
-
+    };
 </script>
