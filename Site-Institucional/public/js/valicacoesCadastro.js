@@ -23,7 +23,7 @@ function cadastro() {
         document.getElementById('input_senha').style.boxShadow ='0px 2px 0px 0px #00000056'
         document.getElementById('input_confirmar_senha').style.boxShadow ='0px 2px 0px 0px #00000056'
         return false;
-    } else if (emailVar.indexOf("@") == -1 && emailVar.indexOf(".com") == -1) {
+    } else if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
         alert(`Email cadastrado é invalido!! Para cadastrar é preciso que o email tenha '@' e '.com'`)
         document.getElementById('input_Nome_Completo').style.boxShadow ='0px 2px 0px 0px #00000056'
         document.getElementById('input_email').style.boxShadow ='0px 2px 0px 0px red'
