@@ -30,17 +30,12 @@
                    
                     <div class="input-group">
                         <label for="email" style="font-size: 15px;">Email:</label><br>
-                        <input id="input_email" type="email" name="email" placeholder="Email" required>
+                        <input id="input_email" type="email" name="email" placeholder="example@gmail.com" required>
 
                     </div>
                     <div class="input-group">
                         <label for="senha" style="font-size: 15px;">Senha:</label><br>
                         <input id="input_senha" type="password" name="password" placeholder="Senha" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="password" style="font-size: 15px;">Confirmar Senha:</label><br>
-                        <input id="input_confirmar_senha" type="password" name="password" placeholder="Confirmar Senha"
-                            required>
                     </div>
                     
                     <div class="input-group">
@@ -50,6 +45,15 @@
                                 <option value="1">Gerente</option>
                                 <option value="2">Suporte</option>
                                 <option value="3">Coordenador</option>
+                            </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="number" style="font-size: 15px;">Permissões de Usuário:</label><br>
+                            <select class="cargos" name="cargo" id="select_permissao">
+                                <option value="">Selecione...</option>
+                                <option value="adm">Administrador</option>
+                                <option value="gerente">Gerente</option>
+                                <option value="funcionario">Funcionário</option>
                             </select>
                     </div>
                 
