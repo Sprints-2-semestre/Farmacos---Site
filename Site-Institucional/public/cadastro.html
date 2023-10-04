@@ -8,7 +8,7 @@
     <title>Cadastro | Fármacos</title>
     <link rel="shortcut icon" type="imagex/png" href="img/logo F png.png">
     <link rel="stylesheet" href="./styles/cadastro.css">
-    <script src="../public/js/valicacoesCadastro.js"></script>
+    <script src="../public/js/valicacoesCadastro.js" defer></script>
 </head>
 
 <body>
@@ -25,14 +25,19 @@
                 <h1>Cadastre</h1>
                 <form action="">
                     <div class="input-group">
-                        <label for="firstname" style="font-size: 15px;">Nome Completo:</label><br>
+                        <label for="firstname" style="font-size: 15px;">Nome Empresa:</label><br>
                         <input id="input_Nome_Completo" type="text" name="firstname" placeholder="Nome Completo"
+                            required>
+                    </div>
+                    <div class="input-group">
+                        <label for="cnpj" style="font-size: 15px;">CNPJ:</label><br>
+                        <input id="input_cnpj" type="text" maxlength="18" name="cnpj_input" placeholder="XX.XXX.XXX/XXXX-XX."
                             required>
                     </div>
 
                     <div class="input-group">
                         <label for="email" style="font-size: 15px;">Email:</label><br>
-                        <input id="input_email" type="email" name="email" placeholder="Email" required>
+                        <input id="input_email" type="email" name="email" placeholder="example@gmail.com" required>
 
                     </div>
                     <div class="input-group">

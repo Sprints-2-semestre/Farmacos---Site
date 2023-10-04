@@ -83,6 +83,10 @@ body {
     align-items: center;
 }
 
+.textfield::placeholder{
+    font-size: 10px;
+}
+
 .textfield input {
     width: 100%;
     border: none;
