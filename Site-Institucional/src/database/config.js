@@ -1,13 +1,31 @@
 var mysql = require("mysql2");
 var sql = require('mssql');
 
+
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
 var mySqlConfig = {
     host: "127.0.0.1",
     database: "farmacos",
     user: "root",
-    password: "#Acloy2206",
+    password: "#Acloy2206"
 };
+
+// // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
+// var sqlServerConfig = {
+//     server: "SEU_SERVIDOR",
+//     database: "SEU_BANCO_DE_DADOS",
+//     user: "SEU_USUARIO",
+//     password: "SUA_SENHA",
+//     pool: {
+//         max: 10,
+//         min: 0,
+//         idleTimeoutMillis: 30000
+//     },
+//     options: {
+//         encrypt: true, // for azure
+//     }
+// }
+// };
 
 function executar(instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
@@ -40,6 +58,7 @@ function executar(instrucao) {
             });
             conexao.on('error', function (erro) {
                 return ("ERRO NO MySQL WORKBENCH (Local): ", erro.sqlMessage);
+
             });
         });
     } else {
