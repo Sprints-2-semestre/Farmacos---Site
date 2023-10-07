@@ -2,10 +2,234 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@500&family=Poppins:wght@300&display=swap');
 
 .div-principal{
-    width: 80%;
-    position: relative;
+    width: 75%;
+  align-items: center;
     top: 0;
     left: 20%;
     height: 100%;
     overflow: auto;
+    justify-content: center;
+}
+
+.conteudo .div-principal.laft-Editar .raight-Editar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.laft-Editar {
+   
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.laft-Editar h1 {
+    font-size: 30px;
+    color: #001a24;
+}
+
+
+.raight-Editar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-Editar {
+    width: 100%;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px;
+    background: #FFFFFF;
+    border: 1px #001a2476 solid;
+    border-radius: 20px;
+    box-shadow: 15px 15px 20px #00000056;
+    background-image: url(../../img/img-wave.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+    ;
+}
+.card-Editar h1 {
+    color: #001a24;
+    font-weight: 800;
+    margin: 0;
+}
+
+.textfield {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
+}
+
+.textfield .input-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textfield::placeholder{
+    font-size: 10px;
+}
+
+.textfield input {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #e7fbff;
+    color: #001a24;
+    font-size: 12pt;
+    box-shadow: 5px 10px 20px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-group label {
+    gap: 10px;
+}
+.Ames {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #e7fbff;
+    color: #001a24;
+    font-size: 12pt;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-group{
+    margin-top: 10px;
+}
+
+.input-group input {
+    background-color: #e7fbff;
+    border: none;
+    border-radius: 10px;
+    gap: 10px;
+    padding: 10px;
+    color: #001a24;
+    font-size: 12pt;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.textfield label {
+    color: #001a24;
+    margin-bottom: 10px;
+}
+
+.textfield input::placeholder {
+    color: #001a24;
+    ;
+}
+
+.btn-Editar {
+    width: 70%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    align-items: center;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #e4f6f8;
+    background: #458b9b;
+    cursor: pointer;
+    box-shadow: 0px 2px 0px 0px #00000056;
+}
+
+.btn-Editar:hover{
+    background-color: #ffffff;
+    color: #458b9b;
+    border: 1px solid #458b9b;
+    transition: 0.15s ease-in-out;
+}
+
+@media only screen and (max-width:950px) {
+    .card-Editar {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .main-Editar {
+        flex-direction: column;
+    }
+
+    .laft-Editar h1 {
+        display: none;
+    }
+
+    .laft-Editar {
+        width: 50vw;
+        height: auto;
+    }
+
+    .left-Editar-img {
+        width: 30vh;
+    }
+
+    .card-Editar {
+        width: 75%;
+        height: 450px;
+    }
+
+    .card-Editar h1{
+        margin-top: -15px;
+        font-size: 20px;
+        font-family: 'Arimo', Arial, Helvetica, sans-serif;
+
+    }
+
+    .card-Editar .btn-Editar {
+        background-color: #1c5967;
+    }
+
+    .btn-Editar {
+        margin-top: 15px;
+        border-bottom: 5px #000000b9;
+        box-shadow: 0px 2px 0px 0px #00000056;
+    }
+
+    .btn-Editar:hover {
+        color: #e4f6f8;
+        box-shadow: 0px 10px 40px -12px #527880b9;
+    }
+
+    .Ames {
+        width: 100%;
+        font-size: 10pt;
+        box-shadow: 0px 2px 0px 0px #00000056;
+    }
+
+    .input-group{
+        margin-top: 8px;
+    }
+    .input-group label {
+        font-weight: bold;
+    }
+    .input-group input {
+        box-shadow: 0px 2px 0px 0px #00000056;
+    }
+    .main-Editar form{
+        height: 80%;
+    }
 }
