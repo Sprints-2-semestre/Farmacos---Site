@@ -8,6 +8,7 @@
     <title>Log In | Fármacos</title>
     <link rel="shortcut icon" type="imagex/png" href="img/logo F png.png">
     <link rel="stylesheet" href="./styles/login.css">
+    <script src="../app.js"></script>
 </head>
 
 <body>
@@ -21,13 +22,13 @@
             <div class="card-login">
                 <h1>LOGIN</h1>
                 <div class="textfield">
-                    <label for="email">Email</label>
-                    <input id="input_email" placeholder="Email">
+                    <label for="email">Email:</label>
+                    <input id="input_email" placeholder="example@gmail.com">
 
                 </div>
                 <div class="textfield">
-                    <label for="senha">Senha</label>
-                    <input type="password"id="input_senha" placeholder="Senha">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="input_senha" placeholder="Senha">
 
                 </div>
                 <button class="btn-login" onclick="entrar()">Login</button>
@@ -50,17 +51,62 @@
             alert("Preencha todos os campos!");
             return false;
         }
-        else if (emailVar.indexOf("@adm") == -1 && emailVar.indexOf(".com") == -1) {
+        else if (emailVar.indexOf("@") == -1 && emailVar.indexOf(".com") == -1) {
             alert(`Email cadastrado é invalido!! Para cadastrar é preciso que o email tenha @adm.com`)
             return false;
-        } 
-        else if (emailVar != "farmacos@adm.com" || senhaVar != "SPTech") {
-            alert("Email ou senha incorretos!");
         }
         else {
-            alert("Login realizado com sucesso!");
-            window.location.href = "farmacos.html";
+            setInterval("Sumir Mensagem", 5000);
+            console.log("FORM LOGIN: ", emailVar);
+            console.log("FORM SENHA: ", senhaVar);
+
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.id;
+
+                        setTimeout(function () {
+                            window.location = "cadastro.html";
+                        }, 1000); // apenas para exibir o loading
+
+                    });
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+            return false;
         }
+
     }
+
+
+
 
 </script>

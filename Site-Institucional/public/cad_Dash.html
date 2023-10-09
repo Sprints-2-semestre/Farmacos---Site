@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro | Fármacos</title>
+    <title>Cadastro Funcionário | Fármacos</title>
     <link rel="shortcut icon" type="imagex/png" href="img/logo F png.png">
     <link rel="stylesheet" href="./styles/cadastro.css">
+    <script src="js/validacoesCadastroFuncionario.js"></script>
 </head>
 
 <body>
@@ -15,40 +16,44 @@
         <div class="laft-cadastro">
 
             <img src="./img/logo preta.png" class="left-cadastro-img" alt="logo" onclick="voltar()">
-            <h1>Cadastre-se <br>E entre para nosso time</h1>
+            <h1>CADASTRE UM NOVO <br>FUNCIONÁRIO AO SISTEMA!</h1>
         </div>
         <div class="right-cadastro">
             <div class="card-cadastro">
-                <h1>Cadastre-se
-                </h1>
+                <h1 style="font-size: 20px; text-transform: uppercase; text-align: center;">Cadastre um <br>novo funcionário:</h1>
                 <form action="">
                     <div class="input-group">
-                        <label for="firstname">Nome Completo</label><br>
+                        <label for="firstname" style="font-size: 15px;">Nome Completo:</label><br>
                         <input id="input_Nome_Completo" type="text" name="firstname" placeholder="Nome Completo"
                             required>
                     </div>
                    
                     <div class="input-group">
-                        <label for="email">Email</label><br>
-                        <input id="input_email" type="email" name="email" placeholder="Email" required>
+                        <label for="email" style="font-size: 15px;">Email:</label><br>
+                        <input id="input_email" type="email" name="email" placeholder="example@gmail.com" required>
 
                     </div>
                     <div class="input-group">
-                        <label for="senha">Senha</label><br>
+                        <label for="senha" style="font-size: 15px;">Senha:</label><br>
                         <input id="input_senha" type="password" name="password" placeholder="Senha" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="password">Confirmar Senha</label><br>
-                        <input id="input_confirmar_senha" type="password" name="password" placeholder="Confirmar Senha"
-                            required>
                     </div>
                     
                     <div class="input-group">
-                        <label for="number">Cargo</label><br>
+                        <label for="number" style="font-size: 15px;">Cargo:</label><br>
                             <select class="cargos" name="cargo" id="select_cargo">
+                                <option value="">Selecione...</option>
                                 <option value="1">Gerente</option>
                                 <option value="2">Suporte</option>
                                 <option value="3">Coordenador</option>
+                            </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="number" style="font-size: 15px;">Permissões de Usuário:</label><br>
+                            <select class="cargos" name="cargo" id="select_permissao">
+                                <option value="">Selecione...</option>
+                                <option value="adm">Administrador</option>
+                                <option value="gerente">Gerente</option>
+                                <option value="funcionario">Funcionário</option>
                             </select>
                     </div>
                 
@@ -60,39 +65,3 @@
 </body>
 
 </html>
-<script>
-    function voltar() {
-        window.location.href = "farmacos.html";
-
-    }
-    function cad_dash() {
-        var nome_Completo = input_Nome_Completo.value;
-        var emailVar = input_email.value;
-        var senhaVar = input_senha.value;
-        var confirmarSenhaVar = input_confirmar_senha.value;
-        var cargoVar = select_cargo.value;
-
-        if (nome_Completo == "" ||emailVar == "" || senhaVar == "" || confirmarSenhaVar == "" || cargoVar == "") {
-            alert("Preencha todos os campos!");
-            return false;
-        } else if (nome_Completo.length < 3) {
-            alert('Seu nome tem que ter no mínimo 3 letras!!!')
-            return false;
-        } else if (emailVar.indexOf("@") == -1 && emailVar.indexOf(".com") == -1) {
-            alert(`Email cadastrado é invalido!! Para cadastrar é preciso que o email tenha @adm.com`)
-            return false;
-        } else if (senhaVar != confirmarSenhaVar) {
-            alert(`Os campos de senha e confirmar senha estão diferentes`)
-            return false;
-        } else {
-            window.location.href = "login.html";
-
-            alert("Cadastro realizado com sucesso!");
-
-            return true;
-
-
-        }
-    }
-
-</script>
