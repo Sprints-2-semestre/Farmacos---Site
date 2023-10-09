@@ -72,6 +72,10 @@ img {
         padding: 0;
     }
 
+    .sidebar{
+        width: 100%;
+    }
+
     .sidebar p {
         width: 100%;
         text-align: center;
