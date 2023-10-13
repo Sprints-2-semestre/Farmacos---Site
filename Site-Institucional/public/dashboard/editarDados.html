@@ -33,9 +33,9 @@
         </div>
 
         <div class="div-principal">
-            <div class="laft-Editar">
-                <div class="right-Editar">
-                    <div class="card-Editar">
+            <div class="card">
+                <div class="conteudo-card">
+                    
                         <h1>Editar dados</h1>
                         <form action="">
                             <div class="input-group">
@@ -91,7 +91,9 @@
 
                             </div>
                         </form>
-                        <button class="btn-Editar" onclick="Editar()">Alterar Cadastro</button>
+                        <div class="btn-Editar">
+                           <button onclick="Editar()">Alterar Cadastro</button>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -99,6 +101,24 @@
 </body>
 </html>
 <script>
+    function Editar(){
+        var nomeVar = input_Nome_Completo.value
+        var emailVar = input_email.value
+        var senhaVar = input_senha.value
+        var confirmarSenhaVar = input_confirmar_senha.value
+        var ameVar = select_Ame.value
+        var codAmeVar = input_Codigo-Ame.value
+
+        if(nomeVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "" || ameVar == "" || codAmeVar == ""){
+            alert("Preencha todos os campos");
+        }else{
+            if(senhaVar == confirmarSenhaVar){
+                alert("Dados alterados com sucesso");
+            }else{
+                alert("As senhas não coincidem");
+            }
+        }
+    }
 
 
 </script>
