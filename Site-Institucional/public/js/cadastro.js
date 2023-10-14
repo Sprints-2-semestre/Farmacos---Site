@@ -33,6 +33,7 @@ function cadastro() {
             nomeServer: nomeVar,
             emailServer: emailVar,
             senhaServer: senhaVar,
+            
         })
     }).then(function (resposta) {
 
