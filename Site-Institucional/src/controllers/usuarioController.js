@@ -66,7 +66,7 @@ function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    var tokenAME = req.body.tokenAMEServer;
+    var tokenAME = req.body.tokenServer;
 
     // Faça as validações dos valores
     if (nome == undefined) {

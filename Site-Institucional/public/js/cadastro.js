@@ -1,8 +1,9 @@
-function cadastro() {
+function cadastrar() {
     var nomeVar = input_Nome_Completo.value;
     var emailVar = input_email.value;
     var senhaVar = input_senha.value;
     var confirmarSenhaVar = input_confirmar_senha.value;
+    var tokenAME = input_token_cadastro.value;
 
     if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "") {
         alert("Preencha todos os campos!");
@@ -33,6 +34,7 @@ function cadastro() {
             nomeServer: nomeVar,
             emailServer: emailVar,
             senhaServer: senhaVar,
+            tokenServer: tokenAME
         })
     }).then(function (resposta) {
 
