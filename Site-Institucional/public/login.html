@@ -8,7 +8,6 @@
     <title>Log In | Fármacos</title>
     <link rel="shortcut icon" type="imagex/png" href="img/logo F png.png">
     <link rel="stylesheet" href="./styles/login.css">
-    <script src="../app.js"></script>
 </head>
 
 <body>
@@ -40,7 +39,7 @@
 </html>
 <script>
     function voltar() {
-        window.location.href = "farmacos.html";
+        window.location.href = "index.html";
     }
     function entrar() {
 
@@ -56,18 +55,18 @@
             return false;
         }
         else {
-            setInterval("Sumir Mensagem", 5000);
             console.log("FORM LOGIN: ", emailVar);
             console.log("FORM SENHA: ", senhaVar);
 
-            fetch("/usuarios/autenticar", {
+            fetch("/usuario/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     emailServer: emailVar,
-                    senhaServer: senhaVar
+                    senhaServer: senhaVar,
+
                 })
             }).then(function (resposta) {
                 console.log("ESTOU NO THEN DO entrar()!")
@@ -83,18 +82,13 @@
                         sessionStorage.ID_USUARIO = json.id;
 
                         setTimeout(function () {
-                            window.location = "cadastro.html";
+                            window.location = "farmacos.html";
                         }, 1000); // apenas para exibir o loading
 
                     });
 
                 } else {
-
                     console.log("Houve um erro ao tentar realizar o login!");
-
-                    resposta.text().then(texto => {
-                        console.error(texto);
-                    });
                 }
 
             }).catch(function (erro) {
