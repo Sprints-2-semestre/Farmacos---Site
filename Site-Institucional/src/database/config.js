@@ -4,10 +4,10 @@ var sql = require('mssql');
 
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
 var mySqlConfig = {
-    host: "127.0.0.1",
+    host: "localhost",
     database: "farmacos",
     user: "root",
-    password: "#Acloy2206"
+    password: "quintans123"
 };
 
 // // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
