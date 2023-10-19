@@ -28,7 +28,7 @@ function cadastrar(nome, email, senha) {
     var pegarId = "SELECT count(idUsuario) from usuario"
 
     var instrucao = `
-    INSERT INTO funcionario (nome, email, senha, cargo) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC');`
+    INSERT INTO funcionario (nome, email, senha, cargo, fkPermissao) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC', 1);`
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
