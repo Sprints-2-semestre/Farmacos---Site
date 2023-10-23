@@ -347,12 +347,20 @@
     new Chart(ctx2, {
         data: {
             datasets: [{
-                type: 'radar',
-                label: 'Gráfico de Rede',
+                type: 'bar',
+                label: 'Pacotes Recebidos',
                 data: [30, 35, 40, 50, 70, 20], // captura de rede
                 borderWidth: 1,
                 borderColor: '#034c5b',
                 borderColor: '#00d5ffb9',
+            },
+            {
+                type: 'bar',
+                label: 'Pacotes Enviados',
+                data: [30, 35, 40, 50, 70, 20], // captura de rede
+                borderWidth: 1,
+                borderColor: '#000000',
+                borderColor: '#000000',
             },
             ],
             labels: ['Máquina 1', 'Máquina 2', 'Máquina 3', 'Máquina 4', 'Máquina 5', 'Máquina 6']
