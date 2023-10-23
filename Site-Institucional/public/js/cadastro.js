@@ -12,7 +12,7 @@ function cadastrar() {
         alert('Seu nome tem que ter no mínimo 3 letras!!!')
         return false;
     } else if (emailVar.indexOf("@") == -1 && emailVar.indexOf(".com") == -1) {
-        alert(`Email cadastrado é invalido!! Para cadastrar é preciso que o email tenha @adm.com`)
+        alert(`Email cadastrado é invalido!! Para cadastrar é preciso que o email tenha @farmacos.com`)
         return false;
     } else if (senhaVar != confirmarSenhaVar) {
         alert(`Os campos de senha e confirmar senha estão diferentes`)
