@@ -147,15 +147,14 @@ body{
     width: 100%;
     /* background-color: purple; */
     justify-content: space-around;
+    margin-top: 15px;
 }
 
 .parametros {
     width: 20%;
     height: 100%;
     display: flex;
-    border-bottom: 3px solid #00323c;
-    border-right: 3px solid #00323c;
-    border-left: 3px solid #00323c;
+    border: 2px solid #00323c;
     border-radius: 18px;
 }
 
@@ -184,15 +183,18 @@ body{
 }
 
 .botao-pdf {
-    width: 20%;
+    width: 15%;
     height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    border: 4px #001a24 solid;
-    font-size: 25px;
-    box-shadow: inset 0 0 25px #001a24;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    background-color: #00323c;
+    color: white;
+    font-weight: 800;
+    letter-spacing: 3px;
 }
 
 .coluna-graficos {
@@ -410,12 +412,13 @@ body{
 }
 
 .moldura-lista {
-    border: 3px solid #034c5b;
+    border: 2px solid #034c5b;
     width: 90%;
     height: 80%;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
+    gap: 5px;
     align-items: center;
     overflow-y: scroll;
 }
@@ -429,9 +432,8 @@ body{
     font-size: 23px;
     font-weight: 400;
     border-radius: 10px;
-    border-bottom: #00323c 3px solid;
-    border-left: #00323c 3px solid;
-    border-right: #00323c 3px solid;
+    border: #034c5b 2px solid;
+    margin-top: 5px;
 }
 
 .titulo-lista-alertas {
@@ -445,9 +447,7 @@ body{
     width: 70%;
     height: 15%;
     gap: 18px;
-    border-left: #00323c 3px solid ;
-    border-right:  #00323c 3px solid;
-    border-bottom: #00323c 3px solid;
+    border: #00323c 1px solid;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
@@ -458,11 +458,12 @@ body{
 }
 
 .moldura-alertas {
-    border: 3px solid #034c5b;
+    border: 2px solid #034c5b;
     width: 80%;
     height: 95%;
     border-radius: 15px;
     display: flex;
+    gap: 5px;
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
@@ -474,9 +475,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom: 3px solid #00323c;
-    border-left: 3px solid #00323c;
-    border-right: 3px solid #00323c;
+    border: #00323c 1px solid;
     border-radius: 10px;
     font-size: 17px;
 }
@@ -487,17 +486,16 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
+    border-radius: 8px;
     font-size: 25px;
-    box-shadow: 0 0 10px #001a24;
     gap: 20px;
 }
 
 .uso-memoria {
     display: flex;
     justify-content: center;
-    border-radius: 20px;
-    border: 4px solid #001a24;
+    border-radius: 8px;
+    border: 2px solid #001a24;
     width: 50%;
     height: 90%;
 }
@@ -539,7 +537,7 @@ body{
     height: 60%;
     align-items: center;
     font-size: 17px;
-    border-bottom: 3px#001a24 solid;
+    border-bottom: 2px #001a24 solid;
 }
 
 .informacoes-maquina {

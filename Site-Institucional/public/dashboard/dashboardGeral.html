@@ -189,14 +189,15 @@
                         </div>
                         <div class="contagem-maquinas">
                             <div class="titulo-contagem">
-                                Total máquinas:
+                                <u>Total máquinas:</u>
                             </div>
                             <div class="kpi-qtd-maquina">
-                                80
+                                2
                             </div>
                         </div>
                     </div>
                     <div class="coluna-graficos">
+                        
                         <div class="linha1-graficos">
                             <div class="uso-memoria">
                                 <!-- <canvas id="myChart3" style="width: 250px; height: 200px;"></canvas> -->
@@ -223,6 +224,18 @@
                                             12 GB
                                         </div>
                                     </div>
+
+                                    <div class="informacoes-maquina">
+                                        <div class="maquina-ram">
+                                            Máquina 2
+                                        </div>
+                                        <div class="uso-maquina-ram">
+                                            55%
+                                        </div>
+                                        <div class="qtd-total-ram">
+                                            8 GB
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -247,8 +260,30 @@
                             </div>
                             <div class="maquinas">
                                 <div class="titulo-mquina">
+                                    <a href="dashboardGeral.html">
+                                        <b>Geral</b>
+                                    </a>
+                                </div>
+                                <div>
+                                    <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
+                                    <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
+                                </div>
+                            </div>
+                            <div class="maquinas">
+                                <div class="titulo-mquina">
                                     <a href="dashboardEspecífica.html">
                                         Máquina 1
+                                    </a>
+                                </div>
+                                <div>
+                                    <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
+                                    <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
+                                </div>
+                            </div>
+                            <div class="maquinas">
+                                <div class="titulo-mquina">
+                                    <a href="dashboardEspecífica.html">
+                                        Máquina 2
                                     </a>
                                 </div>
                                 <div>
@@ -320,7 +355,7 @@
                 borderWidth: 1,
                 // backgroundColor: 'pink',
             }],
-            labels: ['Máquina 1', 'Máquina 2', 'Máquina 3', 'Máquina 4', 'Máquina 5']
+            labels: ['Máquina 1', 'Máquina 2']
         },
         options: {
             indexAxis: 'y',
@@ -331,7 +366,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'Uso de Disco'
+                    text: 'Comparativo de Uso de Disco entre máquinas '
                 }
             },
             // scales: {
@@ -351,19 +386,15 @@
                 label: 'Pacotes Recebidos',
                 data: [30, 35, 40, 50, 70, 20], // captura de rede
                 borderWidth: 1,
-                borderColor: '#034c5b',
-                borderColor: '#00d5ffb9',
             },
             {
                 type: 'bar',
                 label: 'Pacotes Enviados',
                 data: [30, 35, 40, 50, 70, 20], // captura de rede
                 borderWidth: 1,
-                borderColor: '#000000',
-                borderColor: '#000000',
             },
             ],
-            labels: ['Máquina 1', 'Máquina 2', 'Máquina 3', 'Máquina 4', 'Máquina 5', 'Máquina 6']
+            labels: ['Máquina 1', 'Máquina 2']
         },
         options: {
             maintainAspectRatio: false,
@@ -375,7 +406,7 @@
                 title: {
                     display: true,
                     fontSize: 20,
-                    text: "Uso de rede",
+                    text: "Comparação de pacotes recebidos e enviados por máquina diariamente",
                 },
             }
         }
@@ -392,8 +423,8 @@
                 label: 'Alerta preocupante',
                 data: [10, 10, 10, 10, 10, 10],
                 borderWidth: 1.5,
-                borderColor: 'yellow',
-                backgroundColor: 'yellow',
+                borderColor: '#6dc7ff',
+                backgroundColor: '#6dc7ff',
             },
             {
                 type: 'line',
