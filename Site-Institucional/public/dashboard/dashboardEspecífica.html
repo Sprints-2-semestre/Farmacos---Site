@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Específica Fármacos</title>
+    <link rel="stylesheet" href="../styles/css-dash/dashboardEspecífica.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="../img/logo F png.png">
+</head>
+
+<body>
+    <div class="conteudo">
+        <div class="nav-lateral">
+            <div class="logo-empresa">
+                <img src="./../img/logo F png.png" alt="">
+            </div>
+            <div class="nav-itens">
+                <li>
+                    <ul><b>Nome</b></ul>
+
+                    <ul><a class="atual" href="dashboardGeral.html">Máquinas</a></ul>
+                    <ul><a href="./usuarios.html">Usuários</a></ul>
+                    <ul><a href="./editarDados.html">Editar dados</a></ul>
+                </li>
+            </div>
+
+            <div class="btn-sair">
+                <button>Sair</button>
+            </div>
+
+        </div>
+
+        <div class="div-principal">
+            <div class="topo-navegacao">
+                <div class="btn-voltar">
+                    Voltar
+                </div>
+                <!-- <div>
+                    <img style="width: 30px; height: 30px;" src="../img/is-less-than-mathematical-sign.png">
+                </div> -->
+                <div style="font-size: 23px;">
+                        Máquina 1
+                </div>
+                <!-- <div>
+                    <img style="width: 30px; height: 30px;" src="../img/greater-than.png">
+                </div> -->
+                <div class="btn-pdf">
+                    Gerar PDF
+                </div>
+            </div>
+            <div class="graficos-alertas">
+                <div class="graficos-kpi">
+                    <div class="linha-graficos">
+                        <div>
+                            <canvas id="myChart1" style="width: 350px; height: 90%;"></canvas>
+                        </div>
+                        <div>
+                            <canvas id="myChart2" style="width: 250px; height: 90%;"></canvas>
+                        </div>
+                        <div>
+                            <canvas id="myChart3" style="width: 300px; height: 90%;"></canvas>
+                        </div>
+                    </div>
+                    <div class="linha-kpi">
+                        <div class="kpi-grafico-cpu-ram">
+                            <div>
+                                Processos que mais estão consumindo cpu
+                            </div>
+                            <div>
+                                Processos que mais estão consumindo ram
+                            </div>
+                        </div>
+                        <div class="kpi-grafico-rede">
+                            A partir da média da rede, identificaremos o quanto porcento esteve abaixo da média e
+                            identificaremos como oscilação
+                        </div>
+                        <div class="kpi-grafico-disco">
+                            A partir do uso semanal, em quanto tempo acabará o espaço disponível no disco
+                        </div>
+                    </div>
+                </div>
+                <div class="lista-alertas">
+                    <div class="moldura-alertas">
+                        <div class="titulo-lista-alertas">
+                            Lista de Máquinas
+                        </div>
+                        <div class="maquinas">
+                            <div class="titulo-mquina">
+                                <a href="dashboardGeral.html">
+                                    Geral
+                                </a>
+                            </div>
+                            <div>
+                                <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
+                                <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
+                            </div>
+                        </div>
+                        <div class="maquinas">
+                            <div class="titulo-mquina">
+                                <a href="dashboardEspecífica.html">
+                                    <b>Máquina 1</b>
+                                </a>
+                            </div>
+                            <div>
+                                <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
+                                <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
+                            </div>
+                        </div>
+                        <div class="maquinas">
+                            <div class="titulo-mquina">
+                                <a href="dashboardEspecífica.html">
+                                    Máquina 2
+                                </a>
+                            </div>
+                            <div>
+                                <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
+                                <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-maquina-alertas-parametro">
+                <div class="info-hardware">
+                    <div class="titulo-info-hardware">
+                        Informações sobre a máquina
+                    </div>
+                    <div>
+                        I3 10Th com 2.16 Ghz
+                        Windows
+                        Arquitetura 64 bits
+                    </div>
+                </div>
+                <div class="contagem-tempo-alertas">
+                    <div class="titulo-kpi">
+                        Tempo excedido diariamente dos componentes
+                    </div>
+                    <div class="linha1-kpi-tempo">
+                        <div class="cpu">
+                            <div class="ajuste-titulo">
+                                CPU
+                            </div>
+                            <div class="parametro-preocupante">
+                                <div>
+                                    <img src="../img/warning.png" style="width: 21px; height: 21px;">
+                                </div>
+                                <div>
+                                    Preocupante:
+                                </div>
+                                <div>
+                                    16 minutos
+                                </div>
+                            </div>
+                            <div class="parametro-critico">
+                                <div>
+                                    <img src="../img/alarm.png" style="width: 21px; height: 21px;">
+                                </div>
+                                <div>
+                                    Crítico:
+                                </div>
+                                <div>
+                                    16 minutos
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ram">
+                            <div class="ajuste-titulo">
+                                RAM
+                            </div>
+                            <div class="parametro-preocupante">
+                                <div>
+                                    <img src="../img/warning.png" style="width: 23px; height: 23px;">
+                                </div>
+                                <div>
+                                    Preocupante:
+                                </div>
+                                <div>
+                                    16 minutos
+                                </div>
+                            </div>
+                            <div class="parametro-critico">
+                                <div>
+                                    <img src="../img/alarm.png" style="width: 23px; height: 23px;">
+                                </div>
+                                <div>
+                                    Crítico:
+                                </div>
+                                <div>
+                                    16 minutos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linha2-kpi-tempo">
+                        <div class="rede">
+                            <div class="ajuste-titulo">
+                                REDE
+                            </div>
+                            <div class="parametro-preocupante">
+                                <div>
+                                    <img src="../img/warning.png" style="width: 23px; height: 23px;">
+                                </div>
+                                <div>
+                                    Preocupante:
+                                </div>
+                                <div>
+                                    16 minutos
+                                </div>
+                            </div>
+                            <div class="parametro-critico">
+                                <div>
+                                    <img src="../img/alarm.png" style="width: 23px; height: 23px;">
+                                </div>
+                                <div>
+                                    Crítico:
+                                </div>
+                                <div>
+                                    16 minutos
+                                </div>
+                            </div>
+                        </div>
+                        <div class="disco">
+                            <div class="ajuste-titulo">
+                                DISCO
+                            </div>
+                            <div class="parametro-preocupante">
+                                <div>
+                                    <img src="../img/warning.png" style="width: 23px; height: 23px;">
+                                </div>
+                                <div>
+                                    Preocupante:
+                                </div>
+                                <div>
+                                    16 minutos
+                                </div>
+                            </div>
+                            <div class="parametro-critico">
+                                <div>
+                                    <img src="../img/alarm.png" style="width: 23px; height: 23px;">
+                                </div>
+                                <div>
+                                    Crítico:
+                                </div>
+                                <div>
+                                    16 minutos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lista-maquinas">
+                    <div class="moldura-alertas">
+                        <div class="titulo-lista-maquinas">
+                            Lista de Alertas
+                        </div>
+                        <div class="alertas">
+                            <div class="componente">
+                                <div class="titulo-componente">
+                                    Componente:
+                                </div>
+                                <div>
+                                    CPU
+                                </div>
+                            </div>
+                            <div class="horario-componente">
+                                <div>
+                                    Horário:
+                                </div>
+                                <div class="horario">
+                                    12 : 00
+                                </div>
+                            </div>
+                            <div class="metrica-capturada">
+                                <div>
+                                    Métrica capturada:
+                                </div>
+                                <div class="qtd-capturada">
+                                    60%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    const ctx1 = document.getElementById('myChart1');
+
+    new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: [1, 2, 3, 4, 5, 6,], // colocar as horas
+            datasets: [
+                {
+                    label: 'Máquina 1',
+                    data: [12, 19, 3, 5, 2, 3], // colocar o uso 
+                    backgroundColor: '#00323c',
+                    borderColor: '#00323c',
+                    borderWidth: 3
+                },
+                {
+                    label: 'Uso de RAM',
+                    data: [12, 19, 30, 50, 20, 30], // colocar o uso 
+                    backgroundColor: '#00d5ffb9',
+                    borderColor: '#00d5ffb9',
+                    borderWidth: 3
+                }]
+        },
+
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Uso de CPU e RAM em porcentagem diariamente',
+                    fontSize: 50,
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+            },
+        }
+    });
+
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+        data: {
+            datasets: [{
+                type: 'line',
+                label: 'Gráfico de Rede',
+                data: [12, 30, 3, 5, 2, 3], // captura de rede
+                borderWidth: 2.5,
+                tension: 0.4,
+            },
+            ],
+            labels: ['1', '2', '3', '4', '5', '6',]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    fontSize: 20,
+                    text: "Uso de rede  em decorrência do tempo",
+                },
+            }
+        }
+    });
+
+    const ctx3 = document.getElementById('myChart3');
+
+    new Chart(ctx3, {
+        data: {
+            datasets: [{
+                type: 'bar',
+                label: 'Uso do disco',
+                data: [12, 19, 15, 12, 17], // captura de rede
+                borderWidth: 1,
+                backgroundColor: '#00d5ffb9',
+            }],
+            labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                title: {
+                    display: true,
+                    text: 'Uso de disco semanalmente'
+                }
+            },
+            // scales: {
+            //     y: {
+            //         beginAtZero: true
+            //     }
+            // }
+        }
+    });
+</script>
