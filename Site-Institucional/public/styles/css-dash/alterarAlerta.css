@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@500&family=Poppins:wght@300&display=swap');
+
+.div-principal{
+    width: 80%;
+    position: relative;
+    top: 0;
+    left: 20%;
+    height: 100%;
+    overflow: auto;
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 900px;
+}
+
+.conteudo-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    background-image: url(./../../img/img-wave.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    border: 1px #001a2476 solid;
+    border-radius: 20px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 15px;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #e7fbff;
+    border-radius: 10px;
+    border: 1px #001a2441 solid;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+
+.select-cargo, .select-permissao {
+    width: 100%;
+    border: 1px #001a2441 solid;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #e7fbff;
+    color: #001a24;
+    font-size: 15px;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    outline: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.input-group input:hover, .select-cargo:hover, .select-permissao:hover{
+    border-radius: 5px;
+    box-shadow: 0px 2px 0px 0px #00000078;
+    transition: 0.5s;
+}
+
+.btn-cadastrar{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-cadastrar button{
+    padding: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e4f6f8;
+    background: #458b9b;
+    cursor: pointer;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    transition: 0.5s;
+}
+
+.btn-cadastrar button:hover{
+    background-color: #ffffff;
+    color: #458b9b;
+    transition: 0.5s;
+}
+
+.conteudo-alerta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.alertas-cadastrados{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 2px;
+}
