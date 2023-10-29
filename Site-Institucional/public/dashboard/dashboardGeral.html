@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Geral Fármacos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../styles/css-dash/dashbogiardGeral.css">
+    <link rel="icon" href="../img/logo F png.png">
+</head>
+
+<body>
+    <div class="conteudo">
+        <div class="nav-lateral">
+            <div class="logo-empresa">
+                <img src="./../img/logo F png.png" alt="">
+            </div>
+            <div class="nav-itens">
+                <li>
+                    <ul><b>Nome</b></ul>
+
+                    <ul><a class="atual" href="dashboardGeral.html">Máquinas</a></ul>
+                    <ul><a href="./usuarios.html">Usuários</a></ul>
+                    <ul><a href="./editarDados.html">Editar dados</a></ul>
+                </li>
+            </div>
+
+            <div class="btn-sair">
+                <button>Sair</button>
+            </div>
+        </div>
+        <div class="div-principal">
+           
+                                <!-- <canvas id="myChart3" style="width: 250px; height: 200px;"></canvas> -->
+                             
+                                <!-- <canvas id="myChart4" style="width: 400px; height: 220px;"></canvas> -->
+                      
+                                <!-- <canvas id="myChart1" style="width: 400px; height: 260px;"></canvas> -->
+                         
+                              <!-- <canvas id="myChart2" style="width: 400px; height: 300px;"></canvas> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="teste2">
+                    <div class="lista-maquinas">
+                        <div class="moldura-lista">
+                            <div class="titulo-lista-maquinas">
+                                Lista de Máquinas
+                            </div>
+                            <div class="maquinas">
+                                <div class="titulo-mquina">
+                                    <a href="dashboardGeral.html">
+                                        <b>Geral</b>
+                                    </a>
+                                </div>
+                                <div>
+                                    <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
+                                    <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
+                                </div>
+                            </div>
+                            <div class="maquinas">
+                                <div class="titulo-mquina">
+                                    <a href="dashboardEspecífica.html">
+                                        Máquina 1
+                                    </a>
+                                </div>
+                                <div>
+                                    <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
+                                    <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
+                                </div>
+                            </div>
+                            <div class="maquinas">
+                                <div class="titulo-mquina">
+                                    <a href="dashboardEspecífica.html">
+                                        Máquina 2
+                                    </a>
+                                </div>
+                                <div>
+                                    <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
+                                    <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="segurar-alertas">
+                        <div class="moldura-alertas">
+                            <div class="titulo-lista-alertas">
+                                Lista alertas
+                            </div>
+                            <div class="alertas">
+                                <div class="nome-maquna">
+                                    Máquina 1 12:00
+                                </div>
+                                <div class="componente-medida">
+                                    CPU: 80%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const ctx3 = document.getElementById('myChart3');
+    var totalRam = "12";
+
+    new Chart(ctx3, {
+
+        type: 'doughnut',
+        data: {
+            labels: ['Em uso', 'Livre'], // colocar as horas
+            datasets: [{
+                data: [30, 70], // colocar o uso
+                borderWidth: 3,
+                cutout: '65%',
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: `Uso de memória RAM ${totalRam}`,
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                }
+            }
+        },
+    });
+
+    const ctx4 = document.getElementById('myChart4');
+
+    new Chart(ctx4, {
+        data: {
+            datasets: [{
+                type: 'bar',
+                label: 'Gráfico de Disco',
+                data: [12, 19, 15, 12, 17], // captura de rede
+                borderWidth: 1,
+                // backgroundColor: 'pink',
+            }],
+            labels: ['Máquina 1', 'Máquina 2']
+        },
+        options: {
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+                title: {
+                    display: true,
+                    text: 'Comparativo de Uso de Disco entre máquinas '
+                }
+            },
+            // scales: {
+            //     y: {
+            //         beginAtZero: true
+            //     }
+            // }
+        }
+    });
+
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+        data: {
+            datasets: [{
+                type: 'bar',
+                label: 'Pacotes Recebidos',
+                data: [30, 35, 40, 50, 70, 20], // captura de rede
+                borderWidth: 1,
+            },
+            {
+                type: 'bar',
+                label: 'Pacotes Enviados',
+                data: [30, 35, 40, 50, 70, 20], // captura de rede
+                borderWidth: 1,
+            },
+            ],
+            labels: ['Máquina 1', 'Máquina 2']
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    fontSize: 20,
+                    text: "Comparação de pacotes recebidos e enviados por máquina diariamente",
+                },
+            }
+        }
+    });
+
+    const ctx1 = document.getElementById('myChart1');
+
+    new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: [1, 2, 3, 4, 5, 6,], // colocar as horas
+            datasets: [{
+                type: 'line',
+                label: 'Alerta preocupante',
+                data: [10, 10, 10, 10, 10, 10],
+                borderWidth: 1.5,
+                borderColor: '#6dc7ff',
+                backgroundColor: '#6dc7ff',
+            },
+            {
+                type: 'line',
+                label: 'Alerta crítico',
+                data: [20, 20, 20, 20, 20, 20],
+                borderWidth: 1.5,
+                borderColor: 'red',
+                backgroundColor: 'red',
+            },
+            {
+                label: 'Uso de CPU',
+                data: [12, 19, 3, 5, 2, 3], // colocar o uso
+                borderWidth: 3,
+                borderColor: '#00323c',
+                backgroundColor: '#00323c',
+            }]
+        },
+
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Uso de CPU em porcentagem em decorrência do tempo',
+                    fontSize: 50,
+
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
+            },
+        }
+    });
+
+</script>
