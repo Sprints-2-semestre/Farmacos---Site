@@ -1,0 +1,76 @@
+body {
+    position: relative;
+    top: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+h1 {
+    margin-left: 24vw;
+    margin-top: 5vh;
+    font-size: 213;
+}
+
+.parteAcima {   
+    display: flex;
+    flex-direction: row;
+    gap: 40vw;
+}
+
+.botaoCadastro button{
+    padding: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e4f6f8;
+    background: #458b9b;
+    cursor: pointer;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    transition: 0.5s;
+   
+}
+
+.botaoCadastro button:hover {
+    background-color: #ffffff;
+    color: #458b9b;
+    transition: 0.5s;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 900px;
+
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: auto;
+    padding: 10px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-color: #cbc7c7b1;
+  
+    border: 1px #001a2476 solid;
+    border-radius: 5px;
+    margin-left: 30%;
+}
+
+.listagem {
+    margin-left: 1.5vw;
+}
+
+.deLado {
+    display: flex;
+    flex-direction: row;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+}
+
