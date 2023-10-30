@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../styles/css-dash/navLateral.css">
+    <link rel="stylesheet" href="./../styles/css-dash/cadastroAlerta.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="conteudo">
+        <div class="nav-lateral">
+            <div class="logo-empresa">
+                <img src="./../img/logo F png.png" alt="">
+            </div>
+            <div class="nav-itens">
+                <li>
+                    <ul><b>Nome</b></ul>
+
+                    <ul><a class="atual" href="./cadastroAlerta.html">Alertas</a></ul>
+                    <ul><a class="" href="./dashboardGeral.html">Máquinas</a></ul>
+                    <ul><a href="">Usuários</a></ul>
+                    <ul><a href="./editarDados.html">Editar dados</a></ul>
+                </li>
+            </div>
+            
+            <div class="btn-sair">
+                <button>Sair</button>
+            </div>
+
+        </div>
+        <div class="div-principal">
+
+            <div class="card">
+
+                <div class="conteudo-card">
+                    <h1>Cadastro de Alertas</h1>
+                    <form action="">
+
+                        <div class="input-group">
+                            <label for="number" style="font-size: 14px;">Tipo Componente:</label><br>
+                            <select class="select-cargo" name="AME" id="select_Ame">
+                                <option value="">Selecione...</option>
+                                <option value="1">CPU</option>
+                                <option value="2">Memória</option>
+                                <option value="3">Disco</option>
+                                <option value="4">Rede</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="firstname" style="font-size: 14px;">Parâmetro Máximo:</label><br>
+                            <input id="input_Nome_Completo" type="text" name="firstname" placeholder="Máximo" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email" style="font-size: 14px;">Parâmetro Médio:</label><br>
+                            <input id="input_email" type="email" name="email" placeholder="Médio" required>
+                        </div>
+
+                        <div class="btn-cadastrar">
+                            <button onclick="">Cadastrar Alerta</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="conteudo-alerta">
+                    <h1>Alertas cadastrados</h1>
+
+                    <div class="alertas-cadastrados">
+                        <div class="primeiroParametro">
+                            <div class="alertas">
+                                <b>Tipo do componente:</b>
+                                <p>Lorem</p>
+                                <b>Parâmetro máximo:</b>
+                                <p>Lorem</p>
+                                <b>Parâmetro médio:</b>
+                                <p>Lorem</p>
+                                <button class="btn-excluir">Excluir</button>
+                                <a href="./alterarAlerta.html"><button class="btn-alterar">Alterar</button></a>
+                            </div>
+
+                            <div class="alertas">
+                                <b>Tipo do componente:</b>
+                                <p>Lorem</p>
+                                <b>Parâmetro máximo:</b>
+                                <p>Lorem</p>
+                                <b>Parâmetro médio:</b>
+                                <p>Lorem</p>
+                                <button class="btn-excluir">Excluir</button>
+                                <a href="./alterarAlerta.html"><button class="btn-alterar">Alterar</button></a>
+                            </div>
+
+                            <div class="alertas">
+                                <b>Tipo do componente:</b>
+                                <p>Lorem</p>
+                                <b>Parâmetro máximo:</b>
+                                <p>Lorem</p>
+                                <b>Parâmetro médio:</b>
+                                <p>Lorem</p>
+                                <button class="btn-excluir">Excluir</button>
+                                <a href="./alterarAlerta.html"><button class="btn-alterar">Alterar</button></a>
+                            </div>
+
+                            <div class="alertas">
+                                <b>Tipo do componente:</b>
+                                <p>Lorem</p>
+                                <b>Parâmetro máximo:</b>
+                                <p>Lorem</p>
+                                <b>Parâmetro médio:</b>
+                                <p>Lorem</p>
+                                <button class="btn-excluir">Excluir</button>
+                                <a href="./alterarAlerta.html"><button class="btn-alterar">Alterar</button></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+</body>
+
+</html>

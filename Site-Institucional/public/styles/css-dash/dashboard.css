@@ -95,7 +95,8 @@ body {
 }
 
 .btn-sair,
-.btn-pdf {
+.btn-pdf,
+.btn-voltar {
   display: flex;
   text-align: center;
   font-size: 20px;
@@ -103,16 +104,19 @@ body {
   color: black;
   justify-content: center;
   align-items: end;
-  margin: 10%;
   height: 20%;
   width: 100%;
 }
 
+.btn-sair{
+  margin-bottom: 4%;
+}
+
 .btn-sair button,
-.btn-pdf button {
+.btn-pdf button,
+.btn-voltar button {
   height: 40%;
   width: 60%;
-  margin-top: 15px;
   border: none;
   border-radius: 8px;
   outline: none;
@@ -126,7 +130,9 @@ body {
 }
 
 .btn-sair button:hover,
-.btn-pdf button:hover {
+.btn-pdf button:hover,
+.btn-voltar button:hover
+ {
   color: #e4f6f8;
   transition: 0.5s;
   background: #034c5b;
@@ -202,11 +208,13 @@ body {
     height: 70%;
 }
 
-.div-ram {
+.div-ram, .div-processos {
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  width: 24%;
+  width: 30%;
   border-radius: 8px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -284,6 +292,25 @@ body {
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+.div-rede-disco{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  gap: 2%;
+}
+
+.uso-sem, .temp-osci{
+  display: flex;
+  background-color: #ffffff;
+  height: 48%;
+  border-radius: 8px;
+  flex-direction: column;
+  align-items: center;
+  padding: 1%;
+}
+
+
+
 .div-graf-disco {
   display: flex;
   background-color: #ffffff;
@@ -306,31 +333,44 @@ body {
   border-radius: 8px;
 }
 
+.div-list-maquinas-esp {
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+
 ::-webkit-scrollbar{
     color: #001a24;
     width: 15px;
 }
 
-.div-list-maquinas::-webkit-scrollbar-thumb, .div-list-alertas::-webkit-scrollbar-thumb {
+.div-list-maquinas::-webkit-scrollbar-thumb, .div-list-alertas::-webkit-scrollbar-thumb,.div-processos::-webkit-scrollbar-thumb, .div-list-maquinas-esp::-webkit-scrollbar-thumb  {
     border-radius: 8px;
     background-color: #001a24;
     border: solid white 4px;
 }
 
-.div-list-maquinas::-webkit-scrollbar-track, .div-list-alertas::-webkit-scrollbar-track {
+.div-list-maquinas::-webkit-scrollbar-track, .div-list-alertas::-webkit-scrollbar-track,.div-processos::-webkit-scrollbar-track,.div-list-maquinas-esp::-webkit-scrollbar-track  {
     border-radius: 2px;
     background-color: transparent;
 
 }
 
 .div-list-maquinas a,
-.div-list-alertas a {
+.div-list-alertas a,
+.div-list-maquinas-esp a {
   text-decoration: none;
   color: black;
 }
 
 .div-list-maquinas h2,
-.div-list-alertas h2 {
+.div-list-alertas h2,
+.div-list-maquinas-esp h2 {
   margin: 2%;
   margin-top: 5%;
   padding-left: 4%;
@@ -383,3 +423,4 @@ tr:hover {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
+

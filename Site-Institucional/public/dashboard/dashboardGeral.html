@@ -19,128 +19,62 @@
             <div class="nav-itens">
                 <li>
                     <ul><b>Nome</b></ul>
-
                     <ul><a class="atual" href="dashboardGeral.html">Máquinas</a></ul>
                     <ul><a href="./usuarios.html">Usuários</a></ul>
                     <ul><a href="./editarDados.html">Editar dados</a></ul>
                 </li>
             </div>
-
+            <div class="btn-pdf"><button>Gerar PDF</button></div>
             <div class="btn-sair">
                 <button>Sair</button>
             </div>
         </div>
+        // api do chart.js
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"
+            integrity="sha512-t2JWqzirxOmR9MZKu+BMz0TNHe55G5BZ/tfTmXMlxpUY8tsTo3QMD27QGoYKZKFAraIPDhFv56HLdN11ctmiTQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+
+            // final da api do chart.js
+
+            
         <div class="div-principal">
-            <div class="todos-parametros">
-                <div class="parametros">
-                    <div class="esquerda-parametro-cpu">
-                        <div class="titulo-parametro-cpu">
-                            Parâmetros CPU
-                        </div>
-                        <div class="parametro-preocupante">
-                            <div class="img-preocupante">
-                                <img src="../img/warning.png" style="width: 23px; height: 23px;">
-                            </div>
-                            <div class="titulo-preocupante">
-                                Procupante
-                            </div>
-                            <div>
-                                60%
-                            </div>
-                        </div>
-                        <div class="parametro-critico">
-                            <div class="img-critico">
-                                <img src="../img/alarm.png" style="width: 23px; height: 23px;">
-                            </div>
-                            <div class="titulo-critico">
-                                Crítico
-                            </div>
-                            <div>
-                                85%
-                            </div>
-                        </div>
+            <div class="div-superior">
+                <div class="div-cpu">
+                    <h2>CPU</h2>
+                    <div class="descricao-componente">
+                        <img src="../img/aviso (1).png" alt="">
+                        <p>Preocupante 60%</p>
                     </div>
-                    <div class="direita-parametro-cpu">
-                        <div class="titulo-uso-atual">
-                            Agora
-                        </div>
-                        <div>
-                            50%
-                        </div>
+                    <div class="descricao-componente">
+                        <img src="../img/aviso.png" alt="">
+                        <p>Critico 85%</p>
                     </div>
                 </div>
-                <div class="parametros">
-                    <div class="esquerda-parametro-ram">
-                        <div class="titulo-parametro-ram">
-                            Parâmetros RAM
-                        </div>
-                        <div class="parametro-preocupante">
-                            <div class="img-preocupante">
-                                <img src="../img/warning.png" style="width: 23px; height: 23px;">
-                            </div>
-                            <div class="titulo-preocupante">
-                                Procupante
-                            </div>
-                            <div>
-                                60%
-                            </div>
-                        </div>
-                        <div class="parametro-critico">
-                            <div class="img-critico">
-                                <img src="../img/alarm.png" style="width: 23px; height: 23px;">
-                            </div>
-                            <div class="titulo-critico">
-                                Crítico
-                            </div>
-                            <div>
-                                85%
-                            </div>
-                        </div>
+                <div class="div-ram">
+                    <h2>Memoria RAM</h2>
+                    <div class="descricao-componente">
+                        <img src="../img/aviso (1).png" alt="">
+                        <p>Preocupante 60%</p>
                     </div>
-                    <div class="direita-parametro-ram">
-                        <div class="titulo-uso-atual">
-                            Agora
-                        </div>
-                        <div>
-                            50%
-                        </div>
+                    <div class="descricao-componente">
+                        <img src="../img/aviso.png" alt="">
+                        <p>Critico 85%</p>
                     </div>
+
                 </div>
-                <div class="parametros">
-                    <div class="esquerda-parametro-rede">
-                        <div class="titulo-parametro-rede">
-                            Parâmetros REDE
-                        </div>
-                        <div class="parametro-preocupante">
-                            <div class="img-preocupante">
-                                <img src="../img/warning.png" style="width: 23px; height: 23px;">
-                            </div>
-                            <div class="titulo-preocupante">
-                                Procupante
-                            </div>
-                            <div>
-                                60%
-                            </div>
-                        </div>
-                        <div class="parametro-critico">
-                            <div class="img-critico">
-                                <img src="../img/alarm.png" style="width: 23px; height: 23px;">
-                            </div>
-                            <div class="titulo-critico">
-                                Crítico
-                            </div>
-                            <div>
-                                85%
-                            </div>
-                        </div>
+                <div class="div-rede">
+                    <h2>Rede</h2>
+                    <div class="descricao-componente">
+                        <img src="../img/aviso (1).png" alt="">
+                        <p>Preocupante 60%</p>
                     </div>
-                    <div class="direita-parametro-rede">
-                        <div class="titulo-uso-atual">
-                            Agora
-                        </div>
-                        <div>
-                            50%
-                        </div>
+                    <div class="descricao-componente">
+                        <img src="../img/aviso.png" alt="">
+                        <p>Critico 85%</p>
                     </div>
                 </div>
                 <div class="parametros">
@@ -161,7 +95,7 @@
                         </div>
                         <div class="parametro-critico">
                             <div class="img-critico">
-                                <img src="../img/alarm.png" style="width: 23px; height: 23px;">
+                                <img src="../img/alarm.png" style="width: 23px; height: 23px;">>
                             </div>
                             <div class="titulo-critico">
                                 Crítico
@@ -170,14 +104,16 @@
                                 85%
                             </div>
                         </div>
+                <div class="div-disco">
+                    <h2>Disco</h2>
+                    <div class="descricao-componente">
+                        <img src="../img/aviso (1).png" alt="">
+                        <p>Preocupante 60%</p>
+
                     </div>
-                    <div class="direita-parametro-disco">
-                        <div class="titulo-uso-atual">
-                            Agora
-                        </div>
-                        <div>
-                            50%
-                        </div>
+                    <div class="descricao-componente">
+                        <img src="../img/aviso.png" alt="">
+                        <p>Critico 85%</p>
                     </div>
                 </div>
             </div>
@@ -185,7 +121,7 @@
                 <div class="segurar-graficos">
                     <div class="div-pdf">
                         <div class="botao-pdf">
-                            Gerar PDF
+                            <button onclick="downloadPDF()">Gerar PDF</button>
                         </div>
                         <div class="contagem-maquinas">
                             <div class="titulo-contagem">
@@ -197,7 +133,7 @@
                         </div>
                     </div>
                     <div class="coluna-graficos">
-                        
+
                         <div class="linha1-graficos">
                             <div class="uso-memoria">
                                 <!-- <canvas id="myChart3" style="width: 250px; height: 200px;"></canvas> -->
@@ -225,96 +161,115 @@
                                         </div>
                                     </div>
 
-                                    <div class="informacoes-maquina">
-                                        <div class="maquina-ram">
-                                            Máquina 2
-                                        </div>
-                                        <div class="uso-maquina-ram">
-                                            55%
-                                        </div>
-                                        <div class="qtd-total-ram">
-                                            8 GB
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <canvas id="myChart4" style="width: 400px; height: 220px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="linha2-graficos">
-                            <div>
-                                <canvas id="myChart1" style="width: 400px; height: 260px;"></canvas>
-                            </div>
-                            <div>
-                                <canvas id="myChart2" style="width: 400px; height: 300px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
+            <div class="div-central">
+                <div class="div-tab-ram">
+                    <table>
+                        <tr>
+                            <th>Identificação da Máquina</th>
+                            <th>Uso atual</th>
+                            <th>Total de Ram</th>
+                        </tr>
+                        <tr>
+                            <th>Máquina 1</th>
+                            <th>60%</th>
+                            <th>12 GB</th>
+                        </tr>
+                        <tr>
+                            <th>Máquina 2</th>
+                            <th>55%</th>
+                            <th>8 GB</th>
+                        </tr>
+                    </table>
                 </div>
-                <div class="teste2">
-                    <div class="lista-maquinas">
-                        <div class="moldura-lista">
-                            <div class="titulo-lista-maquinas">
-                                Lista de Máquinas
-                            </div>
-                            <div class="maquinas">
-                                <div class="titulo-mquina">
-                                    <a href="dashboardGeral.html">
-                                        <b>Geral</b>
-                                    </a>
-                                </div>
-                                <div>
-                                    <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
-                                    <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
-                                </div>
-                            </div>
-                            <div class="maquinas">
-                                <div class="titulo-mquina">
-                                    <a href="dashboardEspecífica.html">
-                                        Máquina 1
-                                    </a>
-                                </div>
-                                <div>
-                                    <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
-                                    <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
-                                </div>
-                            </div>
-                            <div class="maquinas">
-                                <div class="titulo-mquina">
-                                    <a href="dashboardEspecífica.html">
-                                        Máquina 2
-                                    </a>
-                                </div>
-                                <div>
-                                    <img src="../img/pencil.png" onclick="" style="width: 18px; height: 18px;">
-                                    <img src="../img/delete.png" onclick="" style="width: 18px; height: 18px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="segurar-alertas">
-                        <div class="moldura-alertas">
-                            <div class="titulo-lista-alertas">
-                                Lista alertas
-                            </div>
-                            <div class="alertas">
-                                <div class="nome-maquna">
-                                    Máquina 1 12:00
-                                </div>
-                                <div class="componente-medida">
-                                    CPU: 80%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="div-graf-disco"><canvas id="myChart4" style="width: 400px; height: 220px;"></canvas></div>
+
+                <div class="div-list-maquinas">
+                    <h2>Lista de Máquinas</h2>
+                    <table>
+                        <tr>
+                            <th><a href=""> Geral</a></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Máquina 1</a></th>
+                            <th>Ativo</th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Máquina 2</a></th>
+                            <th>Ativo</th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Maquina 3</a></th>
+                            <th>Ativo</th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Maquina 4</a></th>
+                            <th>Inativo</th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Maquina 5</a></th>
+                            <th>Ativo</th>
+                        </tr>
+                        <tr>
+                            </th>
+                            <th><a href="">Máquina 6</a></th>
+                            <th>Ativo</th>
+                        </tr>
+                    </table>
                 </div>
             </div>
+            <div class="div-inferior">
+                <div class="div-graf-rede">
+                    <canvas id="myChart2" style="width: 400px; height: 300px;"></canvas>
+                </div>
+                <div class="div-graf-cpu">
+                    <canvas id="myChart1" style="width: 400px; height: 260px;"></canvas>
+                </div>
+                <div class="div-list-alertas">
+                    <h2>Alertas</h2>
+                    <table>
+                        <tr>
+                            <th><a href=""> </a></th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Máquina 1</a></th>
+                            <th>16:02</th>
+                            <th>CPU: 80%</th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Máquina 2</a></th>
+                            <th>16:02</th>
+                            <th>RAM: 90%</th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Máquina 3</a></th>
+                            <th>09:02</th>
+                            <th>DISCO: 98%</th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Máquina 1</a></th>
+                            <th>19:02</th>
+                            <th>CPU: 90%</th>
+                        </tr>
+                        <tr>
+                            <th><a href="">Máquina 3</a></th>
+                            <th>16:02</th>
+                            <th>CPU: 90%</th>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <!-- <canvas id="myChart3" style="width: 250px; height: 200px;"></canvas> -->
+
+
         </div>
     </div>
 </body>
 
 <script>
+  
     const ctx3 = document.getElementById('myChart3');
     var totalRam = "12";
 
@@ -436,13 +391,24 @@
             },
             {
                 label: 'Uso de CPU',
-                data: [12, 19, 3, 5, 2, 3], // colocar o uso 
+                data: [12, 19, 3, 5, 2, 3], // colocar o uso
                 borderWidth: 3,
                 borderColor: '#00323c',
                 backgroundColor: '#00323c',
             }]
         },
+        // configurar a cor de fundo
+        const: bgColor ={
+            id: 'bgColor',
+            beforeDraw(chart1,steps, options) {
+                const {ctx,chartArea:{ctx1,width,height}} = chart1;
+                ctx1.faleStyle = 'options.backgroundColor';
+                ctx1.fillRect(0,0,width,height);
+                ctx1.restore();
+            }
 
+        },
+    
         options: {
             scales: {
                 y: {
@@ -461,8 +427,33 @@
                     display: true,
                     position: 'bottom'
                 },
+                // cor de fundo da imagem
+                bgColor:{
+                    backgroundColor: 'white'
+                }
             },
         }
+
     });
 
+    function downloadPDF() {
+        const canvas = document.getElementById('myChart1');
+        //const canvas1 = document.getElementById('myChart2');
+        //const canvas2 = document.getElementById('myChart3');
+        //const canvas3 = document.getElementById('myChart4');
+
+    //create image
+    const canvasImage = canvas.toDataURL('image/jpeg', 1.0);
+    //const canvasImage1 = canvas1.toDataURL('image/jpeg', 1.0);
+   // const canvasImage2 = canvas2.toDataURL('image/jpeg', 1.0);
+   // const canvasImage3 = canvas3.toDataURL('image/jpeg', 1.0);
+
+console.log(canvasImage);
+
+    let pdf = new jsPDF('landscape');
+    pdf.setFontSize(20);
+    pdf.addImage(canvasImage, 'JPEG', 0, 0, 150, 150);
+    pdf.save('mychart.pdf');
+    
+    }
 </script>
