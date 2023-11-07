@@ -242,3 +242,18 @@ body {
         height: 80%;
     }
 }
+
+.bordaToken{
+    margin-top: 10px;
+    border: 1px solid;
+    border-color: green;
+    background-color: #e7fbff;
+    border-radius: 10px;
+    gap: 10px;
+    padding: 10px;
+    color: #001a24;
+    font-size: 12pt;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    outline: none;
+    box-sizing: border-box;
+}
