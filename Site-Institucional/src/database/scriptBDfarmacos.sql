@@ -5,9 +5,13 @@ USE farmacos;
 CREATE TABLE AME (
 idAme INT PRIMARY KEY auto_increment,
 nomeAme varchar (45),
-codigoAme int,
+codigoAme varchar(5),
 cep char (9)
 );
+insert into AME (codigoAme) VALUES (97807); 
+insert into AME (codigoAme) VALUES (12345); 
+insert into AME (codigoAme) VALUES (09876); 
+insert into AME (codigoAme) VALUES (22113); 
 
 CREATE TABLE maquina (
 idMaquina INT PRIMARY KEY auto_increment,
@@ -86,3 +90,4 @@ INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Rede");
 
 INSERT INTO funcionario (cargo) VALUES ("NOC");
 INSERT INTO funcionario (cargo) VALUES ("Analista");
+
