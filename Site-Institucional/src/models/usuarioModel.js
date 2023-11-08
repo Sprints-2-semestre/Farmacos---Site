@@ -12,7 +12,7 @@ function listar() {
 function entrar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucao = `
-        SELECT * FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
+        SELECT * FROM usuario WHERE email = '${email}' AND senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -30,7 +30,7 @@ function validar (tokenAME) {
 
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrar(nome, email, senha) {
+function cadastrar(nome, email, senha,) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
 
 
@@ -39,7 +39,7 @@ function cadastrar(nome, email, senha) {
    // var pegarId = "SELECT count(idUsuario) from usuario"
 
     var instrucao = `
-    INSERT INTO funcionario (nome, email, senha, cargo, fkPermissao) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC', 1);`
+    INSERT INTO usuario (nome, email, senha, cargo, fkPermissaoUsuario,fkAme) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC', 1,1);`
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
     
