@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../styles/css-dash/navLateral.css">
     <link rel="stylesheet" href="./../styles/css-dash/cadastroUsuario.css">
-    <title>Document</title>
+    <script src="../js/cadastroUsuario.js"></script>
+    <title>Cadastro Usuario</title>
 </head>
 
 <body>
@@ -67,17 +68,17 @@
 
                         <div class="input-group">
                             <label for="number" style="font-size: 14px;">Cargo</label><br>
-                            <select class="select-cargo" name="AME" id="select_Ame">
+                            <select class="select-cargo" name="AME" id="select_cargo">
                                 <option value="">Selecione...</option>
-                                <option value="1">Suporte</option>
-                                <option value="2">Nock</option>
-                                <option value="3">Gerente de TI</option>
+                                <option value="Suporte">Suporte</option>
+                                <option value="Noc">Noc</option>
+                                <option value="Gerente de TI">Gerente de TI</option>
                             </select>
                         </div>
 
                         <div class="input-group">
                             <label for="cod-ame" style="font-size: 14px;">Tipo de permissão</label><br>
-                            <select class="select-permissao" name="AME" id="select_Ame">
+                            <select class="select-permissao" name="AME" id="select_permissao">
                                 <option value="">Selecione...</option>
                                 <option value="1">Padrão</option>
                                 <option value="2">ADM</option>
@@ -85,7 +86,7 @@
                         </div>
 
                         <div class="btn-cadastrar">
-                            <button onclick="">Cadastrar Usuário</button>
+                            <button onclick="cadastrar()">Cadastrar Usuário</button>
                         </div>
                     </form>
                 </div>
