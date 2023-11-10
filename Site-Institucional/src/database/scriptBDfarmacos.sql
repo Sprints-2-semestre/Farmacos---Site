@@ -1,19 +1,14 @@
-DROP DATABASE farmacos;
+-- drop database farmacos;
 CREATE DATABASE farmacos;
 USE farmacos;
 
 CREATE TABLE AME (
 idAme INT PRIMARY KEY auto_increment,
 nomeAme varchar (45),
-codigoAme varchar(5),
 cep char (9)
 );
-insert into AME (codigoAme) VALUES (97807); 
-insert into AME (codigoAme) VALUES (12345); 
-insert into AME (codigoAme) VALUES (09876); 
-insert into AME (codigoAme) VALUES (22113); 
 
-CREATE TABLE maquina (
+CREATE TABLE maquina (	
 idMaquina INT PRIMARY KEY auto_increment,
 sistemaOperacional varchar (45),
 arquitetura INT,
@@ -27,23 +22,23 @@ idPermissao INT primary key auto_increment,
 tipoPermissao varchar (45)
 );
 insert into permissao values(null,'total');
+insert into permissao values(null,'leitura');
 
-CREATE TABLE funcionario (
-idFuncionario INT primary key auto_increment,
+CREATE TABLE usuario (
+idusuario INT primary key auto_increment,
 nome varchar(45),
 email varchar (45),
 senha varchar (45),
 cargo varchar (45),
-fkNoc INT, CONSTRAINT FK_Noc foreign key (fkNoc) references funcionario(idFuncionario),
-fkAme INT, CONSTRAINT FK_AmeFuncionario foreign key (fkAme) references AME(idAme),
-fkPermissao INT, CONSTRAINT FK_Permissao foreign key (fkPermissao) references permissao(idPermissao)
+fkPermissaoUsuario INT, CONSTRAINT Fk_perm foreign key (fkPermissaoUsuario) references permissao(idPermissao),
+fkAme INT, CONSTRAINT FK_AmeFuncionario foreign key (fkAme) references AME(idAme)
 );
 
 CREATE TABLE parametro (
 idParametro INT primary key auto_increment,
 maximo DOUBLE,
 medio DOUBLE,
-fkFuncionario INT, CONSTRAINT FK_Funcionario foreign key (fkFuncionario) references funcionario(idFuncionario)
+fkPermissaoParametro INT, CONSTRAINT FkPerm_param foreign key (fkPermissaoParametro) references permissao(idpermissao)
 );
 
 CREATE TABLE tipoComponente (
@@ -63,7 +58,7 @@ num_ProcesFisicos INT,
 tamanhoTotal DOUBLE,
 enderecoMac varchar (45),
 numSerial varchar(45),
-ipv4 varchar (45)
+ipv4 varchar(300)
 );
 select* from maquinaTipoComponente;
 
@@ -80,14 +75,21 @@ pacoteRecebido DOUBLE,
 pacoteEnviado DOUBLE,
 dtHora datetime DEFAULT CURRENT_TIMESTAMP 
 );
-
-insert into AME values 
-(null,'ame nova amelia',1, '123456789');
+	
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ("CPU");
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Memória RAM");
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Disco");
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Rede");
 
-INSERT INTO funcionario (cargo) VALUES ("NOC");
-INSERT INTO funcionario (cargo) VALUES ("Analista");
+INSERT INTO usuario (cargo) VALUES ("NOC");
+INSERT INTO usuario (cargo) VALUES ("Analista");
+SELECT maquina.*, maquinaTipoComponente.*
+FROM maquina
+INNER JOIN maquinaTipoComponente ON maquina.idMaquina = maquinaTipoComponente.fkMaquina;
 
+insert into AME VALUES (null, 'ame vila mariana', '09250700');
+insert into AME VALUES (null, 'ame  mariana', '09250700');
+select * from ame;
+select * from usuario;
+select count(idUsuario) from usuario;
+truncate table usuario;
