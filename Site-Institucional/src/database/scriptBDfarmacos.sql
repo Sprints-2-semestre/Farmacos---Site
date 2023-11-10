@@ -1,15 +1,14 @@
-
+-- drop database farmacos;
 CREATE DATABASE farmacos;
 USE farmacos;
 
 CREATE TABLE AME (
 idAme INT PRIMARY KEY auto_increment,
 nomeAme varchar (45),
-codigoAme int,
 cep char (9)
 );
 
-CREATE TABLE maquina (
+CREATE TABLE maquina (	
 idMaquina INT PRIMARY KEY auto_increment,
 sistemaOperacional varchar (45),
 arquitetura INT,
@@ -76,9 +75,7 @@ pacoteRecebido DOUBLE,
 pacoteEnviado DOUBLE,
 dtHora datetime DEFAULT CURRENT_TIMESTAMP 
 );
-
-insert into AME values 
-(null,'ame nova amelia',1, '123456789');
+	
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ("CPU");
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Memória RAM");
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Disco");
@@ -89,3 +86,10 @@ INSERT INTO usuario (cargo) VALUES ("Analista");
 SELECT maquina.*, maquinaTipoComponente.*
 FROM maquina
 INNER JOIN maquinaTipoComponente ON maquina.idMaquina = maquinaTipoComponente.fkMaquina;
+
+insert into AME VALUES (null, 'ame vila mariana', '09250700');
+insert into AME VALUES (null, 'ame  mariana', '09250700');
+select * from ame;
+select * from usuario;
+select count(idUsuario) from usuario;
+truncate table usuario;
