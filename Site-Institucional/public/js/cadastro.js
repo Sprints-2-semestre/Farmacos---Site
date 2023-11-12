@@ -19,8 +19,12 @@ function cadastrar() {
     } else if (senhaVar != confirmarSenhaVar) {
         alert(`Os campos de senha e confirmar senha estão diferentes`)
         return false;
-     } 
+     } //else if{
+    //     window.location.href = "login.html";
+    //     alert("Cadastro realizado com sucesso!");
+    //     return true;
      else {
+
     fetch("/usuario/cadastrar", {
         method: "POST",
         headers: {
@@ -32,8 +36,12 @@ function cadastrar() {
             nomeServer: nomeVar,
             emailServer: emailVar,
             senhaServer: senhaVar,
+<<<<<<< HEAD
             tokenServer: tokenAME,
 
+=======
+            tokenServer: tokenAME
+>>>>>>> parent of 72528b2 (resolvendo conflitos)
         })
     }).then(function (resposta) {
 
@@ -52,8 +60,6 @@ function cadastrar() {
         console.log(`#ERRO: ${resposta}`);
     });
     return false;
-    //
-    
 }
 };
 

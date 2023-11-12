@@ -12,12 +12,13 @@ function listar() {
 function entrar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucao = `
-        SELECT * FROM usuario WHERE email = '${email}' AND senha = '${senha}';
+        SELECT * FROM funcionario WHERE email = '${email}' AND senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
+<<<<<<< HEAD
 function validar (tokenAME) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function validar():", tokenAME);
 
@@ -32,22 +33,31 @@ function validar (tokenAME) {
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function cadastrar(nome, email, senha, tokenAME) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, tokenAME);
+=======
+// Coloque os mesmos parâmetros aqui. Vá para a var instrucao
+function cadastrar(nome, email, senha) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+>>>>>>> parent of 72528b2 (resolvendo conflitos)
 
 
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
-   // var pegarId = "SELECT count(idUsuario) from usuario"
+    var pegarId = "SELECT count(idUsuario) from usuario"
 
     var instrucao = `
+<<<<<<< HEAD
     INSERT INTO usuario (nome, email, senha, cargo, fkPermissaoUsuario,fkAme) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC', 1, ${tokenAME});`
+=======
+    INSERT INTO funcionario (nome, email, senha, cargo, fkPermissao) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC', 1);`
+>>>>>>> parent of 72528b2 (resolvendo conflitos)
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
-    
 }
 
 module.exports = {
+
     entrar,
     cadastrar,
     listar,
-    validar
+
 };
