@@ -1,59 +1,13 @@
- function validar() {
-     console.log ("EXECUTANDO FUNÇÃO VALIDAR()");
-     var tokenAME = input_token_cadastro.value;
-
-         console.log("FORM TOKEN: ", tokenAME);
-      
-         fetch("/usuario/validar", {
-             method: "POST",
-             headers: {
-                 "Content-Type": "application/json"
-             },
-             body: JSON.stringify({
-                 tokenServer: tokenAME,
-             })
-         }).then(function (resposta) {
-             console.log("ESTOU NO THEN DO validar()!")
-
-             if (resposta.ok) {
-                 console.log(resposta);
-
-                 resposta.json().then(json => {
-                     console.log(json);
-                     console.log(JSON.stringify(json));
-                     sessionStorage.TOKEN_AME = json.codigoAme;
-
-                     const inputToken = document.getElementById('input_token_cadastro');
-                     inputToken.style.backgroundColor = '#BDECB6';
-                    
-                     //const botaoValidar = document.getElementById('idBotao');
-                     //botaoValidar.style.display = 'flex'
-                 });
-
-             } else {
-                 console.log("Houve um erro ao tentar realizar a validação!");
-                 console.log("Token inválido!");
-             }
-
-         }).catch(function (erro) {
-             console.log(erro);
-         })
-
-         return false;
-     }
-
-
- const intervalValidacao = setInterval(validar, 1000);
-
-
 function cadastrar() {
     var nomeVar = input_Nome_Completo.value;
     var emailVar = input_email.value;
     var senhaVar = input_senha.value;
     var confirmarSenhaVar = input_confirmar_senha.value;
-    
+    var tokenAME = input_token_cadastro.value;
 
-    if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "") {
+    validar();
+
+    if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "" || tokenAME == "") {
         alert("Preencha todos os campos!");
         return false;
     } else if (nomeVar.length < 3) {
@@ -78,6 +32,8 @@ function cadastrar() {
             nomeServer: nomeVar,
             emailServer: emailVar,
             senhaServer: senhaVar,
+            tokenServer: tokenAME,
+
         })
     }).then(function (resposta) {
 
@@ -100,3 +56,42 @@ function cadastrar() {
     
 }
 };
+
+function validar() {
+    console.log ("EXECUTANDO FUNÇÃO VALIDAR()");
+    var tokenAME = input_token_cadastro.value;
+
+        console.log("FORM TOKEN: ", tokenAME);
+     
+        fetch("/usuario/validar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tokenServer: tokenAME,
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO validar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.TOKEN_AME = json.idAme
+                });
+
+            } else {
+                alert("Token inválido!!!!!")
+                console.log("Houve um erro ao tentar realizar a validação!");
+                console.log("Token inválido!");
+            }
+
+        }).catch(function (erro) {
+            console.log(erro); 
+        })
+
+        return false;
+    }

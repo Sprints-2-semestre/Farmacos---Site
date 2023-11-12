@@ -21,7 +21,7 @@ function entrar(email, senha) {
 function validar (tokenAME) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function validar():", tokenAME);
 
-    var instrucao = `SELECT codigoAme FROM AME WHERE codigoAme = '${tokenAME}';`
+    var instrucao = `SELECT idAme FROM AME WHERE idAme = '${tokenAME}';`
 
     console.log("Executando a instrução SQL: \n" + instrucao);
     
@@ -30,8 +30,8 @@ function validar (tokenAME) {
 
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrar(nome, email, senha,) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+function cadastrar(nome, email, senha, tokenAME) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, tokenAME);
 
 
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
@@ -39,14 +39,11 @@ function cadastrar(nome, email, senha,) {
    // var pegarId = "SELECT count(idUsuario) from usuario"
 
     var instrucao = `
-    INSERT INTO usuario (nome, email, senha, cargo, fkPermissaoUsuario,fkAme) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC', 1,1);`
+    INSERT INTO usuario (nome, email, senha, cargo, fkPermissaoUsuario,fkAme) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC', 1, ${tokenAME});`
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
     
 }
-
-
-
 
 module.exports = {
     entrar,

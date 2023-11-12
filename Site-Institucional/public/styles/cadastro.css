@@ -257,3 +257,7 @@ body {
     outline: none;
     box-sizing: border-box;
 }
+
+#input_token_cadastro.inativo {
+    background-color: #BDECB6;
+}
