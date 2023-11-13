@@ -45,7 +45,8 @@
 
         var emailVar = input_email.value;
         var senhaVar = input_senha.value;
-
+        var idUser =  sessionStorage.ID_USUARIO;
+        console.log("ID USUARIO: ", idUser);
         if (emailVar == "" || senhaVar == "") {
             alert("Preencha todos os campos!");
             return false;
@@ -79,7 +80,7 @@
                         console.log(JSON.stringify(json));
                         sessionStorage.EMAIL_USUARIO = json.email;
                         sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.ID_USUARIO = json.idFuncionario;
+                        sessionStorage.ID_USUARIO = json.idusuario;
                         sessionStorage.FK_AME = json.fkAme;
                         sessionStorage.PERMISSAO = json.fkPermissao;
 
