@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="./../styles/css-dash/listaUsuario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../img/logo F png.png">
+   <script src="/public/js/cadastroUsuario.js"></script>
     <title>Listagem de Usuários</title>
 </head>
 
-<body>
+<body onload="listarUsuarios()">
     <div style="display: flex; flex-direction: column;">
         <!-- NAVEBAR -->
         <div class="nav-lateral">
@@ -47,7 +48,7 @@
         <div class="deLado">
             <div class="card">
                 <div class="listagem">
-                    <ul id="userList" class="user-list">
+                    <ul id="lista_usuarios" class="user-list">
                 </div>
             </div>
 
