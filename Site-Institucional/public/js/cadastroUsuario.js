@@ -189,3 +189,32 @@ function listar (){
 }
 
     
+function puxarUsuarios(idUsuario) {
+    lista_usuarios.innerHTML = ""
+    fetch(`/usuarioDashboard/listar/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+       if (response.ok) {
+          if (response.status === 204) {
+             console.log("vazio")
+          } else {
+             response.json().then(function (resposta) {
+                // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                var div = document.getElementById("lista_usuarios");
+                resposta.forEach(element => {
+                   div.innerHTML += `
+                   <li id="usuario${element.idUsuario}" fkAme='${element.fkAme}' onclick="puxarIdUsuario('usuario${element.idUsuario}')">
+                      
+                      <a href="./dashboard/edidarUsuario.html"> ${element.fkAme} </a>
+                   </li>
+                   `
+                });
+             });
+          }
+       } else {
+          console.error('Nenhum dado encontrado ou erro na API');
+       }
+    })
+       .catch(function (error) {
+          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+       });
+ }
+ 
