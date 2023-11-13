@@ -22,7 +22,6 @@ function entrar(email, senha) {
 function cadastrar(nome, email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
 
-
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var pegarId = "SELECT count(idUsuario) from usuario"
@@ -33,10 +32,21 @@ function cadastrar(nome, email, senha) {
     return database.executar(instrucao);
 }
 
+function editarNoc(nome, email, senha, idUser){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editarNoc():", nome, email, senha, idUser);
+
+    var instrucao = `
+    UPDATE usuario SET nome = '${nome}', email = '${email}', senha = '${senha}' WHERE idusuario = '${idUser}';`
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
 module.exports = {
 
     entrar,
     cadastrar,
     listar,
-
+    validar,
+    editarNoc
 };
