@@ -15,5 +15,7 @@ router.post("/login", function (req, res) {
 router.post("/validar", function (req, res) {
     usuarioController.validar(req, res);
 });
-
+router.put("/editarNoc", function (req, res) {
+    usuarioController.editarNoc(req, res);
+});
 module.exports = router;
