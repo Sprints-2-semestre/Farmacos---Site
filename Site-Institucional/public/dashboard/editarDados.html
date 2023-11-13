@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">  
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../styles/css-dash/navLateral.css">
     <link rel="stylesheet" href="./../styles/css-dash/editarDados.css">
+    <link rel="stylesheet" href="../js/cadastro.js">
+    <script src="../js/cadastro.js"></script>
     <title>Editar Dados</title>
     <link rel="icon" href="../img/logo F png.png">
+    <title>Document</title>
 </head>
 
 <body>
@@ -21,9 +24,9 @@
                 <li>
                     <ul><b>Nome</b></ul>
 
-                    <ul><a href="cadastroAlerta.html">Alertas</a></ul>
+                    <ul><a href="./cadastroAlerta.html">Alertas</a></ul>
                     <ul><a href="./dashboardGeral.html">Máquinas</a></ul>
-                    <ul><a href="./listaUsuario.html">Usuários</a></ul>
+                    <ul><a href="./usuarios.html">Usuários</a></ul>
                     <ul><a class="atual" href="./editarDados.html">Editar dados</a></ul>
                 </li>
             </div>
@@ -39,88 +42,35 @@
                 <div class="conteudo-card">
                     
                         <h1>Editar dados</h1>
-                        <form action="">
+                        <div>
                             <div class="input-group">
-                                <label for="firstname" style="font-size: 14px;">Nome Completo</label><br>
-                                <input id="input_Nome_Completo" type="text" name="firstname" placeholder="Nome Completo"
+                                Nome Completo <input id="input_Nome_Completo" type="text" name="firstname" placeholder="Nome Completo"
                                     required>
                             </div>
 
                             <div class="input-group">
-                                <label for="email" style="font-size: 14px;">Email</label><br>
-                                <input id="input_email" type="email" name="email" placeholder="Email" required>
+                                Email <input id="input_email" type="email" name="email" placeholder="Email" required>
                             </div>
 
                             <div class="input-group">
-                                <label for="senha" style="font-size: 14px;">Senha</label><br>
-                                <input id="input_senha" type="password" name="password" placeholder="Senha" required>
+                                Senha<input id="input_senha" type="password" name="password" placeholder="Senha" required>
                             </div>
 
                             <div class="input-group">
-                                <label for="password" style="font-size: 14px;">Confirmar Senha</label><br>
-                                <input id="input_confirmar_senha" type="password" name="password"
+                            
+                                Confirmar Senha <input id="input_confirmar_senha" type="password" name="password"
                                     placeholder="Confirmar Senha" required>
                             </div>
-
-                            <div class="input-group">
-                                <label for="number" style="font-size: 15px;">Unidade AME:</label><br>
-                                <select class="Ames" name="AME" id="select_Ame">
-                                    <option value="">Selecione...</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="">8</option>
-                                    <option value="7">9</option>
-                                    <option value="">10</option>
-                                    <option value="1">11</option>
-                                    <option value="2">12</option>
-                                    <option value="3">13</option>
-                                    <option value="4">14</option>
-                                    <option value="5">15</option>
-                                    <option value="6">16</option>
-                                    <option value="7">17</option>
-                                    <object value="8">18</object>
-                                </select>
-                                <div class="input-group">
-                                    <label for="cod-ame" style="font-size: 14px;">Código do AME</label><br>
-                                    <input id="input_Codigo-Ame" type="text" name="cod-ame" placeholder="Código do AME"
-                                        placeholder="Nome Completo" required>
-                                </div>
-
-                            </div>
-                        </form>
-                        <div class="btn-Editar">
-                           <button onclick="Editar()">Alterar Cadastro</button>
-                        </div> 
+                            <div class="btn-Editar">
+                                <button onclick="editarNoc()">Alterar Cadastro</button>
+                                
+                             </div> 
+                        </div>
+                       
                     </div>
+                    
                 </div>
             </div>
         </div>
 </body>
 </html>
-<script>
-    function Editar(){
-        var nomeVar = input_Nome_Completo.value
-        var emailVar = input_email.value
-        var senhaVar = input_senha.value
-        var confirmarSenhaVar = input_confirmar_senha.value
-        var ameVar = select_Ame.value
-        var codAmeVar = input_Codigo-Ame.value
-
-        if(nomeVar == "" || emailVar == "" || senhaVar == "" || confirmarSenhaVar == "" || ameVar == "" || codAmeVar == ""){
-            alert("Preencha todos os campos");
-        }else{
-            if(senhaVar == confirmarSenhaVar){
-                alert("Dados alterados com sucesso");
-            }else{
-                alert("As senhas não coincidem");
-            }
-        }
-    }
-
-
-</script>

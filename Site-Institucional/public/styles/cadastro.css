@@ -241,6 +241,7 @@ body {
     .main-cadastro form{
         height: 80%;
     }
+<<<<<<< HEAD
 }
 
 .bordaToken{
@@ -260,4 +261,6 @@ body {
 
 #input_token_cadastro.inativo {
     background-color: #BDECB6;
+=======
+>>>>>>> parent of 72528b2 (resolvendo conflitos)
 }
