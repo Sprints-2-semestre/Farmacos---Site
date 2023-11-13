@@ -36,7 +36,7 @@ function buscarMedidasEmTempoReal(idAquario) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 1
+        instrucaoSql = `top 1
         dht11_temperatura as temperatura, 
         dht11_umidade as umidade,  
                         CONVERT(varchar, momento, 108) as momento_grafico, 

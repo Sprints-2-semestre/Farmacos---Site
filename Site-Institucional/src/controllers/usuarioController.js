@@ -1,12 +1,9 @@
 var usuarioModel = require("../models/usuarioModel");
-
 var sessoes = [];
-
 function testar(req, res) {
     console.log("ENTRAMOS NA usuarioController");
     res.json("ESTAMOS FUNCIONANDO!");
 }
-
 function listar(req, res) {
     usuarioModel.listar()
         .then(function (resultado) {
@@ -23,7 +20,6 @@ function listar(req, res) {
             }
         );
 }
-
 function entrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
@@ -33,7 +29,6 @@ function entrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        
         usuarioModel.entrar(email, senha)
             .then(
                 function (resultado) {
@@ -57,11 +52,9 @@ function entrar(req, res) {
                 }
             );
     }
-
 }
 
 function cadastrar(req, res) {
-
     // Crie uma variável que vá recuperar os valores do arquivo
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
@@ -99,17 +92,15 @@ function cadastrar(req, res) {
 
 function validar (req, res) {
     var tokenAME = req.body.tokenServer;
-
     if (tokenAME == undefined) {
         res.status(400).send("Seu token está undefined!");
     } else {
-        
         usuarioModel.validar(tokenAME)
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
-
+                  
                     if (resultado.length == 1) {
                         console.log(resultado);
                         res.json(resultado[0]);
@@ -127,7 +118,6 @@ function validar (req, res) {
                 }
             );
     }
-
 }
 function editarNoc(req, res) {
     var nome = req.body.nomeServer;
@@ -167,4 +157,5 @@ module.exports = {
     testar,
     validar,
     editarNoc
+
 }
