@@ -154,90 +154,62 @@ function editar (){
     }
 
 }
-
-function listar (){
-    var fkAme = sessionStorage.TOKEN_AME;
-    fetch("../usuarioDashboard/listar", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
+// function listar (){
+//     var fkAme = sessionStorage.TOKEN_AME;
+//     fetch("../usuarioDashboard/listar", {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             // crie um atributo que recebe o valor recuperado aqui
+//             // Agora vá para o arquivo routes/usuario.js
           
-            fkAmeServer: fkAme
+//             fkAmeServer: fkAme
             
 
-        })
-    }).then(function (resposta) {
+//         })
+//     }).then(function (resposta) {
 
-        console.log("resposta: ", resposta);
+//         console.log("resposta: ", resposta);
 
-        if (resposta.ok) {
-            console.log("opa");
+//         if (resposta.ok) {
+//             console.log("opa");
 
-        } else {
-            alert("Erro ao cadastrar")
-            throw ("Houve um erro ao tentar realizar o cadastro!");
-        }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-    });
-    return false;
+//         } else {
+//             alert("Erro ao cadastrar")
+//             throw ("Houve um erro ao tentar realizar o cadastro!");
+//         }
+//     }).catch(function (resposta) {
+//         console.log(`#ERRO: ${resposta}`);
+//     });
+//     return false;
 
-}
-
-    
 function puxarUsuarios() {
-    var idUsuario = sessionStorage.ID_USUARIO;
-    fetch(`/usuarioDashboard/listar`).then(function (resposta) {
-        if (resposta.ok) {
-            if (resposta.status == 204) {
-                var feed = document.getElementById("usuarios_container");
-                var mensagem = document.createElement("span");
-                mensagem.innerHTML = "Nenhum resultado encontrado."
-                feed.appendChild(mensagem);
-                throw "Nenhum resultado encontrado!!";
-            }
+    var fkAme = sessionStorage.TOKEN_AME;
 
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                var feed = document.getElementById("usuarios_container");
-                feed.innerHTML = "";
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
-
-                    // criando e manipulando elementos do HTML via JavaScript
-            
-                    var spanNome = document.createElement("td");
-                  
-                    spanNome.innerHTML = ;
-                    
-                
-                    spanNome.className = "publicacao-nome";
-                 
-                    
-                    linha.appendChild(spanNome);
-          
-
-                    feed.appendChild(linha);
-                    
-                    contador++;
-                }
-            });
-        } else {
-            throw ('Houve um erro na API!');
+    fetch("/usuarioDashboard/puxarUsuarios", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + fkAme
         }
-    }).catch(function (resposta) {
-        console.error(resposta);
-        finalizarAguardar();
-    });
+    })
+    .then(function (resposta) {
+        if (resposta.ok) {
+            return resposta.json(); // Você provavelmente deseja retornar os dados JSON
+        }
+        //  else {
+        //     return Promise.reject("Erro ao buscar usuários"); // Rejeite a promessa em caso de erro
+        // }
+    })
+    // .then(function (dados) {
+    //     console.log("Dados do usuário: ", dados);
+    //     // Faça o que desejar com os dados do usuário aqui
+    //     console.log(dados)
+    // })
+    // .catch(function (erro) {
+    //     console.error(`#ERRO: ${erro}`);
+    //     alert("Houve um erro ao buscar usuários");
+    // });
 }
-
-
- function deletarUsuario(idUsuario){
-
- }
- 
