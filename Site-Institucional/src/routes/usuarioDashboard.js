@@ -4,12 +4,10 @@ var router = express.Router();
 var usuarioDashboardController = require("../controllers/usuarioDashboardController");
 
 router.post("/cadastrar", function (req, res) {
-    // função a ser chamada quando acessar /carros/cadastrar
     usuarioDashboardController.cadastrar(req, res);
 });
 
 router.post("/alterar", function (req, res) {
-    // função a ser chamada quando acessar /carros/cadastrar
     usuarioDashboardController.alterar(req, res);
 });
 
@@ -17,11 +15,15 @@ router.get("/listar/:idUsuario", function(req, res) {
     usuarioDashboardController.listar(req, res);
  });
 
-
 router.get("/listar", function (req, res) {
-    // função a ser chamada quando acessar /carros/listar
     usuarioDashboardController.listar(req, res);
 });
+router.post("/puxarUsuarios", function (req, res) {
+    usuarioDashboardController.puxarUsuarios(req, res);
+});
 
+router.delete("/excluirUsuario", function (req, res) {
+    usuarioDashboardController.excluirUsuario(req, res);
+});
 
 module.exports = router;
