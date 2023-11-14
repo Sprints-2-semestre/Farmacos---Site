@@ -38,9 +38,16 @@ function editar(nome, email, senha, cargo, permissao){
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function puxarUsuarios(fkAme){
+    var instrucao = `
+    SELECT nome From usuario where idAme = ${fkAme};`
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 module.exports = {
     cadastrar,
     listar, 
-    editar
+    editar,
+    puxarUsuarios
 };
