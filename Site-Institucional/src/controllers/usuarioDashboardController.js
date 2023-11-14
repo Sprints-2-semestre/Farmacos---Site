@@ -119,9 +119,38 @@ function cadastrar(req, res) {
         
         }
 
+        function excluirUsuario(req, res){
+
+            const headerAuthorization = String(req.headers.authorization);
+
+            // 'Bearer 12321'
+
+            // ['Bearer', '12321']
+
+            const idUsuario = headerAuthorization.split(' ')[1];
+
+            usuarioDashboardModel.excluirUsuario(idUsuario)
+            .then(function (resultado) {
+                console.log(resultado);
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!")
+                }
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+        
+        }
+
 module.exports = {
     listar,
     cadastrar, 
     editar,
-    puxarUsuarios
+    puxarUsuarios,
+    excluirUsuario
 }

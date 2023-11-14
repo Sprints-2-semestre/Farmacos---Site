@@ -22,4 +22,8 @@ router.post("/puxarUsuarios", function (req, res) {
     usuarioDashboardController.puxarUsuarios(req, res);
 });
 
+router.delete("/excluirUsuario", function (req, res) {
+    usuarioDashboardController.excluirUsuario(req, res);
+});
+
 module.exports = router;

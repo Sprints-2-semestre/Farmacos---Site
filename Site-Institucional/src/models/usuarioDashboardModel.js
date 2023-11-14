@@ -44,9 +44,16 @@ function puxarUsuarios(fkAme){
     return database.executar(instrucao);
 }
 
+function excluirUsuario(idUsuario){
+    var instrucao = `DELETE from usuario WHERE idUsuario = ${idUsuario};`
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     cadastrar,
     listar, 
     editar,
-    puxarUsuarios
+    puxarUsuarios,
+    excluirUsuario
 };
