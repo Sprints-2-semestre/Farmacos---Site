@@ -154,67 +154,62 @@ function editar (){
     }
 
 }
-
-function listar (){
-    var fkAme = sessionStorage.TOKEN_AME;
-    fetch("../usuarioDashboard/listar", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
+// function listar (){
+//     var fkAme = sessionStorage.TOKEN_AME;
+//     fetch("../usuarioDashboard/listar", {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             // crie um atributo que recebe o valor recuperado aqui
+//             // Agora vá para o arquivo routes/usuario.js
           
-            fkAmeServer: fkAme
+//             fkAmeServer: fkAme
             
 
-        })
-    }).then(function (resposta) {
+//         })
+//     }).then(function (resposta) {
 
-        console.log("resposta: ", resposta);
+//         console.log("resposta: ", resposta);
 
-        if (resposta.ok) {
-            console.log("opa");
+//         if (resposta.ok) {
+//             console.log("opa");
 
-        } else {
-            alert("Erro ao cadastrar")
-            throw ("Houve um erro ao tentar realizar o cadastro!");
+//         } else {
+//             alert("Erro ao cadastrar")
+//             throw ("Houve um erro ao tentar realizar o cadastro!");
+//         }
+//     }).catch(function (resposta) {
+//         console.log(`#ERRO: ${resposta}`);
+//     });
+//     return false;
+
+function puxarUsuarios() {
+    var fkAme = sessionStorage.TOKEN_AME;
+
+    fetch("/usuarioDashboard/puxarUsuarios", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + fkAme
         }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-    });
-    return false;
-
-}
-
-    
-function puxarUsuarios(idUsuario) {
-    lista_usuarios.innerHTML = ""
-    fetch(`/usuarioDashboard/listar/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-       if (response.ok) {
-          if (response.status === 204) {
-             console.log("vazio")
-          } else {
-             response.json().then(function (resposta) {
-                // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                var div = document.getElementById("lista_usuarios");
-                resposta.forEach(element => {
-                   div.innerHTML += `
-                   <li id="usuario${element.idUsuario}" fkAme='${element.fkAme}' onclick="puxarIdUsuario('usuario${element.idUsuario}')">
-                      
-                      <a href="./dashboard/edidarUsuario.html"> ${element.fkAme} </a>
-                   </li>
-                   `
-                });
-             });
-          }
-       } else {
-          console.error('Nenhum dado encontrado ou erro na API');
-       }
     })
-       .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-       });
- }
- 
+    .then(function (resposta) {
+        if (resposta.ok) {
+            return resposta.json(); // Você provavelmente deseja retornar os dados JSON
+        }
+        //  else {
+        //     return Promise.reject("Erro ao buscar usuários"); // Rejeite a promessa em caso de erro
+        // }
+    })
+    // .then(function (dados) {
+    //     console.log("Dados do usuário: ", dados);
+    //     // Faça o que desejar com os dados do usuário aqui
+    //     console.log(dados)
+    // })
+    // .catch(function (erro) {
+    //     console.error(`#ERRO: ${erro}`);
+    //     alert("Houve um erro ao buscar usuários");
+    // });
+}
