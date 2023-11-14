@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Geral Fármacos</title>
-    <link rel="stylesheet" href="../styles/css-dash/dashboardGeral.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../styles/css-dash/dashboard.css">
     <link rel="icon" href="../img/logo F png.png">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"
+        integrity="sha512-t2JWqzirxOmR9MZKu+BMz0TNHe55G5BZ/tfTmXMlxpUY8tsTo3QMD27QGoYKZKFAraIPDhFv56HLdN11ctmiTQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 </head>
-
 <body>
     <div class="conteudo">
         <div class="nav-lateral">
@@ -18,11 +23,10 @@
             <div class="nav-itens">
                 <li>
                     <ul><b>Nome</b></ul>
-
-                    <ul><a href="./cadastroAlerta.html">Alertas</a></ul>
-                    <ul><a href="./dashboardGeral.html">Máquinas</a></ul>
+                    <ul><a href="cadastroAlerta.html">Alertas</a></ul>
+                    <ul><a class="atual" href="dashboardGeral.html">Máquinas</a></ul>
                     <ul><a href="./listaUsuario.html">Usuários</a></ul>
-                    <ul><a class="atual" href="./editarDados.html">Editar dados</a></ul>
+                    <ul><a href="./editarDados.html">Editar dados</a></ul>
                 </li>
             </div>
             <div class="btn-pdf"><button>Gerar PDF</button></div>
@@ -31,6 +35,11 @@
             </div>
         </div>
         <div class="div-principal">
+
+            <div class="nome-ame">
+                <p>AME: </p>
+                <p>Paulista</p>
+            </div>
             <div class="div-superior">
                 <div class="div-cpu">
                     <h2>CPU</h2>
@@ -66,6 +75,7 @@
                         <p>Critico 85%</p>
                     </div>
                 </div>
+        
                 <div class="div-disco">
                     <h2>Disco</h2>
                     <div class="descricao-componente">
@@ -104,32 +114,32 @@
                     <h2>Lista de Máquinas</h2>
                     <table>
                         <tr>
-                            <th><a href=""> Geral</a></th>
+                            <th><a href="dashboardGeral.html"> Geral</a></th>
                             <th></th>
                         </tr>
                         <tr>
-                            <th><a href="">Máquina 1</a></th>
+                            <th><a href="dashboardEspecífica.html">Máquina 1</a></th>
                             <th>Ativo</th>
                         </tr>
                         <tr>
-                            <th><a href="">Máquina 2</a></th>
+                            <th><a href="dashboardEspecífica.html">Máquina 2</a></th>
                             <th>Ativo</th>
                         </tr>
                         <tr>
-                            <th><a href="">Maquina 3</a></th>
+                            <th><a href="dashboardEspecífica.html">Maquina 3</a></th>
                             <th>Ativo</th>
                         </tr>
                         <tr>
-                            <th><a href="">Maquina 4</a></th>
+                            <th><a href="dashboardEspecífica.html">Maquina 4</a></th>
                             <th>Inativo</th>
                         </tr>
                         <tr>
-                            <th><a href="">Maquina 5</a></th>
+                            <th><a href="dashboardEspecífica.html">Maquina 5</a></th>
                             <th>Ativo</th>
                         </tr>
                         <tr>
                             </th>
-                            <th><a href="">Máquina 6</a></th>
+                            <th><a href="dashboardEspecífica.html">Máquina 6</a></th>
                             <th>Ativo</th>
                         </tr>
                     </table>
@@ -186,6 +196,49 @@
 </body>
 
 <script>
+    const btnPrint = document.querySelector(".btn-pdf");
+    btnPrint.addEventListener("click", () => {
+
+        const navLateral = document.querySelector(".nav-lateral"); // Supondo que "nav-lateral" é uma classe
+        const divPrincipal = document.querySelector(".div-principal");
+
+        if (navLateral) {
+            navLateral.style.display = "none";
+        }
+
+        if(divPrincipal){
+            divPrincipal.style.width = "100%";
+            divPrincipal.style.left = "0%";
+        }
+        // Cria uma folha de estilo CSS dinâmica para a impressão
+        const printStyles = `
+                @page {
+                    size: A3 landscape; /* Tamanho da folha, pode ser A4, letter, legal, etc. */
+                    margin: 1cm; /* Margens da página (por exemplo, 1cm em todos os lados) */
+                }
+            `;
+        const style = document.createElement('style');
+        style.textContent = printStyles;
+        document.head.appendChild(style);
+
+        // Inicia o diálogo de impressão
+        window.print();
+
+        if (navLateral) {
+            navLateral.style.display = "flex";
+        }
+
+        if(divPrincipal){
+            divPrincipal.style.width = "81%";
+            divPrincipal.style.left = "19%";
+        }
+
+        // Remove a folha de estilo após a impressão
+        style.remove();
+    });
+
+
+  
     const ctx3 = document.getElementById('myChart3');
     var totalRam = "12";
 
@@ -313,7 +366,18 @@
                 backgroundColor: '#00323c',
             }]
         },
+        // configurar a cor de fundo
+        const: bgColor ={
+            id: 'bgColor',
+            beforeDraw(chart1,steps, options) {
+                const {ctx,chartArea:{ctx1,width,height}} = chart1;
+                ctx1.faleStyle = 'options.backgroundColor';
+                ctx1.fillRect(0,0,width,height);
+                ctx1.restore();
+            }
 
+        },
+    
         options: {
             scales: {
                 y: {
@@ -332,8 +396,33 @@
                     display: true,
                     position: 'bottom'
                 },
+                // cor de fundo da imagem
+                bgColor:{
+                    backgroundColor: 'white'
+                }
             },
         }
+
     });
 
+    function downloadPDF() {
+        const canvas = document.getElementById('myChart1');
+        //const canvas1 = document.getElementById('myChart2');
+        //const canvas2 = document.getElementById('myChart3');
+        //const canvas3 = document.getElementById('myChart4');
+
+    //create image
+    const canvasImage = canvas.toDataURL('image/jpeg', 1.0);
+    //const canvasImage1 = canvas1.toDataURL('image/jpeg', 1.0);
+   // const canvasImage2 = canvas2.toDataURL('image/jpeg', 1.0);
+   // const canvasImage3 = canvas3.toDataURL('image/jpeg', 1.0);
+
+console.log(canvasImage);
+
+    let pdf = new jsPDF('landscape');
+    pdf.setFontSize(20);
+    pdf.addImage(canvasImage, 'JPEG', 0, 0, 150, 150);
+    pdf.save('mychart.pdf');
+    
+    }
 </script>
