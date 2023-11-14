@@ -43,7 +43,7 @@ h1 {
 
 .card {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
     height: 900px;
 
@@ -60,8 +60,25 @@ h1 {
     box-shadow: 17px 22px 11px -3px rgba(0, 0, 0, 0.1);
 }
 
-.listagem {
-    margin-left: 1.5vw;
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+th {
+    font-size: 22px;
+}
+
+td {
+    align-items: center;
+    font-size: 16px;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
 
 .deLado {
@@ -69,8 +86,35 @@ h1 {
     flex-direction: row;
 }
 
-.icon {
-    display: flex;
-    flex-direction: column;
+.left-align {
+    float: left;
 }
 
+.right-align {
+    float: right;
+    margin-right: 2%;
+}
+
+.fa-solid {
+    transition: 0.3s all;
+}
+
+.fa-pen:hover {
+    color: yellow;
+}
+
+.fa-trash:hover {
+    color: red;
+}
+
+
+.fa-solid:hover {
+    transition: 0.3s all;
+}
+
+
+
+/* #icon_remove, #icon_edit {
+    flex-direction: column;
+    justify-content: flex-end;
+} */

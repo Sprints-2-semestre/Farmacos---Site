@@ -39,8 +39,7 @@ function editar(nome, email, senha, cargo, permissao){
     return database.executar(instrucao);
 }
 function puxarUsuarios(fkAme){
-    var instrucao = `
-    SELECT nome From usuario where idAme = ${fkAme};`
+    var instrucao = `SELECT nome, idUsuario FROM usuario where fkAme = ${fkAme};`
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }

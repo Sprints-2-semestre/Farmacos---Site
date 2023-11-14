@@ -185,31 +185,44 @@ function editar (){
 //     });
 //     return false;
 
-function puxarUsuarios() {
+async function puxarUsuarios() {
     var fkAme = sessionStorage.TOKEN_AME;
 
-    fetch("/usuarioDashboard/puxarUsuarios", {
+    const usuarios = await fetch("/usuarioDashboard/puxarUsuarios", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + fkAme
-        }
+        },
     })
     .then(function (resposta) {
         if (resposta.ok) {
-            return resposta.json(); // Você provavelmente deseja retornar os dados JSON
+            return resposta.json();
+        } else {
+            return undefined;
         }
-        //  else {
-        //     return Promise.reject("Erro ao buscar usuários"); // Rejeite a promessa em caso de erro
-        // }
     })
-    // .then(function (dados) {
-    //     console.log("Dados do usuário: ", dados);
-    //     // Faça o que desejar com os dados do usuário aqui
-    //     console.log(dados)
-    // })
-    // .catch(function (erro) {
-    //     console.error(`#ERRO: ${erro}`);
-    //     alert("Houve um erro ao buscar usuários");
-    // });
+    .catch(function (erro) {
+        console.error(`#ERRO: ${erro}`);
+        alert("Houve um erro ao buscar usuários");
+        return undefined;
+    });
+
+    if (usuarios) {
+        for(var usuario of usuarios) {
+        
+
+            let tableRef = document.getElementById('usuarios_container');
+            let newRow = tableRef.insertRow(-1);
+            let newCell = newRow.insertCell(0);
+
+            
+    
+            newCell.innerHTML = `
+                <span id='name_span' class='left-align'>${usuario.nome.toUpperCase()}</span>
+    <span id='icon_remove' class='right-align'><i class="fa-solid fa-trash" style="font-size: 18px;"></i> <a href="editarUsuario.html"></a> </span>
+                <span id='icon_edit' class='right-align'><i class="fa-solid fa-pen" style="font-size: 18px;"></i></span>
+            `;
+        }
+    }
 }
