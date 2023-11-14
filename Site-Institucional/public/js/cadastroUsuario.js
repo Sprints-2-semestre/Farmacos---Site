@@ -189,32 +189,55 @@ function listar (){
 }
 
     
-function puxarUsuarios(idUsuario) {
-    lista_usuarios.innerHTML = ""
-    fetch(`/usuarioDashboard/listar/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-       if (response.ok) {
-          if (response.status === 204) {
-             console.log("vazio")
-          } else {
-             response.json().then(function (resposta) {
-                // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                var div = document.getElementById("lista_usuarios");
-                resposta.forEach(element => {
-                   div.innerHTML += `
-                   <li id="usuario${element.idUsuario}" fkAme='${element.fkAme}' onclick="puxarIdUsuario('usuario${element.idUsuario}')">
-                      
-                      <a href="./dashboard/edidarUsuario.html"> ${element.fkAme} </a>
-                   </li>
-                   `
-                });
-             });
-          }
-       } else {
-          console.error('Nenhum dado encontrado ou erro na API');
-       }
-    })
-       .catch(function (error) {
-          console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-       });
+function puxarUsuarios() {
+    var idUsuario = sessionStorage.ID_USUARIO;
+    fetch(`/usuarioDashboard/listar`).then(function (resposta) {
+        if (resposta.ok) {
+            if (resposta.status == 204) {
+                var feed = document.getElementById("usuarios_container");
+                var mensagem = document.createElement("span");
+                mensagem.innerHTML = "Nenhum resultado encontrado."
+                feed.appendChild(mensagem);
+                throw "Nenhum resultado encontrado!!";
+            }
+
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                var feed = document.getElementById("usuarios_container");
+                feed.innerHTML = "";
+                for (let i = 0; i < resposta.length; i++) {
+                    var publicacao = resposta[i];
+
+                    // criando e manipulando elementos do HTML via JavaScript
+            
+                    var spanNome = document.createElement("td");
+                  
+                    spanNome.innerHTML = ;
+                    
+                
+                    spanNome.className = "publicacao-nome";
+                 
+                    
+                    linha.appendChild(spanNome);
+          
+
+                    feed.appendChild(linha);
+                    
+                    contador++;
+                }
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+        finalizarAguardar();
+    });
+}
+
+
+ function deletarUsuario(idUsuario){
+
  }
  
