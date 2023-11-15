@@ -54,11 +54,19 @@ function editarNoc(nome, email, senha, idUser){
     return database.executar(instrucao);
 
 }
+function deletar(idUser){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idUser);
 
+    var instrucao = `
+    DELETE FROM usuario WHERE idUsuario = '${idUser}';`
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 module.exports = {
     entrar,
     cadastrar,
     listar,
     validar,
-    editarNoc
+    editarNoc,
+    deletar
 };

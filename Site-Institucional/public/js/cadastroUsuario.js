@@ -237,9 +237,8 @@ async function puxarUsuarios() {
         
     }
 }    
-
-async function armazenarId (){
-    var idUsuarioi = usuario.idUsuario;
+function armazenarId (){
+    var idUsuario = usuario.idUsuario;
     
     fetch("/usuarioDashboard/puxarUsuarios", {
         method: "GET",
@@ -247,7 +246,7 @@ async function armazenarId (){
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            emailServer: idUsuarioi,
+            emailServer: idUsuario,
 
         })
     }).then(function (resposta) {
@@ -260,7 +259,7 @@ async function armazenarId (){
                 console.log(json);
                 console.log(JSON.stringify(json));
         
-                sessionStorage.ID_SELECIONADO = json.idusuarioi;
+                sessionStorage.ID_SELECIONADO = json.idusuario;
              
 
                // setTimeout(function () {
