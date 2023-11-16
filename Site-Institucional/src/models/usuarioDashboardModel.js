@@ -23,18 +23,18 @@ function cadastrar(nome, email, senha, cargo, permissao, fkAme) {
     return database.executar(instrucao);
 }
 
-function editar(nome, email, senha, cargo, permissao){
+function editar(nome, email, senha, cargo, permissao, idUsuario){
 
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
-
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar():", nome, email, senha, cargo, permissao, idUsuario);
 
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
 
-    var pegarId = `SELECT idUsuario from usuario where nome = ${nome}`
+    var permissaoNumber = Number(permissao);
+
 
     var instrucao = `
-    UPDATE usuario SET nome = ${nome}, email = ${email}, senha = ${senha}, cargo = ${cargo}, permissao = ${permissao} WHERE idUsuario = ${pegarId};`
+    UPDATE usuario SET nome = '${nome}', email = '${email}', senha = '${senha}', cargo = '${cargo}', fkPermissaoUsuario = ${permissaoNumber} WHERE idUsuario = ${idUsuario};`
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
