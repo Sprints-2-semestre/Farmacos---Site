@@ -18,6 +18,14 @@ router.get("/listar/:idUsuario", function(req, res) {
 router.get("/listar", function (req, res) {
     usuarioDashboardController.listar(req, res);
 });
+
+router.get("/listar/:idUsuario", function(req, res) {
+    usuarioDashboardController.listar(req, res);
+ });
+
+router.get("/listar", function (req, res) {
+    usuarioDashboardController.listar(req, res);
+});
 router.post("/puxarUsuarios", function (req, res) {
     usuarioDashboardController.puxarUsuarios(req, res);
 });
