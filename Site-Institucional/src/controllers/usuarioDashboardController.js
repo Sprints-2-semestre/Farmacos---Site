@@ -7,7 +7,6 @@ function cadastrar(req, res) {
     var cargo = req.body.cargoServer;
     var permissao = req.body.permissaoServer;
     var fkAme = req.body.fkAmeServer;
-
     
 
     if (email == undefined) {
@@ -47,7 +46,7 @@ function cadastrar(req, res) {
         var email = req.body.emailServer;
         var cargo = req.body.cargoServer;
         var permissao = req.body.permissaoServer;
-        var idUsuario = req.body.idUsuarioServer;
+    
         if (email == undefined) {
             res.status(400).send("O email está undefined!");
         } else if (senha == undefined) {
@@ -61,11 +60,10 @@ function cadastrar(req, res) {
         } else{
             
             // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-            usuarioDashboardModel.editar(nome, email, senha, cargo, permissao, idUsuario)
+            usuarioDashboardModel.editar(nome, email, senha, cargo, permissao)
                 .then(
                     function (resultado) {
                         res.json(resultado);
-                        console.log("usuario editado(euACHO)")
                     }
                 ).catch(
                     function (erro) {
@@ -131,9 +129,7 @@ function cadastrar(req, res) {
 
             // ['Bearer', '12321']
 
-            //const idUsuario = headerAuthorization.split(' ')[1];
-
-            var idUsuario = req.body.idUsuarioServer;
+            const idUsuario = headerAuthorization.split(' ')[1];
 
             usuarioDashboardModel.excluirUsuario(idUsuario)
             .then(function (resultado) {
