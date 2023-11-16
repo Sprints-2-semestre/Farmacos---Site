@@ -7,8 +7,8 @@ router.post("/cadastrar", function (req, res) {
     usuarioDashboardController.cadastrar(req, res);
 });
 
-router.post("/alterar", function (req, res) {
-    usuarioDashboardController.alterar(req, res);
+router.post("/editar", function (req, res) {
+    usuarioDashboardController.editar(req, res);
 });
 
 router.get("/listar/:idUsuario", function(req, res) {
