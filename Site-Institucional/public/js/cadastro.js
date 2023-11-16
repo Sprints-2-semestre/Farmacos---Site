@@ -148,40 +148,4 @@ function editarNoc() {
         });
         return false;
     }
-}function deletar() {
-    var IdUserVar = sessionStorage.ID_USUARIO;
-    console.log(sessionStorage.ID_USUARIO);
-    // Usando confirm para pedir confirmação
-    var confirmacao = confirm("Tem certeza que deseja deletar sua conta?");
-
-    if (!confirmacao) {
-        // Se o usuário cancelar, retorne sem fazer nada
-        return false;
-    }
-
-    // Restante do código para deletar a conta
-    fetch("/usuario/deletar", {
-        method: "delete",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            idUserServer: IdUserVar,
-        })
-    }).then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-            setTimeout(() => {
-                window.location = "../login.html";
-            }, "2000");
-        } else {
-            alert("Erro ao deletar");
-            throw ("Houve um erro ao tentar excluir a conta!");
-        }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-    });
-
-    return false;
 }

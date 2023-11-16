@@ -33,11 +33,6 @@
             </div>
         </div>
         <div class="div-principal">
-            <div class="nome-ame">
-                <p>AME:</p>
-                <p>Paulista</p>
-            </div>
-
             <div class="div-superior">
                 <div class="div-cpu">
                     <h2>CPU</h2>
@@ -138,45 +133,45 @@
                     <h2>Lista de Máquinas</h2>
                     <table>
                         <tr>
-                            <th><a href="dashboardGeral.html"> Geral</a></th>
+                            <th><a href=""> Geral</a></th>
                             <th></th>
                         </tr>
                         <tr>
-                            <th><a href="dashboardEspecífica.html">Máquina 1</a></th>
+                            <th><a href="">Máquina 1</a></th>
                             <th>Ativo</th>
                         </tr>
                         <tr>
-                            <th><a href="dashboardEspecífica.html">Máquina 2</a></th>
+                            <th><a href="">Máquina 2</a></th>
                             <th>Ativo</th>
                         </tr>
                         <tr>
-                            <th><a href="dashboardEspecífica.html">Maquina 3</a></th>
+                            <th><a href="">Maquina 3</a></th>
                             <th>Ativo</th>
                         </tr>
                         <tr>
-                            <th><a href="dashboardEspecífica.html">Maquina</a></th>
+                            <th><a href="">Maquina</a></th>
                             <th>Inativo</th>
                         </tr>
                         <tr>
-                            <th><a href="dashboardEspecífica.html">Maquina 5</a></th>
+                            <th><a href="">Maquina 5</a></th>
                             <th>Ativo</th>
                         </tr>
                         <tr>
                             </th>
-                            <th><a href="dashboardEspecífica.html">Máquina 6</a></th>
+                            <th><a href="">Máquina 6</a></th>
                             <th>Ativo</th>
                         </tr>
                     </table>
                 </div>
             </div>
             <div class="div-inferior">
-                <div class="div-graf-rede" style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
+                <div class="div-graf-rede">
                     <canvas id="myChart2" style="width: 400px; height: 300px;"></canvas>
                 </div>
-                <div class="div-graf-cpu" style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
+                <div class="div-graf-cpu">
                     <canvas id="myChart1" style="width: 400px; height: 260px;"></canvas>
                 </div>
-                <div class="div-list-alertas" style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
+                <div class="div-list-alertas">
                     <canvas id="myChart3" style="width: 400px; height: 220px;"></canvas>
                     </table>
                 </div>
@@ -192,47 +187,6 @@
 </html>
 
 <script>
-    const btnPrint = document.querySelector(".btn-pdf");
-    btnPrint.addEventListener("click", () => {
-
-        const navLateral = document.querySelector(".nav-lateral"); // Supondo que "nav-lateral" é uma classe
-        const divPrincipal = document.querySelector(".div-principal");
-
-        if (navLateral) {
-            navLateral.style.display = "none";
-        }
-
-        if(divPrincipal){
-            divPrincipal.style.width = "100%";
-            divPrincipal.style.left = "0%";
-        }
-        // Cria uma folha de estilo CSS dinâmica para a impressão
-        const printStyles = `
-                @page {
-                    size: A3 landscape; /* Tamanho da folha, pode ser A4, letter, legal, etc. */
-                    margin: 1cm; /* Margens da página (por exemplo, 1cm em todos os lados) */
-                }
-            `;
-        const style = document.createElement('style');
-        style.textContent = printStyles;
-        document.head.appendChild(style);
-
-        // Inicia o diálogo de impressão
-        window.print();
-
-        if (navLateral) {
-            navLateral.style.display = "flex";
-        }
-
-        if(divPrincipal){
-            divPrincipal.style.width = "81%";
-            divPrincipal.style.left = "19%";
-        }
-
-        // Remove a folha de estilo após a impressão
-        style.remove();
-    });
-
     const ctx1 = document.getElementById('myChart1');
 
     new Chart(ctx1, {
