@@ -5,7 +5,7 @@ function cadastrar(){
     var confirmarSenha = input_confirmar_senha.value;
     var cargo = select_cargo.value;
     var permissao = select_permissao.value;
-    var fkAme = sessionStorage.TOKEN_AME;
+    var fkAme = sessionStorage.FK_AME;
 
     if (nome == "" || email == "" || senha == "" || cargo == "" || permissao == "") {
         alert("Preencha todos os campos!");
@@ -156,7 +156,7 @@ function editar (){
 }
 
 async function puxarUsuarios() {
-    var fkAme = sessionStorage.TOKEN_AME;
+    var fkAme = sessionStorage.FK_AME;
 
     const usuarios = await fetch("/usuarioDashboard/puxarUsuarios", {
         method: "POST",
