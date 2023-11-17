@@ -7,12 +7,29 @@ router.post("/cadastrar", function (req, res) {
     usuarioDashboardController.cadastrar(req, res);
 });
 
-router.post("/editar", function (req, res) {
-    usuarioDashboardController.editar(req, res);
+router.post("/alterar", function (req, res) {
+    usuarioDashboardController.alterar(req, res);
+});
+
+router.get("/listar/:idUsuario", function(req, res) {
+    usuarioDashboardController.listar(req, res);
+ });
+
+router.get("/listar", function (req, res) {
+    usuarioDashboardController.listar(req, res);
+});
+
+router.get("/listar/:idUsuario", function(req, res) {
+    usuarioDashboardController.listar(req, res);
+ });
+
+router.get("/listar", function (req, res) {
+    usuarioDashboardController.listar(req, res);
 });
 router.post("/puxarUsuarios", function (req, res) {
     usuarioDashboardController.puxarUsuarios(req, res);
 });
+
 router.delete("/excluirUsuario", function (req, res) {
     usuarioDashboardController.excluirUsuario(req, res);
 });

@@ -149,37 +149,13 @@ function editarNoc(req, res) {
             );
     }
 }
-function deletar(req, res) {
-    var idUser = req.body.idUserServer;
-    if (idUser == undefined) {
-        res.status(400).send("Seu id está undefined!");
-    } else {
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.deletar(idUser)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    console.log(erro);
-                    console.log(
-                        "\nHouve um erro ao deletar o usuário! Erro: ",
-                        erro.sqlMessage
-                    );
-                    res.status(500).json(erro.sqlMessage);
-                }
-            );
-    }
 
-}
 module.exports = {
     entrar,
     cadastrar,
     listar,
     testar,
     validar,
-    editarNoc,
-    deletar
+    editarNoc
 
 }
