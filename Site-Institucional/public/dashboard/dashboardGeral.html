@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Geral Fármacos</title>
-    <link rel="stylesheet" href="../styles/css-dash/dashboardGeral.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../styles/css-dash/dashboard.css">
     <link rel="icon" href="../img/logo F png.png">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"
+        integrity="sha512-t2JWqzirxOmR9MZKu+BMz0TNHe55G5BZ/tfTmXMlxpUY8tsTo3QMD27QGoYKZKFAraIPDhFv56HLdN11ctmiTQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 </head>
 
-<body>
+<body onload="obterDadosGrafico()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -18,11 +24,10 @@
             <div class="nav-itens">
                 <li>
                     <ul><b>Nome</b></ul>
-
-                    <ul><a href="./cadastroAlerta.html">Alertas</a></ul>
-                    <ul><a href="./dashboardGeral.html">Máquinas</a></ul>
+                    <ul><a href="cadastroAlerta.html">Alertas</a></ul>
+                    <ul><a class="atual" href="dashboardGeral.html">Máquinas</a></ul>
                     <ul><a href="./listaUsuario.html">Usuários</a></ul>
-                    <ul><a class="atual" href="./editarDados.html">Editar dados</a></ul>
+                    <ul><a href="./editarDados.html">Editar dados</a></ul>
                 </li>
             </div>
             <div class="btn-pdf"><button>Gerar PDF</button></div>
@@ -66,6 +71,7 @@
                         <p>Critico 85%</p>
                     </div>
                 </div>
+
                 <div class="div-disco">
                     <h2>Disco</h2>
                     <div class="descricao-componente">
@@ -186,6 +192,47 @@
 </body>
 
 <script>
+    const btnPrint = document.querySelector(".btn-pdf");
+    btnPrint.addEventListener("click", () => {
+
+        const navLateral = document.querySelector(".nav-lateral"); // Supondo que "nav-lateral" é uma classe
+        const divPrincipal = document.querySelector(".div-principal");
+
+        if (navLateral) {
+            navLateral.style.display = "none";
+        }
+
+        if (divPrincipal) {
+            divPrincipal.style.width = "100%";
+            divPrincipal.style.left = "0%";
+        }
+        // Cria uma folha de estilo CSS dinâmica para a impressão
+        const printStyles = `
+                @page {
+                    size: A3 landscape; /* Tamanho da folha, pode ser A4, letter, legal, etc. */
+                    margin: 1cm; /* Margens da página (por exemplo, 1cm em todos os lados) */
+                }
+            `;
+        const style = document.createElement('style');
+        style.textContent = printStyles;
+        document.head.appendChild(style);
+
+        // Inicia o diálogo de impressão
+        window.print();
+
+        if (navLateral) {
+            navLateral.style.display = "flex";
+        }
+
+        if (divPrincipal) {
+            divPrincipal.style.width = "81%";
+            divPrincipal.style.left = "19%";
+        }
+
+        // Remove a folha de estilo após a impressão
+        style.remove();
+    });
+
     const ctx3 = document.getElementById('myChart3');
     var totalRam = "12";
 
@@ -248,40 +295,40 @@
         }
     });
 
-    const ctx2 = document.getElementById('myChart2');
+    // const ctx2 = document.getElementById('myChart2');
 
-    new Chart(ctx2, {
-        data: {
-            datasets: [{
-                type: 'bar',
-                label: 'Pacotes Recebidos',
-                data: [30, 35, 40, 50, 70, 20], // captura de rede
-                borderWidth: 1,
-            },
-            {
-                type: 'bar',
-                label: 'Pacotes Enviados',
-                data: [30, 35, 40, 50, 70, 20], // captura de rede
-                borderWidth: 1,
-            },
-            ],
-            labels: ['Máquina 1', 'Máquina 2']
-        },
-        options: {
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                },
-                title: {
-                    display: true,
-                    fontSize: 20,
-                    text: "Comparação de pacotes recebidos e enviados por máquina diariamente",
-                },
-            }
-        }
-    });
+    // new Chart(ctx2, {
+    //     data: {
+    //         datasets: [{
+    //             type: 'bar',
+    //             label: 'Pacotes Recebidos',
+    //             data: [30, 35, 40, 50, 70, 20], // captura de rede
+    //             borderWidth: 1,
+    //         },
+    //         {
+    //             type: 'bar',
+    //             label: 'Pacotes Enviados',
+    //             data: [30, 35, 40, 50, 70, 20], // captura de rede
+    //             borderWidth: 1,
+    //         },
+    //         ],
+    //         labels: ['Máquina 1', 'Máquina 2']
+    //     },
+    //     options: {
+    //         maintainAspectRatio: false,
+    //         plugins: {
+    //             legend: {
+    //                 display: true,
+    //                 position: 'bottom',
+    //             },
+    //             title: {
+    //                 display: true,
+    //                 fontSize: 20,
+    //                 text: "Comparação de pacotes recebidos e enviados por máquina diariamente",
+    //             },
+    //         }
+    //     }
+    // });
 
     const ctx1 = document.getElementById('myChart1');
 
@@ -313,6 +360,17 @@
                 backgroundColor: '#00323c',
             }]
         },
+        // configurar a cor de fundo
+        const: bgColor = {
+            id: 'bgColor',
+            beforeDraw(chart1, steps, options) {
+                const { ctx, chartArea: { ctx1, width, height } } = chart1;
+                ctx1.faleStyle = 'options.backgroundColor';
+                ctx1.fillRect(0, 0, width, height);
+                ctx1.restore();
+            }
+
+        },
 
         options: {
             scales: {
@@ -332,8 +390,222 @@
                     display: true,
                     position: 'bottom'
                 },
+                // cor de fundo da imagem
+                bgColor: {
+                    backgroundColor: 'white'
+                }
             },
         }
+
     });
 
+    function downloadPDF() {
+        const canvas = document.getElementById('myChart1');
+        //const canvas1 = document.getElementById('myChart2');
+        //const canvas2 = document.getElementById('myChart3');
+        //const canvas3 = document.getElementById('myChart4');
+
+        //create image
+        const canvasImage = canvas.toDataURL('image/jpeg', 1.0);
+        //const canvasImage1 = canvas1.toDataURL('image/jpeg', 1.0);
+        // const canvasImage2 = canvas2.toDataURL('image/jpeg', 1.0);
+        // const canvasImage3 = canvas3.toDataURL('image/jpeg', 1.0);
+
+        console.log(canvasImage);
+
+        let pdf = new jsPDF('landscape');
+        pdf.setFontSize(20);
+        pdf.addImage(canvasImage, 'JPEG', 0, 0, 150, 150);
+        pdf.save('mychart.pdf');
+
+    }
+
+
+    // fetch(`/medidas/obterIdMaquina`, {
+    //     cache: 'no-store',
+    //     method: "GET",
+    // }).then(function (response) {
+    //     if (response.ok) {
+
+            
+    //         response.json().then(function (resposta) {
+    //             // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+    //             // plotarGrafico(resposta);
+    //             idMaquina = resposta
+    //             console.log(resposta)
+
+    //         });
+    //     } else {
+    //         console.error('Não foi encontrado o idMaquina');
+    //     }
+    // })
+    //     .catch(function (error) {
+    //         console.error(`Erro ao obter idMaquina ${error.message}`);
+    //     });
+
+    //     console.log(idMaquina);
+
+
+
+    function obterDadosGrafico() {
+        fetch(`/medidas/obterDadosRede`, {
+            cache: 'no-store',
+            method: "GET",
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    plotarGrafico(resposta);
+                    console.log(resposta)
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarGrafico(resposta) {
+        console.log('iniciando plotagem do gráfico...');
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Pacotes Recebidos',
+                data: [],
+                fill: false,
+                tension: 0.1
+            },
+            {
+                label: 'Pacotes Enviados',
+                data: [],
+                fill: false,
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(1);
+            if (registro.bytesRecebido && registro.bytesEnviado != "null") {
+                dados.datasets[0].data.push(registro.bytesRecebido);
+                dados.datasets[1].data.push(registro.bytesEnviado);
+            }
+
+
+            // if (registro.temperatura > 29 || registro.temperatura < 17) {
+            //     dados.datasets[0].backgroundColor.push("#FF5555");
+            //     dados.datasets[0].borderColor.push("#FF5555");
+            // } else if ((registro.temperatura > 26 && registro.temperatura < 29) || (registro.temperatura >= 17 && registro.temperatura < 20)) {
+            //     dados.datasets[0].backgroundColor.push("#FF9900");
+            //     dados.datasets[0].borderColor.push("#FF9900");
+            // } else if (registro.temperatura > 24 && registro.temperatura <= 26) {
+            //     dados.datasets[0].backgroundColor.push("#FFCC00");
+            //     dados.datasets[0].borderColor.push("#FFCC00");
+            // } else {
+            //     dados.datasets[0].backgroundColor.push("#74C365");
+            //     dados.datasets[0].borderColor.push("#74C365");
+            // }
+
+            // if (registro.umidade > 85 || registro.umidade < 75) {
+            //     dados.datasets[1].backgroundColor.push("#FF5555");
+            //     dados.datasets[1].borderColor.push("#FF5555");
+            // } else {
+            //     dados.datasets[1].backgroundColor.push("#74C365");
+            //     dados.datasets[1].borderColor.push("#74C365");
+            // }
+
+            console.log(registro)
+
+        }
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        myChart = new Chart(
+            document.getElementById(`myChart2`),
+            config
+        );
+        myChart.update();
+        setTimeout(() => atualizarGrafico(dados, myChart2), 2000);
+    }
+
+    function atualizarGrafico(dados, myChart2) {
+
+
+
+        fetch(`/medidas/rede-tempo-real`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    obterDadosGrafico();
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    // let avisoCaptura = document.getElementById(`avisoCaptura`)
+                    // avisoCaptura.innerHTML = ""
+
+                    // console.log(novoRegistro[0].momento_grafico, dados.labels[dados.labels.length - 1])
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].bytesRecebido); // incluir uma nova medida de umidade
+
+                        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                        dados.datasets[1].data.push(novoRegistro[0].bytesEnviado); // incluir uma nova medida de temperatura
+
+
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart2), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart2), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
 </script>

@@ -19,27 +19,10 @@ h1 {
 }
 
 .botaoCadastro button{
-    padding: 10px;
-    font-size: 15px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 15px;
-    text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: #e4f6f8;
-    background: #458b9b;
-    cursor: pointer;
-    box-shadow: 0px 2px 0px 0px #00000056;
-    transition: 0.5s;
+    display: none;
    
 }
 
-.botaoCadastro button:hover {
-    background-color: #ffffff;
-    color: #458b9b;
-    transition: 0.5s;
-}
 
 .card {
     display: flex;

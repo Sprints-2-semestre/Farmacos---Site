@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="./../styles/css-dash/listaUsuario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="../img/logo F png.png">
-   <script src="/public/js/cadastroUsuario.js"></script>
     <title>Listagem de Usuários</title>
 </head>
 
 <body onload="puxarUsuarios()">
-    <div style="display: flex; flex-direction: column;">
+    <div class="teste" display: flex; flex-direction: column;>
         <!-- NAVEBAR -->
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -48,30 +47,13 @@
         <div class="deLado">
             <div class="card">
                 <div class="listagem">
-                    <ul id="lista_usuarios" class="user-list">
+                    <table id="usuarios_container">
+                        <tr>
+                            <th>Nome</th>
+                        </tr>
+                    </table>
+                    <!-- <ul id="lista_usuarios" class="user-list"> -->
                 </div>
-            </div>
-
-            <div class="icon">
-                <div> <i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-                <div><i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-                <div><i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-                <div><i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-                <div><i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-                <div><i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-                <div><i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-                <div><i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-                <div><i class="fa-solid fa-trash" style="margin-left: 2vw; margin-top: 4vh; font-size: 23px;"></i>
-                <i class="fa-solid fa-pen" style="margin-left: 1vw; margin-top: 4vh; font-size: 23px;"></i></div>
-            
             </div>
         </div>
 
@@ -80,11 +62,39 @@
 
     </div>
 
+    <!-- <div class="modal-container">
+        <div class="modal-content">
+          <label class="modal-close" for="modal-toggle">&#x2715;</label>
+          <h2>Deseja excluir esse usuario?</h2><hr />
+          <p>Essa ação não pode ser revertida!</p> 
+          <label class="modal-content-btn" for="modal-toggle">SIM</label>   
+          <label class="modal-content-btn-left" for="modal-toggle">NAO</label>   
+        </div>          
+      </div>  
+ -->
+
+ <!-- Modal de confirmação -->
+<div id="confirmacaoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="fecharModal">&times;</span>
+      <p>Tem certeza que deseja excluir este usuário?</p>
+      <div class="botoes">
+      <button onclick="excluirUsuario()" id="confirmarExclusao">Confirmar</button>
+      <button id="cancelarExclusao">Cancelar</button>
+    </div>
+    </div>
+  </div>
+
+
 </body>
 
 </html>
 
-<!--~ Codigos JavaScripts  para a criação dos icons no site-->
+<script>
+    
+</script>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
+<!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> -->
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="../js/cadastroUsuario.js"></script>

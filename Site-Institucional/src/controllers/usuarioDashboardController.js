@@ -6,6 +6,9 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var cargo = req.body.cargoServer;
     var permissao = req.body.permissaoServer;
+    var fkAme = req.body.fkAmeServer;
+
+    
 
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
@@ -20,7 +23,7 @@ function cadastrar(req, res) {
     } else{
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioDashboardModel.cadastrar(nome, email, senha, cargo, permissao)
+        usuarioDashboardModel.cadastrar(nome, email, senha, cargo, permissao, fkAme)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -44,7 +47,7 @@ function cadastrar(req, res) {
         var email = req.body.emailServer;
         var cargo = req.body.cargoServer;
         var permissao = req.body.permissaoServer;
-    
+        var idUsuario = req.body.idUsuarioServer;
         if (email == undefined) {
             res.status(400).send("O email está undefined!");
         } else if (senha == undefined) {
@@ -58,10 +61,11 @@ function cadastrar(req, res) {
         } else{
             
             // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-            usuarioDashboardModel.editar(nome, email, senha, cargo, permissao)
+            usuarioDashboardModel.editar(nome, email, senha, cargo, permissao, idUsuario)
                 .then(
                     function (resultado) {
                         res.json(resultado);
+                        console.log("usuario editado(euACHO)")
                     }
                 ).catch(
                     function (erro) {
@@ -91,10 +95,68 @@ function cadastrar(req, res) {
                     }
                 );
         }
+        function puxarUsuarios(req, res){
 
+            const headerAuthorization = String(req.headers.authorization);
+
+            // 'Bearer 12321'
+
+            // ['Bearer', '12321']
+
+            const fkAme = headerAuthorization.split(' ')[1];
+
+            usuarioDashboardModel.puxarUsuarios(fkAme)
+            .then(function (resultado) {
+                console.log(resultado);
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!")
+                }
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+        
+        }
+
+        function excluirUsuario(req, res){
+
+            const headerAuthorization = String(req.headers.authorization);
+
+            // 'Bearer 12321'
+
+            // ['Bearer', '12321']
+
+            //const idUsuario = headerAuthorization.split(' ')[1];
+
+            var idUsuario = req.body.idUsuarioServer;
+
+            usuarioDashboardModel.excluirUsuario(idUsuario)
+            .then(function (resultado) {
+                console.log(resultado);
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!")
+                }
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+        
+        }
 
 module.exports = {
     listar,
     cadastrar, 
-    editar
+    editar,
+    puxarUsuarios,
+    excluirUsuario
 }

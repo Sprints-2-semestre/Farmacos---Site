@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../styles/css-dash/navLateral.css">
+    <link rel="stylesheet" href="./../styles/css-dash/listaNoc.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../img/logo F png.png">
+    <script src="../js/listarNoc.js"></script>
+    <title>Listagem de noc</title>
+</head>
+
+<!-- <body onload="puxarNoc()"> -->
+
+    <body onload="puxarNoc()">
+        <div class="teste" display: flex; flex-direction: column;>
+            <!-- NAVEBAR -->
+            <div class="nav-lateral">
+                <div class="logo-empresa">
+                    <img src="./../img/logo F png.png" alt="">
+                </div>
+                <div class="nav-itens">
+                    <li>
+                        <ul><b>Nome</b></ul>
+                        <ul><a href="cadastroAlerta.html">Alertas</a></ul>
+                        <ul><a class="" href="./dashboardGeral.html">Máquinas</a></ul>
+                        <ul><a  href="./listaUsuario.html">Usuários</a></ul>
+                        <ul><a class="atual" href="./editarDados.html">Editar dados</a></ul>
+                    </li>
+                </div>
+    
+                <div class="btn-sair">
+                    <button>Sair</button>
+                </div>
+            </div>
+    
+    
+            <div class="parteAcima">
+                <div>
+                    <h1>Usuários Noc</h1>
+                </div>
+                <a href="../dashboard/cadastroUsuario.html">
+                    <div class="botaoCadastro"><button style="margin-top: 6.2vh;">NOVO</button></div>
+                </a>
+            </div>
+    
+            <div class="deLado">
+                <div class="card">
+                    <div class="listagem">
+                        <table id="N_container">
+                            <tr>
+                                <th>Nome</th>
+                            </tr>
+                        </table>
+                        <!-- <ul id="lista_N" class="user-list"> -->
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+    
+        </div>
+    
+        <!-- <div class="modal-container">
+            <div class="modal-content">
+              <label class="modal-close" for="modal-toggle">&#x2715;</label>
+              <h2>Deseja excluir esse usuario?</h2><hr />
+              <p>Essa ação não pode ser revertida!</p> 
+              <label class="modal-content-btn" for="modal-toggle">SIM</label>   
+              <label class="modal-content-btn-left" for="modal-toggle">NAO</label>   
+            </div>          
+          </div>  
+     -->
+    
+     <!-- Modal de confirmação -->
+    <div id="confirmacaoModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="fecharModal">&times;</span>
+          <p>Tem certeza que deseja excluir este usuário?</p>
+          <div class="botoes">
+          <button onclick="excluirUsuario()" id="confirmarExclusao">Confirmar</button>
+          <button id="cancelarExclusao">Cancelar</button>
+        </div>
+        </div>
+      </div>
+    
+    
+    </body>
+    
+    </html>
+    
+    <script>
+        
+    </script>
+    
+    
+    <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> -->
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="../js/cadastroUsuario.js"></script>

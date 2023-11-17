@@ -18,4 +18,7 @@ router.post("/validar", function (req, res) {
 router.put("/editarNoc", function (req, res) {
     usuarioController.editarNoc(req, res);
 });
+router.delete("/deletar", function (req, res) {
+    usuarioController.deletar(req, res);
+});
 module.exports = router;
