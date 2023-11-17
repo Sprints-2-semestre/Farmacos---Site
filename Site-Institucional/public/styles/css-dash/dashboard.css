@@ -152,24 +152,10 @@ body {
   flex-direction: column;
 }
 
-.nome-ame{
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  
-}
-
-.nome-ame p{
-  display: flex;
-  font-size: 25px;
-  font-weight: bold;
-  margin: 10px;
-}
-
 .div-superior {
   padding: 1%;
   display: flex;
-  height: 20%;
+  height: 29%;
   justify-content: space-evenly;
   gap: 2%;
 }
@@ -182,7 +168,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  width: 26%;
+  width: 24%;
   border-radius: 8px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -194,7 +180,6 @@ body {
 .div-cpu h2 {
   display: flex;
   width: 100%;
-  font-size: 25px;
   justify-content: center;
   margin: 2%;
   margin-top: 5%;
@@ -241,7 +226,6 @@ body {
 .div-ram h2 {
   display: flex;
   width: 100%;
-  font-size: 25px;
   justify-content: center;
   margin: 2%;
   margin-top: 5%;
@@ -263,7 +247,6 @@ body {
 .div-rede h2 {
   display: flex;
   width: 100%;
-  font-size: 25px;
   justify-content: center;
   margin: 2%;
   margin-top: 5%;
@@ -285,7 +268,6 @@ body {
 .div-disco h2 {
   margin: 2%;
   margin-top: 5%;
-  font-size: 25px;
   display: flex;
   width: 100%;
   justify-content: center;

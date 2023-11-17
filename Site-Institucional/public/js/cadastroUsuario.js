@@ -19,7 +19,7 @@ function cadastrar(){
     alert("Email cadastrado é invalido!! Para cadastrar é preciso que o email tenha @farmacos.com")
             document.getElementById('input_email').style.boxShadow = '0px 2px 0px 0px red'
             return false;
-    } else if( senha != confirmarSenha){
+    } else if( senha =! confirmarSenha){
         alert("As senhas não combinam! Tente novamente")
         document.getElementById('input_senha').style.boxShadow = '0px 2px 0px 0px red'
         document.getElementById('input_confirmar_senha').style.boxShadow = '0px 2px 0px 0px red'
@@ -64,10 +64,7 @@ function cadastrar(){
             console.log("resposta: ", resposta);
     
             if (resposta.ok) {
-                console.log("opa")
-                    setTimeout(() => {
-                        window.location = "./dashboard/listaUsuario.html";
-                    }, "2000")
+                console.log("opa");
     
             } else {
                 alert("Erro ao cadastrar")
@@ -88,8 +85,8 @@ function editar (){
     var confirmarSenha = input_confirmar_senha.value;
     var cargo = select_cargo.value;
     var permissao = select_permissao.value;
-    var idUsuario = localStorage.idUsuario
     
+
     if (nome == "" || email == "" || senha == "" || cargo == "" || permissao == "") {
         alert("Preencha todos os campos!");
         document.getElementById('input_Nome_Completo').style.boxShadow = '0px 2px 0px 0px red'
@@ -98,12 +95,12 @@ function editar (){
         document.getElementById('select_cargo').style.boxShadow = '0px 2px 0px 0px red'
         document.getElementById('select_permissao').style.boxShadow ='0px 2px 0px 0px red';
         return false;
-    } else if( senha != confirmarSenha){
+    } else if( senha =! confirmarSenha){
         alert("As senhas não combinam! Tente novamente")
         document.getElementById('input_senha').style.boxShadow = '0px 2px 0px 0px red'
         document.getElementById('input_confirmar_senha').style.boxShadow = '0px 2px 0px 0px red'
         return false;
-    } else if (nome.length <= 2) {
+    } else if (nome_Completo.length <= 2) {
         alert('O nome deve ter no mínimo 3 letras!!!')
         document.getElementById('input_Nome_Completo').style.boxShadow ='0px 2px 0px 0px red'
         document.getElementById('input_email').style.boxShadow ='0px 2px 0px 0px 00000056'
@@ -111,7 +108,7 @@ function editar (){
         document.getElementById('select_cargo').style.boxShadow ='0px 2px 0px 0px #00000056'
         document.getElementById('select_permissao').style.boxShadow ='0px 2px 0px 0px #00000056';
         return false;
-    } else if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+    } else if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
         alert(`Email cadastrado é invalido!! Para editar é preciso que o email tenha '@' e '.com'`)
         document.getElementById('input_Nome_Completo').style.boxShadow = '0px 2px 0px 0px #00000056'
         document.getElementById('input_email').style.boxShadow = '0px 2px 0px 0px red'
@@ -119,12 +116,12 @@ function editar (){
         document.getElementById('select_cargo').style.boxShadow = '0px 2px 0px 0px #00000056'
         document.getElementById('select_permissao').style.boxShadow ='0px 2px 0px 0px #00000056';
         return false;
-    } else if (email.indexOf("@farmacos.com") == -1) {
+    } else if (emailVar.indexOf("@farmacos.com") == -1) {
         alert(`Email cadastrado é invalido!! Para editar é preciso que o email tenha @farmacos.com`)
         return false;
     }else {
         fetch("/usuarioDashboard/editar", {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -134,19 +131,16 @@ function editar (){
                 nomeServer: nome,
                 emailServer: email,
                 senhaServer: senha,
-                cargoServer: cargo,
-                permissaoServer: permissao,
-                idUsuarioServer: idUsuario
             })
         }).then(function (resposta) {
     
             console.log("resposta: ", resposta);
     
             if (resposta.ok) {
-                
+
               
                 setTimeout(() => {
-                   window.location = "./listaUsuario.html";
+                   window.location = "./dashboard/listaUsuario.html";
                 }, "2000")
     
             } else {
@@ -183,8 +177,6 @@ async function puxarUsuarios() {
         alert("Houve um erro ao buscar usuários");
         return undefined;
     });
-    
-    
 
     if (usuarios) {
         for (var usuario of usuarios) {
@@ -194,11 +186,11 @@ async function puxarUsuarios() {
           
     
             newCell.innerHTML = `
-                <span id='name_span' class='left-align'>${usuario.nome.toUpperCase()}</span>
-                <span id='icon_remove' class='right-align'>
-                    <i class="fa-solid fa-trash" style="font-size: 18px;" onclick="obterId(${usuario.idUsuario})"></i>
+                <span onclick="armazenarId()" id='name_span' class='left-align'>${usuario.nome.toUpperCase()}</span>
+                <span onclick="armazenarId()"id='icon_remove' class='right-align'>
+                    <i class="fa-solid fa-trash" style="font-size: 18px;"></i>
                 </span>
-                <span id='icon_edit' class='right-align'><a href="editarUsuario.html" onclick="obterId(${usuario.idUsuario})"><i  class="fa-solid fa-pen" style="font-size: 18px;"></i></a></span>
+                <span id='icon_edit' class='right-align'><a href="editarUsuario.html"><i class="fa-solid fa-pen" style="font-size: 18px;"></i></a></span>
             `;
 
             
@@ -245,15 +237,50 @@ async function puxarUsuarios() {
         
     }
 }    
+function armazenarId (){
+    var idUsuario = usuario.idUsuario;
+    
+    fetch("/usuarioDashboard/puxarUsuarios", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: idUsuario,
 
-function obterId(idUsuario) {
-    localStorage.setItem("idUsuario", idUsuario)
+        })
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO listar()!")
+
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+        
+                sessionStorage.ID_SELECIONADO = json.idusuario;
+             
+
+               // setTimeout(function () {
+                   // window.location = "./dashboard/dashboardGeral.html";
+              //  }, 1000); // apenas para exibir o loading
+
+            });
+
+        } else {
+            console.log("Houve um erro ao salvar");
+            alert("Não funcionou");
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+    return false;
 }
 
-
 function excluirUsuario(){
-    var idUsuario = localStorage.idUsuario;
-
     fetch("/usuarioDashboard/excluirUsuario", {
         method: "delete",
         headers: {
@@ -262,7 +289,6 @@ function excluirUsuario(){
         body: JSON.stringify({
             // crie um atributo que recebe o valor recuperado aqui
             // Agora vá para o arquivo routes/usuario.js
-            idUsuarioServer: idUsuario
         
         })
     }).then(function (resposta) {
@@ -270,9 +296,9 @@ function excluirUsuario(){
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          setTimeout(() => {
-       window.location = "./dashboard/listaUsuario.html";
-     }, "2000")
+            setTimeout(() => {
+                window.location = "../login.html";
+            }, "2000")
 
         } else {
             alert("Erro ao excluir")
