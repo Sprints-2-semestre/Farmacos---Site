@@ -49,7 +49,7 @@ function editarNoc(nome, email, senha, idUser){
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editarNoc():", nome, email, senha, idUser);
 
     var instrucao = `
-    UPDATE usuario SET nome = '${nome}', email = '${email}', senha = '${senha}' WHERE idusuario = '${idUser}';`
+    UPDATE usuario SET nome = '${nome}', email = '${email}', senha = '${senha}' WHERE idUsuario = '${idUser}';`
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 

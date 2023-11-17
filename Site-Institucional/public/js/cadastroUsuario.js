@@ -271,7 +271,7 @@ function excluirUsuario(){
 
         if (resposta.ok) {
           setTimeout(() => {
-       window.location = "./dashboard/listaUsuario.html";
+       window.location = "./listaUsuario.html";
      }, "2000")
 
         } else {

@@ -10,6 +10,7 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
+var medidaRouter = require("./src/routes/medidas");
 
 var usuarioDashboardRouter = require("./src/routes/usuarioDashboard")
 
@@ -23,7 +24,7 @@ app.use("/", indexRouter);
 app.use("/usuario", usuarioRouter);
 app.use("/usuarioDashboard", usuarioDashboardRouter)
 // app.use("/avisos", avisosRouter);
-// app.use("/medida", medidaRouter);
+app.use("/medidas", medidaRouter);
 
 
 app.listen(PORTA, function () {
