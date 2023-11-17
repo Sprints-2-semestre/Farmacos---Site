@@ -1,5 +1,5 @@
 async function puxarNoc() {
-    var fkAme = sessionStorage.TOKEN_AME;
+    var fkAme = sessionStorage.FK_AME;
 
     const usuarios = await fetch("/usuarioDashboard/puxarNoc", {
         method: "POST",
