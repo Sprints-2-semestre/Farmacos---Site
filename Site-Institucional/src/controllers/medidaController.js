@@ -33,7 +33,60 @@ function obter_dados_rede(req, res) {
     }).catch(function (erro) {
         console.log(erro);
         console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
+        res.status(500).j
+        
+        son(erro.sqlMessage);
+    });
+}
+
+function obterDadosDisco(req, res) {
+
+    medidaModel.obterDadosDisco().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).j
+        
+        son(erro.sqlMessage);
+    });
+}
+
+function obterDadosCPU(req, res) {
+
+    medidaModel.obterDadosCPU().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).j
+        
+        son(erro.sqlMessage);
+    });
+}
+
+function obterDadosRAM(req, res) {
+
+    medidaModel.obterDadosRAM().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).j
+        
+        son(erro.sqlMessage);
     });
 }
 
@@ -75,5 +128,8 @@ module.exports = {
     buscarUltimasMedidas,
     redeMedidasEmTempoReal,
     obter_dados_rede,
+    obterDadosDisco,
+    obterDadosCPU,
+    obterDadosRAM,
     obterIdMaquina
 }
