@@ -32,19 +32,17 @@ fkAme INT, CONSTRAINT FK_AmeUsuario FOREIGN KEY (fkAme) REFERENCES AME(idAme),
 fkPermissaoUsuario INT, CONSTRAINT FK_perm FOREIGN KEY (fkPermissaoUsuario) REFERENCES permissao(idPermissao)
 );
 
-CREATE TABLE parametro (
-idParametro INT primary key AUTO_INCREMENT,
-nomeComponente VARCHAR (30),
-critico INT,
-preocupante INT,
-fkPermissaoParametro INT, CONSTRAINT FkPerm_param FOREIGN KEY (fkPermissaoParametro) REFERENCES permissao(idPermissao)
-);
-
 CREATE TABLE tipoComponente (
 idTipoComp INT PRIMARY KEY AUTO_INCREMENT,
-nomeTipoComp VARCHAR (45),
-fkParametro INT,
-CONSTRAINT fkParametroComponente FOREIGN KEY (fkParametro) REFERENCES parametro (idParametro)
+nomeTipoComp VARCHAR (45)
+);
+
+CREATE TABLE parametro (
+idParametro INT primary key AUTO_INCREMENT,
+máximo INT,
+médio INT,
+fkPermissaoParametro INT, CONSTRAINT FkPerm_param FOREIGN KEY (fkPermissaoParametro) REFERENCES permissao(idPermissao),
+fkTipoComponente INT, CONSTRAINT FkTipo_comp foreign key (fkTipoComponente) references tipoComponente(idTipoComp)
 );
 
 CREATE TABLE maquinaTipoComponente (
@@ -79,9 +77,9 @@ INSERT INTO permissao (tipoPermissao) VALUES ('NOC');
 INSERT INTO permissao (tipoPermissao) VALUES ('Visualização');
 
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ('CPU');
-INSERT INTO tipoComponente (nomeTipoComp) VALUES ('RAM');
-INSERT INTO tipoComponente (nomeTipoComp) VALUES ('DISCO');
-INSERT INTO tipoComponente (nomeTipoComp) VALUES ('REDE');
+INSERT INTO tipoComponente (nomeTipoComp) VALUES ('Memória RAM');
+INSERT INTO tipoComponente (nomeTipoComp) VALUES ('Disco');
+INSERT INTO tipoComponente (nomeTipoComp) VALUES ('Rede');
 
 SELECT maquina.sistemaOperacional,
 maquina.arquitetura,
@@ -138,4 +136,4 @@ WHERE maquina.idMaquina = 'BFEBFBFF000A0660';
 
 insert into ame values
 (null, "Paulista", "0366000");
-select * from usuario
+select * from usuario;
