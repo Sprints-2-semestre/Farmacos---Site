@@ -6,7 +6,8 @@ var sql = require('mssql');
 var mySqlConfig = {
     host: "localhost",
     database: "farmacos",
-    password: ""
+    user: "root",
+    password: "D@vi1606"
 };
 
 // // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
