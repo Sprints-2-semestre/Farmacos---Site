@@ -40,6 +40,7 @@ function cadastrar() {
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
+                alert ("Cadastro realizado com sucesso! Redirecionando para a tela de login ...")
                 setTimeout(() => {
                     window.location = "login.html";
                 }, "2000")
