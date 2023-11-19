@@ -18,13 +18,13 @@ function entrar(email, senha) {
     return database.executar(instrucao);
 }
 
-function validar (tokenAME) {
+function validar(tokenAME) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function validar():", tokenAME);
 
     var instrucao = `SELECT idAme FROM AME WHERE idAme = '${tokenAME}';`
 
     console.log("Executando a instrução SQL: \n" + instrucao);
-    
+
     return database.executar(instrucao);
 }
 
@@ -36,16 +36,16 @@ function cadastrar(nome, email, senha, tokenAME) {
 
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
-   // var pegarId = "SELECT count(idUsuario) from usuario"
+    // var pegarId = "SELECT count(idUsuario) from usuario"
 
     var instrucao = `
     INSERT INTO usuario (nome, email, senha, cargo, fkPermissaoUsuario,fkAme) VALUES ('${nome}', '${email}', '${senha}', 'ENG. NOC', 1, ${tokenAME});`
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
-    
+
 }
 
-function editarNoc(nome, email, senha, idUser){
+function editarNoc(nome, email, senha, idUser) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editarNoc():", nome, email, senha, idUser);
 
     var instrucao = `
@@ -54,7 +54,7 @@ function editarNoc(nome, email, senha, idUser){
     return database.executar(instrucao);
 
 }
-function deletar(idUser){
+function deletar(idUser) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idUser);
 
     var instrucao = `
@@ -62,11 +62,12 @@ function deletar(idUser){
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-module.exports = {
-    entrar,
-    cadastrar,
-    listar,
-    validar,
-    editarNoc,
-    deletar
-};
+
+    module.exports = {
+        entrar,
+        cadastrar,
+        listar,
+        validar,
+        editarNoc,
+        deletar,
+    };

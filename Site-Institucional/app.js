@@ -11,8 +11,8 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var medidaRouter = require("./src/routes/medidas");
-
 var usuarioDashboardRouter = require("./src/routes/usuarioDashboard")
+var dashboardEspecificaRouter = require("./src/routes/dashboardEspecifica")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -21,10 +21,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 app.use("/", indexRouter);
-app.use("/usuario", usuarioRouter);
+app.use("/usuarios", usuarioRouter);
 app.use("/usuarioDashboard", usuarioDashboardRouter)
 // app.use("/avisos", avisosRouter);
 app.use("/medidas", medidaRouter);
+app.use("/dashboardEspecifica", dashboardEspecificaRouter)
 
 
 app.listen(PORTA, function () {

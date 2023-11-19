@@ -90,7 +90,7 @@ function cadastrar(req, res) {
     }
 }
 
-function validar (req, res) {
+function validar(req, res) {
     var tokenAME = req.body.tokenServer;
     if (tokenAME == undefined) {
         res.status(400).send("Seu token está undefined!");
@@ -100,7 +100,7 @@ function validar (req, res) {
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
-                  
+
                     if (resultado.length == 1) {
                         console.log(resultado);
                         res.json(resultado[0]);
@@ -132,7 +132,7 @@ function editarNoc(req, res) {
         res.status(400).send("Sua senha está undefined!");
     } else {
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.editarNoc(nome, email, senha,idUser)
+        usuarioModel.editarNoc(nome, email, senha, idUser)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -159,6 +159,8 @@ function deletar(req, res) {
             .then(
                 function (resultado) {
                     res.json(resultado);
+                    console.log("Resultado no usuarioController")
+                    console.log(resultado)
                 }
             ).catch(
                 function (erro) {
@@ -171,8 +173,10 @@ function deletar(req, res) {
                 }
             );
     }
-
 }
+
+
+
 module.exports = {
     entrar,
     cadastrar,
@@ -181,5 +185,4 @@ module.exports = {
     validar,
     editarNoc,
     deletar
-
 }
