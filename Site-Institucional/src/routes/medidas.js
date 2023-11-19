@@ -11,6 +11,18 @@ router.get("/obterDadosRede", function (req, res) {
     medidaController.obter_dados_rede(req, res);
 });
 
+router.get("/obterDadosDisco", function (req, res) {
+    medidaController.obterDadosDisco(req, res);
+});
+
+router.get("/obterDadosCPU", function (req, res) {
+    medidaController.obterDadosCPU(req, res);
+});
+
+router.get("/obterDadosRAM", function (req, res) {
+    medidaController.obterDadosRAM(req, res);
+});
+
 router.get("/rede-tempo-real", function (req, res) {
     medidaController.redeMedidasEmTempoReal(req, res);
 })

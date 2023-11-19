@@ -139,10 +139,34 @@ form{
 
 .btn-excluir{
     background-color: rgba(223, 53, 53, 0.979);
+    padding: 10px;
+    font-size: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e4f6f8;
+    cursor: pointer;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    transition: 0.5s;
 }
 
 .btn-alterar{
     background-color: rgb(25, 128, 187);
+    padding: 10px;
+    font-size: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e4f6f8;
+    cursor: pointer;
+    box-shadow: 0px 2px 0px 0px #00000056;
+    transition: 0.5s;
 }
 
 .btn-excluir:hover{
@@ -159,4 +183,18 @@ form{
     border: 1px rgb(25, 128, 187) solid;
     border-radius: 10px;
     transition: 0.5s;
+}
+
+table {
+    border-collapse:collapse;
+    width: 75%;
+    margin-top: 2%;
+    margin-left: 13%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 4px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
