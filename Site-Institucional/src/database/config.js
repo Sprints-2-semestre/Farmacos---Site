@@ -7,7 +7,7 @@ var mySqlConfig = {
     host: "localhost",
     database: "farmacos",
     user: "root",
-    password: "verdi"
+    password: "#Gf2023"
 };
 
 // // CONEXÃO DO SQL SERVER - AZURE (NUVEM)

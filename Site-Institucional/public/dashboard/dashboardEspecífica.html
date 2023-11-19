@@ -10,7 +10,7 @@
     <link rel="icon" href="../img/logo F png.png">
 </head>
 
-<body>
+<body onload="exibirNomeDoEstabelecimentoDeTrabalho()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -18,7 +18,7 @@
             </div>
             <div class="nav-itens">
                 <li>
-                    <ul><b>Nome</b></ul>
+                    <ul><b id="nomeUsuario">Nome</b></ul>
 
                     <ul><a href="cadastroAlerta.html">Alertas</a></ul>
                     <ul><a class="atual" href="dashboardGeral.html">Máquinas</a></ul>
@@ -35,7 +35,7 @@
         <div class="div-principal">
             <div class="nome-ame">
                 <p>AME:</p>
-                <p>Paulista</p>
+                <p id="teste"></p>
             </div>
 
             <div class="div-superior">
@@ -43,7 +43,7 @@
                     <h2>CPU</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p>Preocupante 16 min</p>
+                        <p>A cpu esteve acima do preocupante por 8 minutos atrás</p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
@@ -86,34 +86,10 @@
                 </div>
             </div>
             <div class="div-central">
-                <div class="div-processos">
-                    <h3>Processos com alto consumo de RAM</h3>
-                    <table>
-                        <tr>
-                            <th>Nome</th>
-                            <th>PID</th>
-                            <th>Uso</th>
-                        </tr>
-                        <tr>
-                            <th>Edge</th>
-                            <th>250</th>
-                            <th>17,8</th>
-                        </tr>
-                        <tr>
-                            <th>Instagram</th>
-                            <th>300</th>
-                            <th>90,1</th>
-                        </tr>
-                        <tr>
-                            <th>Twitter</th>
-                            <th>17</th>
-                            <th>50,1</th>
-                        </tr>
-                    </table>
-                </div>
-            
+                
+
                 <div class="div-rede-disco">
-                        <div class="uso-sem">
+                    <div class="uso-sem">
 
                         <table>
                             <tr>
@@ -127,11 +103,13 @@
                                 <th>1490</th>
                             </tr>
                         </table>
-                        </div>
-                        <div class="temp-osci"> <h3>Tempo em que a internet esteve ociosa</h3>
-                        <p>00:25:06</p> </div>
+                    </div>
+                    <div class="temp-osci">
+                        <h3>Tempo em que a internet esteve ociosa</h3>
+                        <p>00:25:06</p>
+                    </div>
                 </div>
-                
+
 
                 <div class="div-list-maquinas-esp">
 
@@ -142,14 +120,14 @@
                             <th></th>
                         </tr>
                         <tr>
-                            <th><a href="dashboardEspecífica.html">Máquina 1</a></th>
-                            <th>Ativo</th>
+                            <th id="listaDeMaquinas"><a href="dashboardEspecífica.html">Máquina 1</a></th>
+                            <!-- <th>Ativo</th> -->
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <th><a href="dashboardEspecífica.html">Máquina 2</a></th>
                             <th>Ativo</th>
-                        </tr>
-                        <tr>
+                        </tr> -->
+                        <!-- <tr>
                             <th><a href="dashboardEspecífica.html">Maquina 3</a></th>
                             <th>Ativo</th>
                         </tr>
@@ -165,18 +143,21 @@
                             </th>
                             <th><a href="dashboardEspecífica.html">Máquina 6</a></th>
                             <th>Ativo</th>
-                        </tr>
+                        </tr> -->
                     </table>
                 </div>
             </div>
             <div class="div-inferior">
-                <div class="div-graf-rede" style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
+                <div class="div-graf-rede"
+                    style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
                     <canvas id="myChart2" style="width: 400px; height: 300px;"></canvas>
                 </div>
-                <div class="div-graf-cpu" style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
+                <div class="div-graf-cpu"
+                    style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
                     <canvas id="myChart1" style="width: 400px; height: 260px;"></canvas>
                 </div>
-                <div class="div-list-alertas" style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
+                <div class="div-list-alertas"
+                    style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
                     <canvas id="myChart3" style="width: 400px; height: 220px;"></canvas>
                     </table>
                 </div>
@@ -202,7 +183,7 @@
             navLateral.style.display = "none";
         }
 
-        if(divPrincipal){
+        if (divPrincipal) {
             divPrincipal.style.width = "100%";
             divPrincipal.style.left = "0%";
         }
@@ -224,7 +205,7 @@
             navLateral.style.display = "flex";
         }
 
-        if(divPrincipal){
+        if (divPrincipal) {
             divPrincipal.style.width = "81%";
             divPrincipal.style.left = "19%";
         }
@@ -342,4 +323,76 @@
             // }
         }
     });
+</script>
+
+<script>
+    document.getElementById("nomeUsuario").innerHTML = `Olá, ${sessionStorage.NOME_USUARIO}`
+    
+    function exibirNomeDoEstabelecimentoDeTrabalho() {
+        var fkAme = sessionStorage.FK_AME
+
+        fetch(`/dashboardEspecifica/nomeAme/${fkAme}`,
+            { cache: 'no-store' })
+            .then(function (response) {
+                console.log("Chegou aqui?")
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        console.log(resposta)
+                        document.getElementById("teste").innerHTML = resposta[0].nomeAme
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }     
+
+    function listarMaquinas() {
+        var fkAme = sessionStorage.FK_AME
+
+        fetch(`/dashbpardEspecifica/listarMaquinas/${fkAme}`,
+            { cache: 'no-store' })
+            .then(function (response) {
+                console.log("Chegou aqui?")
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        console.log(resposta);
+                        for (var i = 0; i < resposta.length; i++) {
+                        document.getElementById("listaDeMaquinas").innerHTML += `${resposta[i].maquinas} 
+                        ${resposta[i].statusMaquina}`
+                        }
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+//     var data = new Date();
+//     setInterval() = {
+//         var tempoAtual = Math.floor(+new Date() / 1000); 
+//         if (usoCpuBanco > 70) {
+//         var capturaTempoAcimaDe70 = Math.floor(+new Date() / 1000)
+//         tempoAtual - capturaTempoAcimaDe70;
+//     console.log(Math.floor(+new Date() / 1000));
+//     }
+// }
+// var segundos
+// if (usoCPuBanco > 70) {
+//     let seungos ++
+//     if (segundos == 60) {
+//         segundos = 0
+//         minutos += 01
+//         if (minutos == 60) {
+//             minutos = 0
+//             hota += 01
+//         }
+//     }
+// }
 </script>
