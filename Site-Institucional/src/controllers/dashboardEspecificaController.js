@@ -60,8 +60,23 @@ function listarMaquinas(req, res) {
             res.status(500).json(erro.sqlMessage)
         })
 }
+
+function obterDadosGrafico(req, res) {
+
+    dashboardEspecificaModel.obterDadosGrafico()
+        .then((response) => {
+            res.json(response);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+
 module.exports = {
     nomeAme,
     // kpiRede
-    listarMaquinas
+    listarMaquinas,
+    obterDadosGrafico
 }

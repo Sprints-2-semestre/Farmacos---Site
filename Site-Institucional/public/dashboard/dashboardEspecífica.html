@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <link rel="icon" href="../img/logo F png.png">
 </head>
 
-<body onload="exibirNomeDoEstabelecimentoDeTrabalho()">
+<body onload="exibirNomeDoEstabelecimentoDeTrabalho(), obterDadosGrafico()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="div-central">
-                
+
 
                 <div class="div-rede-disco">
                     <div class="uso-sem">
@@ -173,6 +173,11 @@
 </html>
 
 <script>
+    id = (sessionStorage.ID_USUARIO);
+
+
+
+
     const btnPrint = document.querySelector(".btn-pdf");
     btnPrint.addEventListener("click", () => {
 
@@ -265,7 +270,7 @@
             datasets: [{
                 type: 'line',
                 label: 'Gráfico de Rede',
-                data: [12, 30, 3, 5, 2, 3], // captura de rede
+                data: [byteRecebido1, 30, 3, 5, 2, 3], // captura de rede
                 borderWidth: 2.5,
                 tension: 0.4,
             },
@@ -327,7 +332,7 @@
 
 <script>
     document.getElementById("nomeUsuario").innerHTML = `Olá, ${sessionStorage.NOME_USUARIO}`
-    
+
     function exibirNomeDoEstabelecimentoDeTrabalho() {
         var fkAme = sessionStorage.FK_AME
 
@@ -348,7 +353,7 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-    }     
+    }
 
     function listarMaquinas() {
         var fkAme = sessionStorage.FK_AME
@@ -362,7 +367,7 @@
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                         console.log(resposta);
                         for (var i = 0; i < resposta.length; i++) {
-                        document.getElementById("listaDeMaquinas").innerHTML += `${resposta[i].maquinas} 
+                            document.getElementById("listaDeMaquinas").innerHTML += `${resposta[i].maquinas} 
                         ${resposta[i].statusMaquina}`
                         }
                     });
@@ -374,25 +379,174 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
-//     var data = new Date();
-//     setInterval() = {
-//         var tempoAtual = Math.floor(+new Date() / 1000); 
-//         if (usoCpuBanco > 70) {
-//         var capturaTempoAcimaDe70 = Math.floor(+new Date() / 1000)
-//         tempoAtual - capturaTempoAcimaDe70;
-//     console.log(Math.floor(+new Date() / 1000));
-//     }
-// }
-// var segundos
-// if (usoCPuBanco > 70) {
-//     let seungos ++
-//     if (segundos == 60) {
-//         segundos = 0
-//         minutos += 01
-//         if (minutos == 60) {
-//             minutos = 0
-//             hota += 01
-//         }
-//     }
-// }
+    //     var data = new Date();
+    //     setInterval() = {
+    //         var tempoAtual = Math.floor(+new Date() / 1000);
+    //         if (usoCpuBanco > 70) {
+    //         var capturaTempoAcimaDe70 = Math.floor(+new Date() / 1000)
+    //         tempoAtual - capturaTempoAcimaDe70;
+    //     console.log(Math.floor(+new Date() / 1000));
+    //     }
+    // }
+    // var segundos
+    // if (usoCPuBanco > 70) {
+    //     let seungos ++
+    //     if (segundos == 60) {
+    //         segundos = 0
+    //         minutos += 01
+    //         if (minutos == 60) {
+    //             minutos = 0
+    //             hota += 01
+    //         }
+    //     }
+    // }
+</script>
+
+<script>
+    // setInterval(entrar, 2000);
+
+    function obterDadosGrafico() {
+        fetch(`/dashboardEspecifica/obterDadosRede`, {
+            cache: 'no-store',
+            method: "GET",
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    dadosBytes = { resposta }
+                    console.log(`
+                    Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    plotarGrafico(resposta);
+                    console.log(resposta)
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarGrafico(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Pacotes Recebidos',
+                data: [],
+                fill: false,
+                tension: 0.1
+            },
+            {
+                label: 'Pacotes Enviados',
+                data: [],
+                fill: false,
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var dadoPlotar = resposta[i];
+
+            if (dadosBytes.resposta[0].bytesRecebido && dadosBytes.resposta[0].bytesEnviado != "null") {
+                labels.push(dadoPlotar.fkMaquina);
+                dados.datasets[0].data.push(dadosBytes.resposta[0].bytesRecebido);
+                dados.datasets[1].data.push(dadosBytes.resposta[0].bytesEnviado);
+            }
+        }
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            data: {
+                datasets: [{
+                    type: 'line',
+                    label: 'Bytes Recebidos',
+                    data: [], // captura de rede
+                    borderWidth: 2.5,
+                    tension: 0.4,
+                },
+                ],
+                labels: ["bytesRecebido", "byteEnviado"]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                    },
+                    title: {
+                        display: true,
+                        fontSize: 20,
+                        text: "Uso de rede  em decorrência do tempo",
+                    },
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        myChartRede = new Chart(
+            document.getElementById(`myChart2`),
+            config
+        );
+        myChartRede.update();
+        setTimeout(() => atualizarGrafico(dados, myChartRede), 2000);
+    }
+
+    function atualizarGrafico(dados, myChartRede) {
+
+        fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    obterDadosGrafico();
+                    byteRecebido1 = dadosBytes.resposta[4].bytesRecebido;
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    // let avisoCaptura = document.getElementById(`avisoCaptura`)
+                    // avisoCaptura.innerHTML = ""
+
+                    // tirando e colocando valores no gráfico
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push(byteRecebido1); // incluir um novo momento
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
 </script>

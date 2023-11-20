@@ -18,7 +18,16 @@ function listarMaquinas(fkAme) {
     return database.executar(instrucaoSql)
 }
 
+function obterDadosGrafico() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucaoSql = `select bytesRecebido, bytesEnviado, dtHora  from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null LIMIT 1;`
+
+    console.log("Executando a instrução do SQL " + instrucaoSql)
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     nomeAme,
-    listarMaquinas
+    listarMaquinas,
+    obterDadosGrafico
 }
