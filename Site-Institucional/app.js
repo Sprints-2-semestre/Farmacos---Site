@@ -10,8 +10,8 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
+var alertaRouter = require("./src/routes/alerta");
 var medidaRouter = require("./src/routes/medidas");
-
 var usuarioDashboardRouter = require("./src/routes/usuarioDashboard")
 
 app.use(express.json());
@@ -20,10 +20,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
-app.use("/", indexRouter);
+app.use("/", indexRouter);  
 app.use("/usuario", usuarioRouter);
 app.use("/usuarioDashboard", usuarioDashboardRouter)
-// app.use("/avisos", avisosRouter);
+app.use("/alerta", alertaRouter)
 app.use("/medidas", medidaRouter);
 
 

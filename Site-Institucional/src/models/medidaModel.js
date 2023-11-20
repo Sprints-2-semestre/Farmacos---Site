@@ -136,6 +136,79 @@ function obterIdMaquina() {
     return database.executar(instrucaoSql);
 }
 
+function cardAlertasCPU() {
+    console.log ("Entrando no cardAlertasCPU.Model")
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT nomeTipoComp, maximo, medio from parametro JOIN tipoComponente ON idTipoComp = fkTipoComponente where fkTipoComponente = 1;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT nomeTipoComp, maximo, medio from parametro JOIN tipoComponente ON idTipoComp = fkTipoComponente where fkTipoComponente = 1;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function cardAlertasRAM() {
+    console.log ("Entrando no cardAlertasRAM.Model")
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT nomeTipoComp, maximo, medio from parametro JOIN tipoComponente ON idTipoComp = fkTipoComponente where fkTipoComponente = 2;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT nomeTipoComp, maximo, medio from parametro JOIN tipoComponente ON idTipoComp = fkTipoComponente where fkTipoComponente = 2;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function cardAlertasDISCO() {
+    console.log ("Entrando no cardAlertasDISCO.Model")
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT nomeTipoComp, maximo, medio from parametro JOIN tipoComponente ON idTipoComp = fkTipoComponente where fkTipoComponente = 3;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT nomeTipoComp, maximo, medio from parametro JOIN tipoComponente ON idTipoComp = fkTipoComponente where fkTipoComponente = 3;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function cardAlertasREDE() {
+    console.log ("Entrando no cardAlertasREDE.Model")
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT nomeTipoComp, maximo, medio from parametro JOIN tipoComponente ON idTipoComp = fkTipoComponente where fkTipoComponente = 4;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT nomeTipoComp, maximo, medio from parametro JOIN tipoComponente ON idTipoComp = fkTipoComponente where fkTipoComponente = 4;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
     buscarUltimasMedidas,
     redeMedidasEmTempoReal,
@@ -143,5 +216,9 @@ module.exports = {
     obterDadosDisco,
     obterDadosCPU,
     obterDadosRAM,
-    obterIdMaquina
+    obterIdMaquina,
+    cardAlertasCPU,
+    cardAlertasRAM,
+    cardAlertasDISCO,
+    cardAlertasREDE
 }
