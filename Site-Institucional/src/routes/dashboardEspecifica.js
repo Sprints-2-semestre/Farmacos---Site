@@ -13,7 +13,7 @@ router.get("/listarMaquinas/:fkAme", function (req, res) {
 })
 
 router.get("/obterDadosRede", function (req, res) {
-    dashboardEspecificaController.obterDadosGrafico(req, res);
+    dashboardEspecificaController.obterDadosRede(req, res);
 });
 
 module.exports = router;

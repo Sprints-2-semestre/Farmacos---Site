@@ -61,9 +61,9 @@ function listarMaquinas(req, res) {
         })
 }
 
-function obterDadosGrafico(req, res) {
+function obterDadosRede(req, res) {
 
-    dashboardEspecificaModel.obterDadosGrafico()
+    dashboardEspecificaModel.obterDadosRede()
         .then((response) => {
             res.json(response);
         })
@@ -78,5 +78,5 @@ module.exports = {
     nomeAme,
     // kpiRede
     listarMaquinas,
-    obterDadosGrafico
+    obterDadosRede
 }

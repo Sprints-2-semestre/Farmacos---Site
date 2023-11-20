@@ -270,7 +270,7 @@
             datasets: [{
                 type: 'line',
                 label: 'Gráfico de Rede',
-                data: [byteRecebido1, 30, 3, 5, 2, 3], // captura de rede
+                data: [byteRecebido1], // captura de rede
                 borderWidth: 2.5,
                 tension: 0.4,
             },
@@ -413,8 +413,6 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     dadosBytes = { resposta }
-                    console.log(`
-                    Dados recebidos: ${JSON.stringify(resposta)}`);
 
                     plotarGrafico(resposta);
                     console.log(resposta)
@@ -440,30 +438,27 @@
             datasets: [{
                 label: 'Pacotes Recebidos',
                 data: [],
-                fill: false,
-                tension: 0.1
             },
             {
                 label: 'Pacotes Enviados',
                 data: [],
-                fill: false,
-                tension: 0.1
             }]
         };
 
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
-            var dadoPlotar = resposta[i];
-
-            if (dadosBytes.resposta[0].bytesRecebido && dadosBytes.resposta[0].bytesEnviado != "null") {
-                labels.push(dadoPlotar.fkMaquina);
-                dados.datasets[0].data.push(dadosBytes.resposta[0].bytesRecebido);
-                dados.datasets[1].data.push(dadosBytes.resposta[0].bytesEnviado);
+            var registro = resposta[i];
+            if (registro.bytesRecebido && registro.bytesEnviado != "null") {
+                labels.push(registro.HoraCaptura);
+                dados.datasets[0].data.push(registro.bytesRecebido);
+                dados.datasets[1].data.push(registro.bytesEnviado);
             }
+
+            console.log(registro)
+
         }
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
@@ -475,33 +470,18 @@
 
         // Criando estrutura para plotar gráfico - config
         const config = {
-            data: {
-                datasets: [{
-                    type: 'line',
-                    label: 'Bytes Recebidos',
-                    data: [], // captura de rede
-                    borderWidth: 2.5,
-                    tension: 0.4,
-                },
-                ],
-                labels: ["bytesRecebido", "byteEnviado"]
-            },
+            type: 'line',
+            data: dados,
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'bottom',
+                        position: 'bottom'
                     },
                     title: {
                         display: true,
-                        fontSize: 20,
-                        text: "Uso de rede  em decorrência do tempo",
-                    },
+                        text: 'Bytes recebidos e Bytes enviados pela rede'
+                    }
                 }
             }
         };
@@ -512,41 +492,47 @@
             config
         );
         myChartRede.update();
-        setTimeout(() => atualizarGrafico(dados, myChartRede), 2000);
+        setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
     }
 
-    function atualizarGrafico(dados, myChartRede) {
+    function atualizarGrafico(dados, myChart) {
 
-        fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
 
-                    obterDadosGrafico();
-                    byteRecebido1 = dadosBytes.resposta[4].bytesRecebido;
-                    // alertar(novoRegistro, idAquario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
+fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (novoRegistro) {
 
-                    // let avisoCaptura = document.getElementById(`avisoCaptura`)
-                    // avisoCaptura.innerHTML = ""
+            obterDadosGrafico();
+            // alertar(novoRegistro, idAquario);
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
 
-                    // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(byteRecebido1); // incluir um novo momento
+            // let avisoCaptura = document.getElementById(`avisoCaptura`)
+            // avisoCaptura.innerHTML = ""
 
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 2000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 2000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+            // tirando e colocando valores no gráfico
+            dados.labels.shift(); // apagar o primeiro
+            dados.labels.push(novoRegistro[0].HoraCaptura); // incluir um novo momento
 
+            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+            dados.datasets[0].data.push(novoRegistro[0].bytesRecebido); // incluir uma nova medida de umidade
+
+            dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+            dados.datasets[1].data.push(novoRegistro[0].bytesEnviado); // incluir uma nova medida de temperatura
+            myChart.update();
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
     }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
 </script>
