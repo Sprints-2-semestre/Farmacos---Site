@@ -16,4 +16,8 @@ router.get("/obterDadosRede", function (req, res) {
     dashboardEspecificaController.obterDadosRede(req, res);
 });
 
+router.get("/obterDadosCpu", function (req, res) {
+    dashboardEspecificaController.obterDadosCpu(req, res);
+});
+
 module.exports = router;

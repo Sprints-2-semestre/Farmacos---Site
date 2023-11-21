@@ -10,7 +10,7 @@
     <link rel="icon" href="../img/logo F png.png">
 </head>
 
-<body onload="exibirNomeDoEstabelecimentoDeTrabalho(), obterDadosGrafico()">
+<body onload="exibirNomeDoEstabelecimentoDeTrabalho(),obterDadosCpu(), obterDadosGrafico()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -224,20 +224,13 @@
     new Chart(ctx1, {
         type: 'line',
         data: {
-            labels: [1, 2, 3, 4, 5, 6,], // colocar as horas
+            labels: [registro.HoraCaptura], // colocar as horas
             datasets: [
                 {
-                    label: 'Máquina 1',
-                    data: [12, 19, 3, 5, 2, 3], // colocar o uso 
+                    label: 'CPU',
+                    data: [], // colocar o uso 
                     backgroundColor: '#00323c',
                     borderColor: '#00323c',
-                    borderWidth: 3
-                },
-                {
-                    label: 'Uso de RAM',
-                    data: [12, 19, 30, 50, 20, 30], // colocar o uso 
-                    backgroundColor: '#00d5ffb9',
-                    borderColor: '#00d5ffb9',
                     borderWidth: 3
                 }]
         },
@@ -252,7 +245,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Uso de CPU e RAM em porcentagem diariamente',
+                    text: 'Uso de CPU e RAM em %',
                     fontSize: 50,
                 },
                 legend: {
@@ -270,7 +263,7 @@
             datasets: [{
                 type: 'line',
                 label: 'Gráfico de Rede',
-                data: [byteRecebido1], // captura de rede
+                data: [bytesRecebido, bytesEnviado], // captura de rede
                 borderWidth: 2.5,
                 tension: 0.4,
             },
@@ -528,6 +521,134 @@ fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(functio
         console.error('Nenhum dado encontrado ou erro na API');
         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
         proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
+</script>
+
+<script>
+    // GRÁFICO DE CPU E RAM
+
+    function obterDadosCpu() {
+        fetch(`/dashboardEspecifica/obterDadosCpu`, {
+            cache: 'no-store',
+            method: "GET",
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    dadosBytes = { resposta }
+
+                    plotarGraficoCpu(resposta);
+                    console.log("Estou sendo! " + resposta)
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarGraficoCpu(resposta) {
+
+        console.log('iniciando plotagem do gráfico de CPUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU...');
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'CPU',
+                data: [],
+            }]
+        };
+
+        console.log('---------------------------------------------- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGraficoCpu" e passados para "plotarGraficoCpu":')
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];  
+            if (registro.qtdUsoCpu != "null") {
+                labels.push(registro.HoraCaptura);
+                dados.datasets[0].data.push(registro.qtdUsoCpu);
+            }
+
+            console.log("RESPOSTA AQUIIIIIIIIIIII " + registro.qtdUsoCpu)
+
+        }
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets[0])
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'USO EM % DA CPU'
+                    }
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        myChartCpu = new Chart(
+            document.getElementById(`myChart1`),
+            config
+        );
+        myChartCpu.update();
+        setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
+    }
+
+    function atualizarGraficoCpu(dados, myChartCpu) {
+
+
+fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (novoRegistro2) {
+
+            obterDadosCpu();
+            // alertar(novoRegistro, idAquario);
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro2)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
+
+            // let avisoCaptura = document.getElementById(`avisoCaptura`)
+            // avisoCaptura.innerHTML = ""
+
+            // tirando e colocando valores no gráfico
+            dados.labels.shift(); // apagar o primeiro
+            dados.labels.push(novoRegistro2[0].HoraCaptura); // incluir um novo momento
+
+            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+            dados.datasets[0].data.push(novoRegistro2[0].qtdUsoCpu); // incluir uma nova medida de umidade
+
+            myChartCpu.update();
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
     }
 })
     .catch(function (error) {
