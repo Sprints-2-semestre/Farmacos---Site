@@ -23,9 +23,9 @@ function obterDadosRede() {
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 5;`;
+        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 3;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 5;`;
+        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 3;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -40,9 +40,17 @@ function obterDadosCpu() {
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select qtdUsoCpu, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE qtdUsoCpu is not null ORDER BY dtHora DESC LIMIT 5;`;
+        instrucaoSql = `SELECT dc1.memoriaEmUso, dc2.qtdUsoCpu, TIME_FORMAT(dc1.dtHora, '%H:%i:%s') AS dtHora
+        FROM dadosComponente dc1
+        LEFT JOIN dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
+        WHERE dc1.memoriaEmUso IS NOT NULL AND dc2.qtdUsoCpu IS NOT NULL
+        ORDER BY dc1.dtHora DESC LIMIT 5;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select qtdUsoCpu, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE qtdUsoCpu is not null ORDER BY dtHora DESC LIMIT 5;`;
+        instrucaoSql = `SELECT dc1.memoriaEmUso, dc2.qtdUsoCpu, TIME_FORMAT(dc1.dtHora, '%H:%i:%s') AS dtHora
+        FROM dadosComponente dc1
+        LEFT JOIN dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
+        WHERE dc1.memoriaEmUso IS NOT NULL AND dc2.qtdUsoCpu IS NOT NULL
+        ORDER BY dc1.dtHora DESC LIMIT 5;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

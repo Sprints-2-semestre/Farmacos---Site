@@ -566,6 +566,10 @@ fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(functio
             datasets: [{
                 label: 'CPU',
                 data: [],
+            },
+            {
+                label: 'Memória RAM',
+                data: [],
             }]
         };
 
@@ -575,12 +579,13 @@ fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(functio
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];  
-            if (registro.qtdUsoCpu != "null") {
-                labels.push(registro.HoraCaptura);
+            if (registro.qtdUsoCpu  && registro.memoriaEmUso != "null") {
+                labels.push(registro.dtHora);
                 dados.datasets[0].data.push(registro.qtdUsoCpu);
+                dados.datasets[1].data.push(registro.memoriaEmUso);
             }
 
-            console.log("RESPOSTA AQUIIIIIIIIIIII " + registro.qtdUsoCpu)
+            console.log("RESPOSTA AQUIIIIIIIIIIII " + registro.memoriaEmUso)
 
         }
         console.log('----------------------------------------------')
@@ -588,7 +593,7 @@ fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(functio
         console.log('Labels:')
         console.log(labels)
         console.log('Dados:')
-        console.log(dados.datasets[0])
+        console.log(dados.datasets[1])
         console.log('----------------------------------------------')
 
         // Criando estrutura para plotar gráfico - config
@@ -636,11 +641,14 @@ fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function
 
             // tirando e colocando valores no gráfico
             dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro2[0].HoraCaptura); // incluir um novo momento
+            dados.labels.push(novoRegistro2[0].dtHora); // incluir um novo momento
 
             dados.datasets[0].data.shift();  // apagar o primeiro de umidade
             dados.datasets[0].data.push(novoRegistro2[0].qtdUsoCpu); // incluir uma nova medida de umidade
-
+            
+            dados.datasets[1].data.shift();  // apagar o primeiro de umidade
+            dados.datasets[1].data.push(novoRegistro2[0].memoriaEmUso); // incluir uma nova medida de umidade
+            
             myChartCpu.update();
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
             proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
