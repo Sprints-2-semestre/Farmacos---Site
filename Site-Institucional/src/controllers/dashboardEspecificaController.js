@@ -85,9 +85,9 @@ function obterDadosCpu(req, res) {
         })
 }
 
-function obterDadosDisco(req, res) {
+function obterDadosDiscoEspecifica(req, res) {
 
-    dashboardEspecificaModel.obterDadosDisco()
+    dashboardEspecificaModel.obterDadosDiscoEspecifica()
         .then((response) => {
             res.json(response);
         })
@@ -103,5 +103,5 @@ module.exports = {
     listarMaquinas,
     obterDadosRede,
     obterDadosCpu,
-    obterDadosDisco
+    obterDadosDiscoEspecifica
 }
