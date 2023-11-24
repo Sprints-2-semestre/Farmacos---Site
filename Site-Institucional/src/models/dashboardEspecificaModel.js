@@ -60,9 +60,35 @@ function obterDadosCpu() {
     return database.executar(instrucaoSql);
 }
 
+function obterDadosDisco() {
+
+    instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT dc1.usoAtualDisco, dc2.usoDisponivelDisco, TIME_FORMAT(dc1.dtHora, '%H:%i:%s') AS dtHora
+        FROM dadosComponente dc1
+        LEFT JOIN dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
+        WHERE dc1.usoAtualDisco IS NOT NULL AND dc2.usoDisponivelDisco IS NOT NULL
+        ORDER BY dc1.dtHora DESC LIMIT 1;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT dc1.usoAtualDisco, dc2.usoDisponivelDisco, TIME_FORMAT(dc1.dtHora, '%H:%i:%s') AS dtHora
+        FROM dadosComponente dc1
+        LEFT JOIN dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
+        WHERE dc1.usoAtualDisco IS NOT NULL AND dc2.usoDisponivelDisco IS NOT NULL
+        ORDER BY dc1.dtHora DESC LIMIT 1`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     nomeAme,
     listarMaquinas,
     obterDadosRede,
-    obterDadosCpu
+    obterDadosCpu,
+    obterDadosDisco
 }

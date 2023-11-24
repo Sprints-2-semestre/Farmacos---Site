@@ -20,4 +20,7 @@ router.get("/obterDadosCpu", function (req, res) {
     dashboardEspecificaController.obterDadosCpu(req, res);
 });
 
+router.get("/obterDadosDisco", function (req, res) {
+    dashboardEspecificaController.obterDadosDisco(req, res);
+});
 module.exports = router;

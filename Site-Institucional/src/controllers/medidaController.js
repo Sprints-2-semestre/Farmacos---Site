@@ -115,14 +115,91 @@ function obterIdMaquina(req, res) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("IdMaquina não encontrado");
+            res.status(204).send("obterIdMaquina não encontrado");
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar IdMaquina.", erro.sqlMessage);
+        console.log("Houve um erro ao buscar obterIdMaquina.", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+function cardAlertasCPU(req, res) {
+
+    medidaModel.cardAlertasCPU().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("cardAlertasCPU não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar cardAlertasCPU.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function cardAlertasRAM(req, res) {
+
+    medidaModel.cardAlertasRAM().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("cardAlertasRAM não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar cardAlertasRAM.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function cardAlertasDISCO(req, res) {
+
+    medidaModel.cardAlertasDISCO().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("cardAlertasDISCO não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar cardAlertasDISCO.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function cardAlertasDISCO(req, res) {
+
+    medidaModel.cardAlertasDISCO().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("cardAlertasDISCO não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar cardAlertasDISCO.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function cardAlertasREDE(req, res) {
+
+    medidaModel.cardAlertasREDE().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("cardAlertasREDE não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar cardAlertasREDE.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 
 module.exports = {
     buscarUltimasMedidas,
@@ -131,5 +208,9 @@ module.exports = {
     obterDadosDisco,
     obterDadosCPU,
     obterDadosRAM,
-    obterIdMaquina
+    obterIdMaquina,
+    cardAlertasCPU,
+    cardAlertasRAM,
+    cardAlertasDISCO,
+    cardAlertasREDE
 }

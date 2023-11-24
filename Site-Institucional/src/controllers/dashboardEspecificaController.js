@@ -85,11 +85,23 @@ function obterDadosCpu(req, res) {
         })
 }
 
+function obterDadosDisco(req, res) {
+
+    dashboardEspecificaModel.obterDadosDisco()
+        .then((response) => {
+            res.json(response);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
 module.exports = {
     nomeAme,
     // kpiRede
     listarMaquinas,
     obterDadosRede,
-    obterDadosCpu
-
+    obterDadosCpu,
+    obterDadosDisco
 }

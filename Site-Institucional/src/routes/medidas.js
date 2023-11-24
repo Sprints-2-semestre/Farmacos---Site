@@ -31,4 +31,20 @@ router.get("/obterIdMaquina", function (req, res) {
     medidaController.obterIdMaquina(req, res);
 });
 
+router.get("/cardAlertasCPU", function (req, res) {
+    medidaController.cardAlertasCPU(req, res);
+});
+
+router.get("/cardAlertasRAM", function (req, res) {
+    medidaController.cardAlertasRAM(req, res);
+});
+
+router.get("/cardAlertasDISCO", function (req, res) {
+    medidaController.cardAlertasDISCO(req, res);
+});
+
+router.get("/cardAlertasREDE", function (req, res) {
+    medidaController.cardAlertasREDE(req, res);
+});
+
 module.exports = router;
