@@ -21,4 +21,5 @@ router.put("/editarNoc", function (req, res) {
 router.delete("/deletar", function (req, res) {
     usuarioController.deletar(req, res);
 });
+
 module.exports = router;
