@@ -7,8 +7,8 @@ function cadastrarAlerta() {
     if (valorCompVar == "") {
         alert("Preencha o componente que deseja alterar!");
         return false;
-    } else if (medioVar > maximoVar){
-        alert ("Parâmetro médio maior que o parâmetro máximo !!")
+    // } else if (medioVar > maximoVar){
+    //     alert ("Parâmetro médio maior que o parâmetro máximo !!")
     }else {
     fetch("/alerta/cadastrarAlerta", {
         method: "POST",
