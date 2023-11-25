@@ -21,7 +21,7 @@ function cadastrar() {
         return false;
     }
     else {
-        fetch("/usuario/cadastrar", {
+        fetch("/usuarios/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -64,7 +64,7 @@ function validar() {
 
     console.log("FORM TOKEN: ", tokenAME);
 
-    fetch("/usuario/validar", {
+    fetch("/usuarios/validar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -118,7 +118,7 @@ function editarNoc() {
         return false;
     }
     else {
-        fetch("/usuario/editarNoc", {
+        fetch("/usuarios/editarNoc", {
             method: "put",
             headers: {
                 "Content-Type": "application/json"
@@ -161,7 +161,7 @@ function editarNoc() {
     }
 
     // Restante do código para deletar a conta
-    fetch("/usuario/deletar", {
+    fetch("/usuarios/deletar", {
         method: "delete",
         headers: {
             "Content-Type": "application/json"
