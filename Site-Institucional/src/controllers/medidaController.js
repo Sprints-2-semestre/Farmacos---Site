@@ -299,7 +299,7 @@ function dadosREDE(req, res) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("dadosREDE não encontrado");s
+            res.status(204).send("dadosREDE não encontrado");
         }
     }).catch(function (erro) {
         console.log(erro);
