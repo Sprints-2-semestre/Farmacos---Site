@@ -146,6 +146,23 @@ function obterDadosDiscoEspecifica(req, res) {
         })
 }
 
+function informacoesMaquina(req, res) {
+    var fkAme = req.params.fkAme
+
+    if (fkAme == undefined) {
+        console.log("fkAme está undefined");
+    }
+
+    dashboardEspecificaModel.informacoesMaquina(fkAme)
+        .then((response) => {
+            res.json(response);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
 module.exports = {
     nomeAme,
     listarMaquinas,
@@ -155,5 +172,6 @@ module.exports = {
     kpiTempoDisco,
     obterDadosRede,
     obterDadosCpu,
-    obterDadosDiscoEspecifica
+    obterDadosDiscoEspecifica,
+    informacoesMaquina
 }

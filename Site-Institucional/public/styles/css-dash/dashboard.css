@@ -328,7 +328,6 @@ body {
 }
 
 
-
 .div-graf-disco {
   display: flex;
   background-color: #ffffff;
@@ -442,3 +441,7 @@ tr:hover {
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
+.info-maquina {
+  display: flex;
+  flex-direction: column;
+}
