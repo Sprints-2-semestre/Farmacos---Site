@@ -51,10 +51,6 @@ router.get("/cardAlertasREDE", function (req, res) {
     medidaController.cardAlertasREDE(req, res);
 });
 
-router.get("/cardAlertasREDE", function (req, res) {
-    medidaController.cardAlertasREDE(req, res);
-});
-
 router.get("/dadosCPU", function (req, res) {
     medidaController.dadosCPU(req, res);
 });
@@ -66,6 +62,26 @@ router.get("/dadosDISCO", function (req, res) {
 });
 router.get("/dadosREDE", function (req, res) {
     medidaController.dadosREDE(req, res);
+});
+
+router.post("/inserirAlertaCPU", function (req, res) {
+    medidaController.inserirAlertaCPU(req, res);
+});
+
+router.post("/inserirAlertaRAM", function (req, res) {
+    medidaController.inserirAlertaRAM(req, res);
+});
+
+router.post("/inserirAlertaDISCO", function (req, res) {
+    medidaController.inserirAlertaDISCO(req, res);
+});
+
+router.post("/inserirAlertaREDE", function (req, res) {
+    medidaController.inserirAlertaREDE(req, res);
+});
+
+router.get("/listagemAlerta/", function (req, res) {
+    medidaController.listagemAlerta(req, res);
 });
 
 module.exports = router;

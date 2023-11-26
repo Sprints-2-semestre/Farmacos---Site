@@ -299,7 +299,7 @@ function dadosREDE(req, res) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("dadosREDE não encontrado");s
+            res.status(204).send("dadosREDE não encontrado");
         }
     }).catch(function (erro) {
         console.log(erro);
@@ -308,6 +308,115 @@ function dadosREDE(req, res) {
     });
 }
 
+function inserirAlertaCPU(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo
+    var fkMaquina = req.body.fkMaquinaServer;
+    var dtHora = req.body.dtHoraServer;
+    var CPU = req.body.CPUServer;
+   
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        medidaModel.inserirAlertaCPU(fkMaquina, dtHora, CPU)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+    function inserirAlertaRAM(req, res) {
+        // Crie uma variável que vá recuperar os valores do arquivo
+        var fkMaquina = req.body.fkMaquinaServer;
+        var dtHora = req.body.dtHoraServer;
+        var RAM = req.body.RAMServer;
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.inserirAlertaRAM(fkMaquina, dtHora, RAM)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+
+    function inserirAlertaDISCO(req, res) {
+        // Crie uma variável que vá recuperar os valores do arquivo
+        var fkMaquina = req.body.fkMaquinaServer;
+        var dtHora = req.body.dtHoraServer;
+        var DISCO = req.body.DISCOServer;
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.inserirAlertaDISCO(fkMaquina, dtHora, DISCO)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+
+    function inserirAlertaREDE(req, res) {
+        // Crie uma variável que vá recuperar os valores do arquivo
+        var fkMaquina = req.body.fkMaquinaServer;
+        var dtHora = req.body.dtHoraServer;
+        var REDE = req.body.REDEServer;
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.inserirAlertaREDE(fkMaquina, dtHora, REDE)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+
+    function listagemAlerta(req, res) {
+        medidaModel.listagemAlerta().then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+    }
 
 
 module.exports = {
@@ -328,5 +437,10 @@ module.exports = {
     dadosCPU,
     dadosRAM,
     dadosDISCO,
-    dadosREDE
+    dadosREDE,
+    inserirAlertaCPU,
+    inserirAlertaRAM,
+    inserirAlertaDISCO,
+    inserirAlertaREDE,
+    listagemAlerta
 }

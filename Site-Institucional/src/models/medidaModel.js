@@ -248,58 +248,12 @@ function dadosCPU() {
 function dadosRAM() {
     console.log ("Entrando no dadosRAM.Model")
 
-    instrucaoSql = '';
+    instrucaoSql = `SELECT fkMaquina, dtHora, CONVERT(memoriaEmUso,SIGNED) AS 'RAM' FROM dadosComponente WHERE fkTipoComponente = 2 order by dtHora DESC LIMIT 1 ;`;
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `	SELECT 
-	  maquinaTipoComponente.fkMaquina, 
-	  dadosComponente.dtHora, 
-	  MAX(
-		CONVERT(
-		  (COALESCE(dadosComponente.memoriaEmUso, 0) / COALESCE(maquinaTipoComponente.tamanhoTotalRam, 1)) * 100, 
-		  SIGNED
-		)
-	  ) AS 'PorcentagemMemoria'
-	FROM 
-	  dadosComponente
-	JOIN 
-	  maquinaTipoComponente ON dadosComponente.fkMaquina = maquinaTipoComponente.fkMaquina
-	WHERE 
-	  maquinaTipoComponente.fkTipoComp = 2
-	  AND CONVERT(
-		(COALESCE(dadosComponente.memoriaEmUso, 0) / COALESCE(maquinaTipoComponente.tamanhoTotalRam, 1)) * 100, 
-		SIGNED
-	  ) <> 0
-	GROUP BY 
-	  dadosComponente.dtHora, maquinaTipoComponente.fkMaquina
-	ORDER BY 
-	  dadosComponente.dtHora DESC LIMIT 1;
-`;
+        instrucaoSql = `SELECT fkMaquina, dtHora, CONVERT(memoriaEmUso,SIGNED) AS 'RAM' FROM dadosComponente WHERE fkTipoComponente = 2 order by dtHora DESC LIMIT 1 ;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `	SELECT 
-	  maquinaTipoComponente.fkMaquina, 
-	  dadosComponente.dtHora, 
-	  MAX(
-		CONVERT(
-		  (COALESCE(dadosComponente.memoriaEmUso, 0) / COALESCE(maquinaTipoComponente.tamanhoTotalRam, 1)) * 100, 
-		  SIGNED
-		)
-	  ) AS 'PorcentagemMemoria'
-	FROM 
-	  dadosComponente
-	JOIN 
-	  maquinaTipoComponente ON dadosComponente.fkMaquina = maquinaTipoComponente.fkMaquina
-	WHERE 
-	  maquinaTipoComponente.fkTipoComp = 2
-	  AND CONVERT(
-		(COALESCE(dadosComponente.memoriaEmUso, 0) / COALESCE(maquinaTipoComponente.tamanhoTotalRam, 1)) * 100, 
-		SIGNED
-	  ) <> 0
-	GROUP BY 
-	  dadosComponente.dtHora, maquinaTipoComponente.fkMaquina
-	ORDER BY 
-	  dadosComponente.dtHora DESC LIMIT 1;
-`;
+        instrucaoSql = `SELECT fkMaquina, dtHora, CONVERT(memoriaEmUso,SIGNED) AS 'RAM' FROM dadosComponente WHERE fkTipoComponente = 2 order by dtHora DESC LIMIT 1 ;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -310,58 +264,14 @@ function dadosRAM() {
 }
 
 function dadosDISCO() {
-    console.log ("Entrando no dadosCPU.Model")
+    console.log ("Entrando no dadosDISCO.Model")
 
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT 
-  maquinaTipoComponente.fkMaquina, 
-  dadosComponente.dtHora, 
-  MAX(
-    CONVERT(
-      (COALESCE(dadosComponente.usoAtualDisco, 0) / COALESCE(maquinaTipoComponente.tamanhoTotalDisco, 1)) * 100, 
-      SIGNED
-    )
-  ) AS 'PorcentagemDisco'
-FROM 
-  dadosComponente
-JOIN 
-  maquinaTipoComponente ON dadosComponente.fkMaquina = maquinaTipoComponente.fkMaquina
-WHERE 
-  maquinaTipoComponente.fkTipoComp = 3
-  AND CONVERT(
-      (COALESCE(dadosComponente.usoAtualDisco, 0) / COALESCE(maquinaTipoComponente.tamanhoTotalDisco, 1)) * 100, 
-      SIGNED
-  ) <> 0
-GROUP BY 
-  dadosComponente.dtHora, maquinaTipoComponente.fkMaquina
-ORDER BY 
-  dadosComponente.dtHora DESC LIMIT 1;`;
+        instrucaoSql = `SELECT fkMaquina, dtHora, usoAtualDisco from  dadosComponente WHERE  fkTipoComponente = 3 order by dtHora DESC LIMIT 1;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT 
-  maquinaTipoComponente.fkMaquina, 
-  dadosComponente.dtHora, 
-  MAX(
-    CONVERT(
-      (COALESCE(dadosComponente.usoAtualDisco, 0) / COALESCE(maquinaTipoComponente.tamanhoTotalDisco, 1)) * 100, 
-      SIGNED
-    )
-  ) AS 'PorcentagemDisco'
-FROM 
-  dadosComponente
-JOIN 
-  maquinaTipoComponente ON dadosComponente.fkMaquina = maquinaTipoComponente.fkMaquina
-WHERE 
-  maquinaTipoComponente.fkTipoComp = 3
-  AND CONVERT(
-      (COALESCE(dadosComponente.usoAtualDisco, 0) / COALESCE(maquinaTipoComponente.tamanhoTotalDisco, 1)) * 100, 
-      SIGNED
-  ) <> 0
-GROUP BY 
-  dadosComponente.dtHora, maquinaTipoComponente.fkMaquina
-ORDER BY 
-  dadosComponente.dtHora DESC LIMIT 1;`;
+        instrucaoSql = `SELECT fkMaquina, dtHora, usoAtualDisco from  dadosComponente WHERE  fkTipoComponente = 3 order by dtHora DESC LIMIT 1;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -377,9 +287,9 @@ function dadosREDE() {
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT fkMaquina, dtHora, CONVERT(bytesEnviado,SIGNED) AS 'REDE' FROM dadosComponente WHERE bytesEnviado IS NOT NULL ORDER BY dtHora DESC LIMIT 1;`;
+        instrucaoSql = `SELECT fkMaquina, dtHora, bytesRecebido as 'REDE'from  dadosComponente WHERE  fkTipoComponente = 4 order by dtHora DESC LIMIT 1;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT fkMaquina, dtHora, CONVERT(bytesEnviado,SIGNED) AS 'REDE' FROM dadosComponente WHERE bytesEnviado IS NOT NULL ORDER BY dtHora DESC LIMIT 1;`;
+        instrucaoSql = `SELECT fkMaquina, dtHora, bytesRecebido as 'REDE'from  dadosComponente WHERE  fkTipoComponente = 4 order by dtHora DESC LIMIT 1;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -387,6 +297,70 @@ function dadosREDE() {
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
+}
+
+function inserirAlertaCPU(fkMaquina,dtHora,CPU) {
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO historicoAlerta VALUES (null,'${fkMaquina}', '${dtHora}','CPU','${CPU}%') ;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO historicoAlerta VALUES (null,'${fkMaquina}', '${dtHora}','CPU','${CPU}%') ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+    }
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);  
+}
+
+function inserirAlertaRAM(fkMaquina,dtHora,RAM) {
+    console.log ("Entrando no inserirAlertaRAM()")
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO historicoAlerta VALUES (null,'${fkMaquina}', '${dtHora}','RAM','${RAM}Gb') ;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO historicoAlerta VALUES (null,'${fkMaquina}', '${dtHora}','RAM','${RAM}Gb') ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+    }
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);  
+}
+
+function inserirAlertaDISCO(fkMaquina,dtHora,DISCO) {
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO historicoAlerta VALUES (null,'${fkMaquina}', '${dtHora}','DISCO','${DISCO}Gb') ;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO historicoAlerta VALUES (null,'${fkMaquina}', '${dtHora}','DISCO','${DISCO}Gb') ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+    }
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);  
+}
+
+function inserirAlertaREDE(fkMaquina,dtHora,REDE) {
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO historicoAlerta VALUES (null,'${fkMaquina}', '${dtHora}','REDE','${REDE}Mb') ;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO historicoAlerta VALUES (null,'${fkMaquina}', '${dtHora}','REDE','${REDE}Mb') ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+    }
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);  
+}
+
+function listagemAlerta() {
+    console.log("Function listagemAlertas():");
+    var instrucao = `SELECT DISTINCT idMaquinaAlerta, dtHoraAlerta, nomeComponente, porcentagem FROM historicoAlerta ORDER BY dtHoraAlerta DESC;`
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);  
 }
 
 module.exports = {
@@ -406,5 +380,10 @@ module.exports = {
     cardAlertasCPU,
     cardAlertasRAM,
     cardAlertasDISCO,
-    cardAlertasREDE
+    cardAlertasREDE,
+    inserirAlertaCPU,
+    inserirAlertaRAM,
+    inserirAlertaDISCO,
+    inserirAlertaREDE,
+    listagemAlerta
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 </head>
 
-<body onload="cardAlertasCPU(), cardAlertasRAM(),cardAlertasDISCO(), cardAlertasREDE(), obterDadosGrafico2(), obterDadosGrafico3(), obterDadosGrafico4()">
+<body onload="cardAlertasCPU(), cardAlertasRAM(),cardAlertasDISCO(), cardAlertasREDE(), obterDadosGrafico2(), obterDadosGrafico3(), obterDadosGrafico4(), listagemAlerta()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -45,22 +45,30 @@
                     <h2>CPU</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p style="color:#FFC048;">Preocupante <p style="color:#FFC048;" id="preocupanteCPU">%</p></p>
+                        <p style="color:#FFC048;">Preocupante
+                        <p style="color:#FFC048;" id="preocupanteCPU"></p>
+                        </p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Crítico <p id="criticoCPU">%</p></p>
+                        <p>Crítico
+                        <p id="criticoCPU"></p>
+                        </p>
                     </div>
                 </div>
                 <div class="div-ram">
                     <h2>Memoria RAM</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p style="color:#FFC048;">Preocupante <p style="color:#FFC048;" id="preocupanteRAM">%</p></p>
+                        <p style="color:#FFC048;">Preocupante
+                        <p style="color:#FFC048;" id="preocupanteRAM"></p>
+                        </p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Crítico <p id="criticoRAM">%</p></p>
+                        <p>Crítico
+                        <p id="criticoRAM"></p>
+                        </p>
                     </div>
 
                 </div>
@@ -68,11 +76,15 @@
                     <h2>Rede</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p  style="color:#FFC048;" >Preocupante <p id="preocupanteREDE">%</p></p>
+                        <p style="color:#FFC048;">Preocupante
+                        <p id="preocupanteREDE"></p>
+                        </p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Crítico <p id="criticoREDE">%</p></p>
+                        <p>Crítico
+                        <p id="criticoREDE"></p>
+                        </p>
                     </div>
                 </div>
 
@@ -80,33 +92,20 @@
                     <h2>Disco</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p  style="color:#FFC048;">Preocupante <p id="preocupanteDISCO">%</p></p>
+                        <p style="color:#FFC048;">Preocupante
+                        <p  style="color:#FFC048;" id="preocupanteDISCO"></p>
+                        </p>
                     </div>
-                 <div class="descricao-componente">
+                    <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Crítico <p id="criticoDISCO"></p>%</p>
+                        <p>Crítico
+                        <p id="criticoDISCO"></p></p>
                     </div>
                 </div>
             </div>
             <div class="div-central">
                 <div class="div-tab-ram">
-                    <!-- <table>
-                        <tr>
-                            <th>Identificação da Máquina</th>
-                            <th>Uso atual</th>
-                            <th>Total de Ram</th>
-                        </tr>
-                        <tr>
-                            <th>Máquina 1</th>
-                            <th>60%</th>
-                            <th>12 GB</th>
-                        </tr>
-                        <tr>
-                            <th>Máquina 2</th>
-                            <th>55%</th>
-                            <th>8 GB</th>
-                        </tr>
-                    </table> -->
+                   
                     <canvas id="myChart4" style="width: 400px; height: 220px;"></canvas>
                 </div>
                 <div class="div-graf-disco">
@@ -115,11 +114,10 @@
 
                 <div class="div-list-maquinas">
                     <h2>Lista de Máquinas</h2>
-                        <table id="feed_container" class="feed-container">
-                            <tr id="colunas-container">
-                                <th><a href=""> Geral</a></th>
-                            </tr>
-                        </table>
+                    <table id="feed_container" class="feed-container">
+                        <tr id="colunas-container">
+                            <th><a href=""> Geral</a></th>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -132,42 +130,13 @@
                 </div>
                 <div class="div-list-alertas">
                     <h2>Alertas</h2>
-                    <table>
-                        <tr>
-                            <th><a href=""> </a></th>
+                    <table id="feed_container1" class="feed-container">
+                        <tr id="colunas-container1">
+                            <th><a href=""> Geral</a></th>
                         </tr>
-                        <tr>
-                            <th><a href="">Máquina 1</a></th>
-                            <th>16:02</th>
-                            <th>CPU: 80%</th>
-                        </tr>
-                        <tr>
-                            <th><a href="">Máquina 2</a></th>
-                            <th>16:02</th>
-                            <th>RAM: 90%</th>
-                        </tr>
-                        <tr>
-                            <th><a href="">Máquina 3</a></th>
-                            <th>09:02</th>
-                            <th>DISCO: 98%</th>
-                        </tr>
-                        <tr>
-                            <th><a href="">Máquina 1</a></th>
-                            <th>19:02</th>
-                            <th>CPU: 90%</th>
-                        </tr>
-                        <tr>
-                            <th><a href="">Máquina 3</a></th>
-                            <th>16:02</th>
-                            <th>CPU: 90%</th>
-                        </tr> 
-
                     </table>
                 </div>
             </div>
-
-            <!-- <canvas id="myChart3" style="width: 250px; height: 200px;"></canvas> -->
-
 
         </div>
     </div>
@@ -216,200 +185,364 @@
     });
 
     // Alertas
-    function cardAlertasCPU(dados) {
-    console.log ("Entrando no cardAlertasCPU()")
+    function cardAlertasCPU() {
+        console.log("Entrando no cardAlertasCPU()")
 
-    fetch("/medidas/cardAlertasCPU").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-                
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+        fetch("/medidas/cardAlertasCPU").then(function (resposta) {
+            if (resposta.ok) {
 
-                    preocupanteCPU.innerHTML = `${publicacao.medio}`
-                    criticoCPU.innerHTML = `${publicacao.maximo}`
-                }
-            });
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        preocupanteCPU.innerHTML = `${publicacao.medio}`
+                        criticoCPU.innerHTML = `${publicacao.maximo}`
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
 
     function cardAlertasRAM() {
-    console.log ("Entrando no cardAlertasRAM()")
+        console.log("Entrando no cardAlertasRAM()")
 
-    fetch("/medidas/cardAlertasRAM").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-                
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+        fetch("/medidas/cardAlertasRAM").then(function (resposta) {
+            if (resposta.ok) {
 
-                    preocupanteRAM.innerHTML = `${publicacao.medio}`
-                    criticoRAM.innerHTML = `${publicacao.maximo}`
-                }
-            });
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        preocupanteRAM.innerHTML = `${publicacao.medio}`
+                        criticoRAM.innerHTML = `${publicacao.maximo}`
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
 
     function cardAlertasDISCO() {
-    console.log ("Entrando no cardAlertasDISCO()")
+        console.log("Entrando no cardAlertasDISCO()")
 
-    fetch("/medidas/cardAlertasDISCO").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-                
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+        fetch("/medidas/cardAlertasDISCO").then(function (resposta) {
+            if (resposta.ok) {
 
-                    preocupanteRAM.innerHTML = `${publicacao.medio}`
-                    criticoRAM.innerHTML = `${publicacao.maximo}`
-                }
-            });
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        preocupanteDISCO.innerHTML = `${publicacao.medio}`
+                        criticoDISCO.innerHTML = `${publicacao.maximo}`
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
 
     function cardAlertasREDE() {
-    console.log ("Entrando no cardAlertasREDE()")
+        console.log("Entrando no cardAlertasREDE()")
 
-    fetch("/medidas/cardAlertasREDE").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-                
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
+        fetch("/medidas/cardAlertasREDE").then(function (resposta) {
+            if (resposta.ok) {
 
-                    preocupanteREDE.innerHTML = `${publicacao.medio}`
-                    criticoREDE.innerHTML = `${publicacao.maximo}`
-                }
-            });
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
 
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        preocupanteREDE.innerHTML = `${publicacao.medio}`
+                        criticoREDE.innerHTML = `${publicacao.maximo}`
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+
+    //ALERTAS
+
+    // ALERTA CPU
     function dadosCPU() {
-    console.log ("Entrando no dadosCPU()")
+        console.log("Entrando no dadosCPU()")
 
-    fetch("/medidas/dadosCPU").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-            
-                for (let i = 0; i < resposta.length; i++) {
-                var exibir = resposta[i];
-                }
-                console.log ("Dados CPU:" + exibir.CPU);
-                satisfies
-                }
-            );
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
+        fetch("/medidas/dadosCPU").then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    if(resposta[0].CPU >= Number(preocupanteCPU.innerHTML)){
+                        inserirAlertaCPU(resposta)
+                    } else if (resposta[0].CPU >= Number(criticoCPU.innerHTML)) {
+                        inserirAlertaCPU(resposta)
+                    }});
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+
+    function inserirAlertaCPU(resposta) {
+
+        var fkMaquina = resposta[0].fkMaquina;
+        var dtHora = resposta[0].dtHora;
+        var CPU = resposta[0].CPU;
+
+        fetch("/medidas/inserirAlertaCPU", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkMaquinaServer: fkMaquina,
+                dtHoraServer: dtHora,
+                CPUServer: CPU,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                console.log("Cadastro realizado com sucesso! Redirecionando para a tela de login ...")
+
+            } else {
+                console.log("Erro ao cadastrar")
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    };
 const intervaloCPU = setInterval(dadosCPU, 3000);
 
-
+    // MEMÓRIA RAM
     function dadosRAM() {
-    console.log ("Entrando no dadosRAM()")
+        console.log("Entrando no dadosRAM()")
 
-    fetch("/medidas/dadosRAM").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-                
-                for (let i = 0; i < resposta.length; i++) {
-                var exibir = resposta[i];
-                }
-                console.log ("Dados RAM:" + exibir.PorcentagemMemoria);
-                }
-            );
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
-const intervaloRAM = setInterval(dadosRAM, 3000);
-
-    function dadosDISCO() {
-    console.log ("Entrando no dadosDISCO()")
-
-    fetch("/medidas/dadosDISCO").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-            
-                for (let i = 0; i < resposta.length; i++) {
-                var exibir = resposta[i];
-                }
-                console.log ("Dados Disco:" + exibir.PorcentagemDisco);
-                }
-            );
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
-const intervaloDISCO = setInterval(dadosDISCO, 3000);
-
-    function dadosREDE() {
-    console.log ("Entrando no dadosREDE()")
-
-    fetch("/medidas/dadosREDE").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-    
-                for (let i = 0; i < resposta.length; i++) {
-                var exibir = resposta[i];
-                }
-                console.log ("Dados Rede:" + exibir.REDE);
+        fetch("/medidas/dadosRAM").then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    if(resposta[0].RAM >= Number(preocupanteRAM.innerHTML)){
+                        inserirAlertaRAM(resposta)
+                    }});
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
         });
-        
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
-const intervaloREDE = setInterval(dadosREDE, 3000);
+    }
 
+    function inserirAlertaRAM(resposta) {
+        var fkMaquina = resposta[0].fkMaquina;
+        var dtHora = resposta[0].dtHora;
+        var RAM = resposta[0].RAM;
+
+        fetch("/medidas/inserirAlertaRAM", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkMaquinaServer: fkMaquina,
+                dtHoraServer: dtHora,
+                RAMServer: RAM,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                console.log("Cadastro realizado com sucesso! Redirecionando para a tela de login ...")
+
+            } else {
+                console.log("Erro ao cadastrar")
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+};
+    const intervaloRAM = setInterval(dadosRAM, 2000);
+
+    // DISCO
+    function dadosDISCO() {
+        console.log("Entrando no dadosDISCO()")
+
+        fetch("/medidas/dadosDISCO").then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos DISCO: ", JSON.stringify(resposta));
+                    if(resposta[0].usoAtualDisco >= Number(preocupanteDISCO.innerHTML)){
+                        inserirAlertaDISCO(resposta)
+                    }});
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+
+    function inserirAlertaDISCO(resposta) {
+        var fkMaquina = resposta[0].fkMaquina;
+        var dtHora = resposta[0].dtHora;
+        var DISCO = resposta[0].usoAtualDisco;
+
+        fetch("/medidas/inserirAlertaDISCO", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkMaquinaServer: fkMaquina,
+                dtHoraServer: dtHora,
+                DISCOServer: DISCO,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                console.log("Cadastro realizado com sucesso! Redirecionando para a tela de login ...")
+
+            } else {
+                console.log("Erro ao cadastrar")
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+};
+    const intervaloDISCO = setInterval(dadosDISCO, 2000);
+
+    // REDE
+    function dadosREDE() {
+        console.log("Entrando no dadosREDE()")
+
+        fetch("/medidas/dadosREDE").then(function (resposta) {
+            if (resposta.ok) {
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    if(resposta[0].REDE >= Number(preocupanteREDE.innerHTML)){
+                        inserirAlertaREDE(resposta)
+                    }});
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+
+    function inserirAlertaREDE(resposta) {
+        var fkMaquina = resposta[0].fkMaquina;
+        var dtHora = resposta[0].dtHora;
+        var REDE = resposta[0].REDE;
+
+        fetch("/medidas/inserirAlertaREDE", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkMaquinaServer: fkMaquina,
+                dtHoraServer: dtHora,
+                REDEServer: REDE,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                console.log("Cadastro realizado com sucesso! Redirecionando para a tela de login ...")
+
+            } else {
+                console.log("Erro ao cadastrar")
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+};
+    const intervaloREDE = setInterval(dadosREDE, 3000);
+
+    // LISTAGEM ALERTAS
+
+    function listagemAlerta () {
+    console.log ("Entrando no listarAlertas()")
+
+    fetch("/medidas/listagemAlerta/").then(function (resposta) {
+    if (resposta.ok) {
+        if (resposta.status == 204) {
+            var feed = document.getElementById("feed_container1");
+            var mensagem = document.createElement("span");
+            mensagem.innerHTML = ""
+            feed.appendChild(mensagem);
+        }
+
+        resposta.json().then(function (resposta) {
+            console.log("Dados recebidos: ", JSON.stringify(resposta));
+            var feed = document.getElementById("feed_container1");
+            var colunas = document.getElementById("colunas-container1");
+            feed.appendChild(colunas);
+
+            for (let i = 0; i < resposta.length; i++) {
+                var publicacao = resposta[i];
+
+                var linha = document.createElement("tr");
+                var idMaquina = document.createElement("td");
+                var dtHoraAlerta = document.createElement("td");
+                var nomeComponente = document.createElement("td");
+                var porcentagem = document.createElement("td");
+
+                idMaquina.innerHTML = `<span>${publicacao.idMaquinaAlerta}</span>`
+                dtHoraAlerta.innerHTML = `<span>${publicacao.dtHoraAlerta}</span>`
+                nomeComponente.innerHTML = `<span>${publicacao.nomeComponente}</span>`
+                porcentagem.innerHTML = `<span>${publicacao.porcentagem}</span>`
+
+                feed.appendChild(linha);
+                linha.appendChild(idMaquina);
+                linha.appendChild(dtHoraAlerta);
+                linha.appendChild(nomeComponente);
+                linha.appendChild(porcentagem);
+            }
+        });
+    } else {
+        throw ('Houve um erro na API!');
+    }
+}).catch(function (resposta) {
+    console.error(resposta);
+});
+    }
+
+    // FIM LISTAGEM ALERTA
+    
     // Pegar o idMaquina
     var idMaquina = {};
     var listaID = [];
@@ -426,19 +559,19 @@ const intervaloREDE = setInterval(dadosREDE, 3000);
                 feed.appendChild(colunas);
 
                 for (let i = 0; i < resposta.length; i++) {
-                var publicacao = resposta[i];
-                listaID.push(publicacao.idMaquina);
+                    var publicacao = resposta[i];
+                    listaID.push(publicacao.idMaquina);
 
-                var linha = document.createElement("tr");
-                var maquina = document.createElement("td");
-        
-                //sessionStorage.ID_MAQUINA;
-                maquina.innerHTML = `<a onclick= "pegarIdMaquina(${i})" id= "${publicacao.idMaquina}" href="dashboardEspecífica.html"><span>${publicacao.idMaquina}</span></a>`;
+                    var linha = document.createElement("tr");
+                    var maquina = document.createElement("td");
 
-                feed.appendChild(linha);
-                linha.appendChild(maquina);
-                
-                console.log("ESSE É O ID DA MAQUINA " + i.idMaquina );
+                    //sessionStorage.ID_MAQUINA;
+                    maquina.innerHTML = `<a onclick= "pegarIdMaquina(${i})" id= "${publicacao.idMaquina}" href="dashboardEspecífica.html"><span>${publicacao.idMaquina}</span></a>`;
+
+                    feed.appendChild(linha);
+                    linha.appendChild(maquina);
+
+                    console.log("ESSE É O ID DA MAQUINA " + i.idMaquina);
                 }
             });
         } else {
@@ -449,34 +582,12 @@ const intervaloREDE = setInterval(dadosREDE, 3000);
             console.error(`Erro ao obter idMaquina ${error.message}`);
         });
 
-        function pegarIdMaquina(numMaquina) {
-            listaID[numMaquina]
-            sessionStorage.setItem('idMaquina', JSON.stringify(listaID[numMaquina]));
-        }
+    function pegarIdMaquina(numMaquina) {
+        listaID[numMaquina]
+        sessionStorage.setItem('idMaquina', JSON.stringify(listaID[numMaquina]));
+    }
     // FIM - Pegar o idMaquina
 
-    // Lista Alerta 
-//     function obterdados(idAquario) {
-//     fetch(`/medidas/tempo-real/${idAquario}`)
-//         .then(resposta => {
-//             if (resposta.status == 200) {
-//                 resposta.json().then(resposta => {
-
-//                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-//                     alertar(resposta, idAquario);
-//                 });
-//             } else {
-//                 console.error(`Nenhum dado encontrado para o id ${idAquario} ou erro na API`);
-//             }
-//         })
-//         .catch(function (error) {
-//             console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
-//         });
-
-// }
-    // Fim da lista alerta
-    
     // Funções para funcionar a dash
 
     function obterDadosGrafico() {
@@ -1059,140 +1170,4 @@ const intervaloREDE = setInterval(dadosREDE, 3000);
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
-    }
-
-
-
-
-
-
-
-
-
-
-
-// const ctx4 = document.getElementById('myChart4');
-
-    // new Chart(ctx4, {
-    //     data: {
-    //         datasets: [{
-    //             type: 'bar',
-    //             label: 'Gráfico de Disco',
-    //             data: [12, 19, 15, 12, 17], // captura de rede
-    //             borderWidth: 1,
-    //             // backgroundColor: 'pink',
-    //         }],
-    //         labels: ['Máquina 1', 'Máquina 2']
-    //     },
-    //     options: {
-    //         indexAxis: 'y',
-    //         plugins: {
-    //             legend: {
-    //                 display: true,
-    //                 position: 'bottom'
-    //             },
-    //             title: {
-    //                 display: true,
-    //                 text: 'Comparativo de Uso de Disco entre máquinas '
-    //             }
-    //         },
-    //         // scales: {
-    //         //     y: {
-    //         //         beginAtZero: true
-    //         //     }
-    //         // }
-    //     }
-    // });
-
-    // const ctx1 = document.getElementById('myChart1');
-
-    // new Chart(ctx1, {
-    //     type: 'line',
-    //     data: {
-    //         labels: [1, 2, 3, 4, 5, 6,], // colocar as horas
-    //         datasets: [{
-    //             type: 'line',
-    //             label: 'Alerta preocupante',
-    //             data: [10, 10, 10, 10, 10, 10],
-    //             borderWidth: 1.5,
-    //             borderColor: '#6dc7ff',
-    //             backgroundColor: '#6dc7ff',
-    //         },
-    //         {
-    //             type: 'line',
-    //             label: 'Alerta crítico',
-    //             data: [20, 20, 20, 20, 20, 20],
-    //             borderWidth: 1.5,
-    //             borderColor: 'red',
-    //             backgroundColor: 'red',
-    //         },
-    //         {
-    //             label: 'Uso de CPU',
-    //             data: [12, 19, 3, 5, 2, 3], // colocar o uso
-    //             borderWidth: 3,
-    //             borderColor: '#00323c',
-    //             backgroundColor: '#00323c',
-    //         }]
-    //     },
-    //     // configurar a cor de fundo
-    //     const: bgColor = {
-    //         id: 'bgColor',
-    //         beforeDraw(chart1, steps, options) {
-    //             const { ctx, chartArea: { ctx1, width, height } } = chart1;
-    //             ctx1.faleStyle = 'options.backgroundColor';
-    //             ctx1.fillRect(0, 0, width, height);
-    //             ctx1.restore();
-    //         }
-
-    //     },
-
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true
-    //             }
-    //         },
-
-    //         plugins: {
-    //             title: {
-    //                 display: true,
-    //                 text: 'Uso de CPU em porcentagem em decorrência do tempo',
-    //                 fontSize: 50,
-
-    //             },
-    //             legend: {
-    //                 display: true,
-    //                 position: 'bottom'
-    //             },
-    //             // cor de fundo da imagem
-    //             bgColor: {
-    //                 backgroundColor: 'white'
-    //             }
-    //         },
-    //     }
-
-    // });
-
-    // function downloadPDF() {
-    //     const canvas = document.getElementById('myChart1');
-    //     //const canvas1 = document.getElementById('myChart2');
-    //     //const canvas2 = document.getElementById('myChart3');
-    //     //const canvas3 = document.getElementById('myChart4');
-
-    //     //create image
-    //     const canvasImage = canvas.toDataURL('image/jpeg', 1.0);
-    //     //const canvasImage1 = canvas1.toDataURL('image/jpeg', 1.0);
-    //     // const canvasImage2 = canvas2.toDataURL('image/jpeg', 1.0);
-    //     // const canvasImage3 = canvas3.toDataURL('image/jpeg', 1.0);
-
-    //     console.log(canvasImage);
-
-    //     let pdf = new jsPDF('landscape');
-    //     pdf.setFontSize(20);
-    //     pdf.addImage(canvasImage, 'JPEG', 0, 0, 150, 150);
-    //     pdf.save('mychart.pdf');
-
-    // }
-</script>
-
-
+    }   
