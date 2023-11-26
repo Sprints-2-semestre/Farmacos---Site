@@ -20,7 +20,7 @@
             </div>
             <div class="nav-itens">
                 <li>
-                    <ul><b>Nome</b></ul>
+                    <ul><b id="nomeUsuario">Nome</b></ul>
 
                     <ul><a href="cadastroAlerta.html">Alertas</a></ul>
                     <ul><a class="" href="./dashboardGeral.html">Máquinas</a></ul>
@@ -98,3 +98,8 @@
 <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script> -->
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="../js/cadastroUsuario.js"></script>
+
+
+<script>
+    document.getElementById("nomeUsuario").innerHTML = `Olá, ${sessionStorage.NOME_USUARIO}`
+</script>

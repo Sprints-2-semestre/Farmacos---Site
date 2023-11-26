@@ -538,7 +538,7 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
-                        document.getElementById("nomeMaquina").innerHTML = resposta[0].hostname
+                        document.getElementById("nomeMaquina").innerHTML = `<b style="color: #00a6b2;">${resposta[0].hostName}</b>`
                         document.getElementById("listagem-info-maquina").innerHTML = `
                         <span style="color: #00a6b2; font-weight: 600"  >SO:</span>  <span style="font-weight: bold">${resposta[0].sistemaOperacional}</span><br>
                         <span style="color: #00a6b2; font-weight: 600"  >Arquitetura Processador:</span>  <span style="font-weight: bold">${resposta[0].arquitetura} bits</span><br>

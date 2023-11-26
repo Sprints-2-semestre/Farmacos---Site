@@ -77,7 +77,7 @@
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
                         <p style="color:#FFC048;">Preocupante
-                        <p id="preocupanteREDE"></p>
+                        <p id="preocupanteREDE" style="color: #FFC048"></p>
                         </p>
                     </div>
                     <div class="descricao-componente">
@@ -198,8 +198,8 @@
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
 
-                        preocupanteCPU.innerHTML = `${publicacao.medio}`
-                        criticoCPU.innerHTML = `${publicacao.maximo}`
+                        preocupanteCPU.innerHTML = `${publicacao.medio} %`
+                        criticoCPU.innerHTML = `${publicacao.maximo} %`
                     }
                 });
             } else {
@@ -222,8 +222,8 @@
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
 
-                        preocupanteRAM.innerHTML = `${publicacao.medio}`
-                        criticoRAM.innerHTML = `${publicacao.maximo}`
+                        preocupanteRAM.innerHTML = `${publicacao.medio}%`
+                        criticoRAM.innerHTML = `${publicacao.maximo}%`
                     }
                 });
             } else {
@@ -246,8 +246,8 @@
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
 
-                        preocupanteDISCO.innerHTML = `${publicacao.medio}`
-                        criticoDISCO.innerHTML = `${publicacao.maximo}`
+                        preocupanteDISCO.innerHTML = `${publicacao.medio}GB`
+                        criticoDISCO.innerHTML = `${publicacao.maximo}GB`
                     }
                 });
             } else {
@@ -270,8 +270,8 @@
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
 
-                        preocupanteREDE.innerHTML = `${publicacao.medio}`
-                        criticoREDE.innerHTML = `${publicacao.maximo}`
+                        preocupanteREDE.innerHTML = `${publicacao.medio} MB`
+                        criticoREDE.innerHTML = `${publicacao.maximo} MB`
                     }
                 });
             } else {
