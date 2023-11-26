@@ -186,7 +186,7 @@
     });
 
     // Alertas
-    function cardAlertasCPU(dados) {
+    function cardAlertasCPU() {
         console.log("Entrando no cardAlertasCPU()")
 
         fetch("/medidas/cardAlertasCPU").then(function (resposta) {
@@ -516,7 +516,6 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
             for (let i = 0; i < resposta.length; i++) {
                 var publicacao = resposta[i];
 
-                // criando e manipulando elementos do HTML via JavaScript
                 var linha = document.createElement("tr");
                 var idMaquina = document.createElement("td");
                 var dtHoraAlerta = document.createElement("td");
