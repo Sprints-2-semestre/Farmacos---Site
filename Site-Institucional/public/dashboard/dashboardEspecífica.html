@@ -10,9 +10,7 @@
     <link rel="icon" href="../img/logo F png.png">
 </head>
 
-<body
-    onload="exibirNomeDoEstabelecimentoDeTrabalho(), listarMaquinas(), kpisParametroCpu(), 
-    kpisParametroRam(), kpiTempoDisco(), kpiRede(), informacoesMaquina(),obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2()">
+<body onload="obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2(), chamaTudo()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -36,7 +34,6 @@
         </div>
         <div class="div-principal">
             <div class="nome-ame">
-                <p>AME:</p>
                 <p id="teste"></p>
             </div>
 
@@ -165,6 +162,20 @@
 <script>
     id = (sessionStorage.ID_USUARIO);
 
+    setInterval(
+        function chamaTudo() {
+            kpisParametroCpu(),
+                exibirNomeDoEstabelecimentoDeTrabalho(), listarMaquinas(), kpisParametroCpu(),
+                kpisParametroRam(), kpiTempoDisco(), kpiRede(), informacoesMaquina(), obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2()
+        }
+        , 4000)
+
+
+
+
+
+
+
     const btnPrint = document.querySelector(".btn-pdf");
     btnPrint.addEventListener("click", () => {
 
@@ -211,7 +222,7 @@
     new Chart(ctx1, {
         type: 'line',
         data: {
-            labels: [1, 2, 3, 4, 5, 6,],
+            labels: [registro.HoraCaptura], // colocar as horas
             datasets: [
                 {
                     label: 'CPU',
@@ -322,7 +333,7 @@
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                        console.log(resposta)
+                        console.log(resposta + "DWAKDGAJDHBAODDWDAWDWSDAWWADA")
                         document.getElementById("teste").innerHTML = resposta[0].nomeAme
                     });
                 } else {
@@ -479,7 +490,7 @@
                         console.log(`Dados recebidos de rede   : ${JSON.stringify(resposta)}`);
 
                         for (let i = 0; i < resposta.length; i++) {
-                            if (resposta[i].bytesRecebido >= resposta[0].medio) {
+                            if (resposta[i].bytesRecebido >= resposta[0].medio && resposta[i].bytesRecebido < resposta[0].maximo) {
                                 segundosRedeMedio++
                                 if (segundosRedeMedio == 60) {
                                     segundosRedeMedio = 0
@@ -701,43 +712,43 @@
     function atualizarGrafico(dados, myChart) {
 
 
-fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (novoRegistro) {
+        fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
 
-            obterDadosGrafico();
-            // alertar(novoRegistro, idAquario);
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico:`);
-            console.log(dados);
+                    obterDadosGrafico();
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
 
-            // let avisoCaptura = document.getElementById(`avisoCaptura`)
-            // avisoCaptura.innerHTML = ""
+                    // let avisoCaptura = document.getElementById(`avisoCaptura`)
+                    // avisoCaptura.innerHTML = ""
 
-            // tirando e colocando valores no gráfico
-            dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro[0].HoraCaptura); // incluir um novo momento
+                    // tirando e colocando valores no gráfico
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push(novoRegistro[0].HoraCaptura); // incluir um novo momento
 
-            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[0].data.push(novoRegistro[0].bytesRecebido); // incluir uma nova medida de umidade
+                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[0].data.push(novoRegistro[0].bytesRecebido); // incluir uma nova medida de umidade
 
-            dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-            dados.datasets[1].data.push(novoRegistro[0].bytesEnviado); // incluir uma nova medida de temperatura
-            myChart.update();
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
+                    dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                    dados.datasets[1].data.push(novoRegistro[0].bytesEnviado); // incluir uma nova medida de temperatura
+                    myChart.update();
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
     }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-
-}
 </script>
 
 <script>
@@ -792,8 +803,8 @@ fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(functio
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];  
-            if (registro.qtdUsoCpu  && registro.memoriaEmUso != "null") {
+            var registro = resposta[i];
+            if (registro.qtdUsoCpu && registro.memoriaEmUso != "null") {
                 labels.push(registro.dtHora);
                 dados.datasets[0].data.push(registro.qtdUsoCpu);
                 dados.datasets[1].data.push(registro.memoriaEmUso);
@@ -840,44 +851,44 @@ fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(functio
     function atualizarGraficoCpu(dados, myChartCpu) {
 
 
-fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (novoRegistro2) {
+        fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro2) {
 
-            obterDadosCpu();
-            // alertar(novoRegistro, idAquario);
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro2)}`);
-            console.log(`Dados atuais do gráfico:`);
-            console.log(dados);
+                    obterDadosCpu();
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro2)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
 
-            // let avisoCaptura = document.getElementById(`avisoCaptura`)
-            // avisoCaptura.innerHTML = ""
+                    // let avisoCaptura = document.getElementById(`avisoCaptura`)
+                    // avisoCaptura.innerHTML = ""
 
-            // tirando e colocando valores no gráfico
-            dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro2[0].dtHora); // incluir um novo momento
+                    // tirando e colocando valores no gráfico
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push(novoRegistro2[0].dtHora); // incluir um novo momento
 
-            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[0].data.push(novoRegistro2[0].qtdUsoCpu); // incluir uma nova medida de umidade
-            
-            dados.datasets[1].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[1].data.push(novoRegistro2[0].memoriaEmUso); // incluir uma nova medida de umidade
-            
-            myChartCpu.update();
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
+                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[0].data.push(novoRegistro2[0].qtdUsoCpu); // incluir uma nova medida de umidade
+
+                    dados.datasets[1].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[1].data.push(novoRegistro2[0].memoriaEmUso); // incluir uma nova medida de umidade
+
+                    myChartCpu.update();
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
     }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-
-}
 </script>
 
 <script>
@@ -998,17 +1009,17 @@ fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function
                     // let avisoCaptura = document.getElementById(`avisoCaptura`)
                     // avisoCaptura.innerHTML = ""
 
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push("USO ATUAL: " + novoRegistro[0].usoAtualDisco + " GB"); // incluir um novo momento
-                        
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push("USO DISPONIVEL: " + novoRegistro[0].usoDisponivelDisco + " GB"); // incluir um novo momento
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push("USO ATUAL: " + novoRegistro[0].usoAtualDisco + " GB"); // incluir um novo momento
 
-                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[0].data.push(novoRegistro[0].usoAtualDisco); // incluir uma nova medida de umidade
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push("USO DISPONIVEL: " + novoRegistro[0].usoDisponivelDisco + " GB"); // incluir um novo momento
 
-                        dados.datasets[1].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[1].data.push(novoRegistro[0].usoDisponivelDisco); // incluir uma nova medida de umidade
+                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[0].data.push(novoRegistro[0].usoAtualDisco); // incluir uma nova medida de umidade
+
+                    dados.datasets[1].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[1].data.push(novoRegistro[0].usoDisponivelDisco); // incluir uma nova medida de umidade
 
 
 
