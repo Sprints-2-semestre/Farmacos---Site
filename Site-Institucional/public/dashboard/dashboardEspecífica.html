@@ -93,33 +93,20 @@
                 </div>
             </div>
             <div class="div-central">
-                <div class="info-maquina">
-                    <div class="titulo-lista-maquina">
+                <div class="div-list-alertas" style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
+                    <canvas id="myChart3" style="width: 400px; height: 220px;"></canvas>
+                    
+                </div>
+                <div class="div-list-alertas" style=" display: flex; align-items: center; justify-content: center; padding: 5px; font-size: 20px;">
+                    <div class="titulo-lista-maquina" style="font-weight: bold;">
                         Informações da máquina
                     </div>
                     <div class="nome-maquina" id="nomeMaquina">
+                        
                     </div>
                     <div class="conjunto-maquina" id="listagem-info-maquina">
 
                     </div>
-                </div>
-                <div class="div-rede-disco">
-                    <div class="uso-sem">
-
-                        <table>
-                            <tr>
-                                <th>Uso MG semanal</th>
-                                <th>Espaço Livre</th>
-                                <th>Previsão de acabar armazenamento</th>
-                            </tr>
-                            <tr>
-                                <th>50</th>
-                                <th>200</th>
-                                <th>1490</th>
-                            </tr>
-                        </table>
-                    </div>
-
                 </div>
 
                 <div class="div-list-maquinas-esp">
@@ -143,16 +130,11 @@
                     style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
                     <canvas id="myChart1" style="width: 400px; height: 260px;"></canvas>
                 </div>
-                <div class="div-list-alertas"
-                    style=" display: flex; align-items: center; justify-content: center; padding: 5px;">
-                    <canvas id="myChart3" style="width: 400px; height: 220px;"></canvas>
+                <div class="div-list-alertas">
+                    Colocar lista de alertas
                     </table>
                 </div>
             </div>
-
-            <!-- <canvas id="myChart3" style="width: 250px; height: 200px;"></canvas> -->
-
-
         </div>
     </div>
 </body>
@@ -169,11 +151,6 @@
                 kpisParametroRam(), kpiTempoDisco(), kpiRede(), informacoesMaquina(), obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2()
         }
         , 4000)
-
-
-
-
-
 
 
     const btnPrint = document.querySelector(".btn-pdf");
@@ -329,11 +306,8 @@
         fetch(`/dashboardEspecifica/nomeAme/${fkAme}`,
             { cache: 'no-store' })
             .then(function (response) {
-                console.log("Chegou aqui?")
                 if (response.ok) {
                     response.json().then(function (resposta) {
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                        console.log(resposta + "DWAKDGAJDHBAODDWDAWDWSDAWWADA")
                         document.getElementById("teste").innerHTML = resposta[0].nomeAme
                     });
                 } else {
@@ -352,13 +326,9 @@
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
-                    console.log(response)
                     response.json().then(function (resposta) {
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                        console.log(resposta);
                         for (var i = 0; i < resposta.length; i++) {
                             var idMaquina = sessionStorage.idMaquina = resposta[i].idMaquina
-                            console.log(idMaquina)
 
                             if (resposta[i].statusMaquina == 1) {
                                 resposta[i].statusMaquina = "Ativada"
@@ -389,12 +359,8 @@
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
-                    console.log(response)
                     response.json().then(function (resposta) {
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                        // setInterval(function () {
-                        // }, 1000);
                         for (var i = 0; i < resposta.length; i++) {
                             if (resposta[i].qtdUsoCpu >= resposta[0].medio && resposta[i].qtdUsoCpu < resposta[0].maximo) {
                                 if ((segundosCpuMedio++) == 60) {
@@ -438,9 +404,7 @@
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
-                    console.log(response)
                     response.json().then(function (resposta) {
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                         for (var i = 0; i < resposta.length; i++) {
                             if (resposta[i].memoriaEmUso >= resposta[0].medio && resposta[i].memoriaEmUso < resposta[0].maximo) {
                                 if ((segundosRamMedio++) == 60) {
@@ -485,9 +449,7 @@
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
-                    console.log(response)
                     response.json().then(function (resposta) {
-                        console.log(`Dados recebidos de rede   : ${JSON.stringify(resposta)}`);
 
                         for (let i = 0; i < resposta.length; i++) {
                             if (resposta[i].bytesRecebido >= resposta[0].medio && resposta[i].bytesRecebido < resposta[0].maximo) {
@@ -537,9 +499,7 @@
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
-                    console.log(response)
                     response.json().then(function (resposta) {
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                         for (var i = 0; i < resposta.length; i++) {
                             if (resposta[i].usoAtualDisco >= resposta[0].medio && resposta[i].usoAtualDisco < resposta[0].maximo) {
                                 if ((segundosDiscoMedio++) == 60) {
@@ -570,16 +530,19 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
-
+    
     function informacoesMaquina() {
         fetch(`/dashboardEspecifica/informacoesMaquina/${fkAme}`,
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
-                    console.log(response)
                     response.json().then(function (resposta) {
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                        document.getElementById("nomeMaquina").innerHTML = resposta[0].hostName
+                        document.getElementById("nomeMaquina").innerHTML = resposta[0].hostname
+                        document.getElementById("listagem-info-maquina").innerHTML = `
+                        <span style="color: #00a6b2; font-weight: 600"  >SO:</span>  <span style="font-weight: bold">${resposta[0].sistemaOperacional}</span><br>
+                        <span style="color: #00a6b2; font-weight: 600"  >Arquitetura Processador:</span>  <span style="font-weight: bold">${resposta[0].arquitetura} bits</span><br>
+                        <span style="color: #00a6b2; font-weight: 600"  >Total de RAM:</span>  <span style="font-weight: bold">${resposta[1].tamanhoTotalRam} GB</span><br>
+                        <span style="color: #00a6b2; font-weight: 600"  >Armazenamento do Disco:</span>   <span style="font-weight: bold">${resposta[2].tamanhoTotalDisco} GB</span>`
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
@@ -589,32 +552,9 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
-    //     var data = new Date();
-    //     setInterval() = {
-    //         var tempoAtual = Math.floor(+new Date() / 1000);
-    //         if (usoCpuBanco > 70) {
-    //         var capturaTempoAcimaDe70 = Math.floor(+new Date() / 1000)
-    //         tempoAtual - capturaTempoAcimaDe70;
-    //     console.log(Math.floor(+new Date() / 1000));
-    //     }
-    // }
-    // var segundos
-    // if (usoCPuBanco > 70) {
-    //     let seungos ++
-    //     if (segundos == 60) {
-    //         segundos = 0
-    //         minutos += 01
-    //         if (minutos == 60) {
-    //             minutos = 0
-    //             hota += 01
-    //         }
-    //     }
-    // }
 </script>
 
 <script>
-    // setInterval(entrar, 2000);
-
     function obterDadosGrafico() {
         fetch(`/dashboardEspecifica/obterDadosRede`, {
             cache: 'no-store',
@@ -625,8 +565,7 @@
                     dadosBytes = { resposta }
 
                     plotarGrafico(resposta);
-                    console.log(resposta)
-
+                
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -638,8 +577,7 @@
     }
 
     function plotarGrafico(resposta) {
-
-        console.log('iniciando plotagem do gráfico...');
+        document.getElementById("myChart2").style = "width: 470px"
         // Criando estrutura para plotar gráfico - labels
         let labels = [];
         // Criando estrutura para plotar gráfico - dados
@@ -659,9 +597,6 @@
             }]
         };
 
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
@@ -670,18 +605,8 @@
                 dados.datasets[0].data.push(registro.bytesRecebido);
                 dados.datasets[1].data.push(registro.bytesEnviado);
             }
-
-            console.log(registro)
-
         }
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
+        
         // Criando estrutura para plotar gráfico - config
         const config = {
             type: 'line',
@@ -718,10 +643,7 @@
 
                     obterDadosGrafico();
                     // alertar(novoRegistro, idAquario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
-
+                    
                     // let avisoCaptura = document.getElementById(`avisoCaptura`)
                     // avisoCaptura.innerHTML = ""
 
@@ -764,7 +686,6 @@
                     dadosBytes = { resposta }
 
                     plotarGraficoCpu(resposta);
-                    console.log("Estou sendo! " + resposta)
 
                 });
             } else {
@@ -777,8 +698,7 @@
     }
 
     function plotarGraficoCpu(resposta) {
-
-        console.log('iniciando plotagem do gráfico de CPUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU...');
+        document.getElementById("myChart1").style = "width: 470px"
         // Criando estrutura para plotar gráfico - labels
         let labels = [];
         // Criando estrutura para plotar gráfico - dados
@@ -798,9 +718,6 @@
             }]
         };
 
-        console.log('---------------------------------------------- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGraficoCpu" e passados para "plotarGraficoCpu":')
-
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
@@ -809,18 +726,7 @@
                 dados.datasets[0].data.push(registro.qtdUsoCpu);
                 dados.datasets[1].data.push(registro.memoriaEmUso);
             }
-
-            console.log("RESPOSTA AQUIIIIIIIIIIII " + registro.memoriaEmUso)
-
         }
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets[1])
-        console.log('----------------------------------------------')
-
         // Criando estrutura para plotar gráfico - config
         const config = {
             type: 'line',
@@ -857,9 +763,6 @@
 
                     obterDadosCpu();
                     // alertar(novoRegistro, idAquario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro2)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
 
                     // let avisoCaptura = document.getElementById(`avisoCaptura`)
                     // avisoCaptura.innerHTML = ""
@@ -901,10 +804,8 @@
         }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                     plotarGrafico2(resposta);
-                    console.log(resposta)
 
                 });
             } else {
@@ -917,7 +818,6 @@
     }
 
     function plotarGrafico2(resposta) {
-        console.log('iniciando plotagem do gráfico...');
         // Criando estrutura para plotar gráfico - labels
         let labels = []
         // Criando estrutura para plotar gráfico - dados
@@ -941,10 +841,6 @@
             }]
         };
 
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
-
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
@@ -954,18 +850,8 @@
                 dados.datasets[0].data.push(registro.usoAtualDisco);
                 dados.datasets[1].data.push(registro.usoDisponivelDisco);
             }
-
-            console.log(registro)
-
         }
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
+        
         // Criando estrutura para plotar gráfico - config
         const config = {
             type: 'pie',
@@ -1002,10 +888,7 @@
 
                     obterDadosGrafico2();
                     // alertar(novoRegistro, idAquario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
-
+                    
                     // let avisoCaptura = document.getElementById(`avisoCaptura`)
                     // avisoCaptura.innerHTML = ""
 

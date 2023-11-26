@@ -26,7 +26,7 @@ router.get("/kpiRede/:fkAme", function (req, res) {
 
 router.get("/kpiTempoDisco/:fkAme", function (req, res) {
     dashboardEspecificaController.kpiTempoDisco(req, res);
-})
+})  
 
 router.get("/informacoesMaquina/:fkAme", function (req, res) {
     dashboardEspecificaController.informacoesMaquina(req, res);
