@@ -19,13 +19,13 @@ function listarMaquinas(fkAme) {
 
 function kpisParametroCpu(fkAme) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `SELECT DC.qtdUsoCpu, P.medio, P.maximo, A.idAme, M.idMaquina
+    var instrucaoSql = `SELECT DC.qtdUsoCpu, P.medio, P.maximo, A.idAme, M.idMaquina, DC.dtHora
     FROM dadosComponente DC
     JOIN ame AS A
     JOIN maquina AS M
     JOIN tipoComponente TC ON DC.fkTipoComponente = TC.idTipoComp
     LEFT JOIN parametro P ON TC.idTipoComp = P.fkTipoComponente
-    WHERE qtdUsoCpu IS NOT NULL AND A.idAme = ${fkAme} AND p.idParametro = 1;`
+    WHERE DC.qtdUsoCpu IS NOT NULL AND DATE(DC.dtHora) = curdate() AND A.idAme = ${fkAme} AND p.fkTipoComponente = 1;`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -33,13 +33,13 @@ function kpisParametroCpu(fkAme) {
 
 function kpisParametroRam(fkAme) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `SELECT DC.memoriaEmUso, P.medio, P.maximo, A.idAme, M.idMaquina
+    var instrucaoSql = `SELECT DC.memoriaEmUso, P.medio, P.maximo, A.idAme, M.idMaquina, DC.dtHora
     FROM dadosComponente DC
     JOIN ame AS A
     JOIN maquina AS M
     JOIN tipoComponente TC ON DC.fkTipoComponente = TC.idTipoComp
     LEFT JOIN parametro P ON TC.idTipoComp = P.fkTipoComponente
-    WHERE DC.memoriaEmUso IS NOT NULL AND A.idAme = ${fkAme} AND p.idParametro = 2;`
+    WHERE DC.memoriaEmUso IS NOT NULL AND DATE(DC.dtHora) = curdate() AND A.idAme = ${fkAme} AND p.fkTipoComponente = 2;`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -47,13 +47,13 @@ function kpisParametroRam(fkAme) {
 
 function kpiRede(fkAme) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `SELECT DC.bytesRecebido, P.medio, P.maximo, A.idAme, M.idMaquina
+    var instrucaoSql = `SELECT DC.bytesRecebido, P.medio, P.maximo, A.idAme, M.idMaquina, DC.dtHora
     FROM dadosComponente DC
     JOIN ame AS A
     JOIN maquina AS M
     JOIN tipoComponente TC ON DC.fkTipoComponente = TC.idTipoComp
     LEFT JOIN parametro P ON TC.idTipoComp = P.fkTipoComponente
-    WHERE DC.bytesRecebido IS NOT NULL AND A.idAme = ${fkAme} AND p.idParametro = 4;`
+    WHERE DC.bytesRecebido IS NOT NULL AND DATE(DC.dtHora) = curdate() AND A.idAme = ${fkAme} AND p.fkTipoComponente = 4 ORDER BY DC.dtHora DESC;`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -61,13 +61,13 @@ function kpiRede(fkAme) {
 
 function kpiTempoDisco(fkAme) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `SELECT DC.usoAtualDisco, P.medio, P.maximo, A.idAme, M.idMaquina
+    var instrucaoSql = `SELECT DC.usoAtualDisco, P.medio, P.maximo, A.idAme, M.idMaquina, DC.dtHora
     FROM dadosComponente DC
     JOIN ame AS A
     JOIN maquina AS M
     JOIN tipoComponente TC ON DC.fkTipoComponente = TC.idTipoComp
     LEFT JOIN parametro P ON TC.idTipoComp = P.fkTipoComponente
-    WHERE DC.usoAtualDisco IS NOT NULL AND A.idAme = ${fkAme} AND p.idParametro = 3;`
+    WHERE DC.usoAtualDisco IS NOT NULL AND DATE(DC.dtHora) = curdate() AND A.idAme = ${fkAme} AND p.fkTipoComponente = 3;`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)

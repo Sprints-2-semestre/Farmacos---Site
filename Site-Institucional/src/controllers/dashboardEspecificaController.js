@@ -153,7 +153,6 @@ module.exports = {
     kpisParametroRam,
     kpiRede,
     kpiTempoDisco,
-    informacoesMaquina,
     obterDadosRede,
     obterDadosCpu,
     obterDadosDiscoEspecifica
