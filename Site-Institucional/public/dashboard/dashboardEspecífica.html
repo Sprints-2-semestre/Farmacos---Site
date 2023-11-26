@@ -10,7 +10,7 @@
     <link rel="icon" href="../img/logo F png.png">
 </head>
 
-<body onload="obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2(), chamaTudo()">
+<body onload="chamaTudo()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -151,6 +151,7 @@
                 kpisParametroRam(), kpiTempoDisco(), kpiRede(), informacoesMaquina(), obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2()
         }
         , 4000)
+
 
     const btnPrint = document.querySelector(".btn-pdf");
     btnPrint.addEventListener("click", () => {

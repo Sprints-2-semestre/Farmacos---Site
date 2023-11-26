@@ -1,5 +1,6 @@
 var medidaModel = require("../models/medidaModel");
 
+
 function buscarUltimasMedidas(req, res) {
 
     const limite_linhas = 7;
@@ -109,6 +110,23 @@ function redeMedidasEmTempoReal(req, res) {
     });
 }
 
+function obterNomeAme(req, res) {
+
+    var IdUserVar = req.params.IdUserVar;
+    medidaModel.obterNomeAme(IdUserVar).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("IdMaquina não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar IdMaquina.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 function obterIdMaquina(req, res) {
 
     medidaModel.obterIdMaquina().then(function (resultado) {
@@ -123,6 +141,22 @@ function obterIdMaquina(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+function listaAlerta(req, res) {
+
+    medidaModel.listarAlerta().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("obterListaAlerta não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar obterListaAlerta.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 function cardAlertasCPU(req, res) {
 
@@ -199,6 +233,81 @@ function cardAlertasREDE(req, res) {
     });
 }
 
+function cardAlertasREDE(req, res) {
+
+    medidaModel.cardAlertasREDE().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("cardAlertasREDE não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar cardAlertasREDE.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function dadosCPU(req, res) {
+
+    medidaModel.dadosCPU().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("dadosRAM não encontrado");s
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar dadosRAM.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function dadosRAM(req, res) {
+
+    medidaModel.dadosRAM().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("dadosRAM não encontrado");s
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar dadosRAM.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function dadosDISCO(req, res) {
+
+    medidaModel.dadosDISCO().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("dadosDISCO não encontrado");s
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar dadosDISCO.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function dadosREDE(req, res) {
+
+    medidaModel.dadosREDE().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("dadosREDE não encontrado");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar dadosREDE.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 
 module.exports = {
@@ -209,8 +318,15 @@ module.exports = {
     obterDadosCPU,
     obterDadosRAM,
     obterIdMaquina,
+    listaAlerta,
+    obterNomeAme,
+    obterIdMaquina,
     cardAlertasCPU,
     cardAlertasRAM,
     cardAlertasDISCO,
-    cardAlertasREDE
+    cardAlertasREDE,
+    dadosCPU,
+    dadosRAM,
+    dadosDISCO,
+    dadosREDE
 }

@@ -4,12 +4,13 @@ USE farmacos;
 
 CREATE TABLE AME (
 idAme INT PRIMARY KEY AUTO_INCREMENT,
-nomeAme VARCHAR (45),
-cep CHAR (9)
-);
+nomeAme VARCHAR(45),
+cep CHAR(9)
+) AUTO_INCREMENT = 1000;
 
 CREATE TABLE maquina (
-idMaquina VARCHAR(30) PRIMARY KEY,
+idMaquina VARCHAR(100) PRIMARY KEY,
+hostName VARCHAR(100),
 sistemaOperacional VARCHAR (45),
 arquitetura INT,
 fabricante VARCHAR (45),
@@ -37,17 +38,18 @@ idTipoComp INT PRIMARY KEY AUTO_INCREMENT,
 nomeTipoComp VARCHAR (45)
 );
 
+
 CREATE TABLE parametro (
 idParametro INT primary key AUTO_INCREMENT,
-máximo INT,
-médio INT,
+maximo INT,
+medio INT,
 fkPermissaoParametro INT, CONSTRAINT FkPerm_param FOREIGN KEY (fkPermissaoParametro) REFERENCES permissao(idPermissao),
 fkTipoComponente INT, CONSTRAINT FkTipo_comp foreign key (fkTipoComponente) references tipoComponente(idTipoComp)
 );
 
 CREATE TABLE maquinaTipoComponente (
 idMaqTipoComp INT PRIMARY KEY AUTO_INCREMENT,
-fkMaquina VARCHAR(30), CONSTRAINT FK_Maquina FOREIGN KEY (fkMaquina) REFERENCES maquina(idMaquina),
+fkMaquina VARCHAR(100), CONSTRAINT FK_Maquina FOREIGN KEY (fkMaquina) REFERENCES maquina(idMaquina),
 fkTipoComp INT, CONSTRAINT FK_TipoComp FOREIGN KEY (fkTipoComp) REFERENCES tipoComponente(idTipoComp),
 numProcesLogicos INT,
 numProcesFisicos INT,
@@ -60,7 +62,7 @@ ipv4 VARCHAR (45)
 
 CREATE TABLE dadosComponente (
 idDadosComponentes INT PRIMARY KEY AUTO_INCREMENT,
-fkMaquina VARCHAR(30), CONSTRAINT Dados_FK_Maquina FOREIGN KEY (fkMaquina) REFERENCES maquina(idMaquina),
+fkMaquina VARCHAR(100), CONSTRAINT Dados_FK_Maquina FOREIGN KEY (fkMaquina) REFERENCES maquina(idMaquina),
 fkTipoComponente INT, CONSTRAINT Dados_FK_TipoComp FOREIGN KEY (fkTipoComponente) REFERENCES tipoComponente(idTipoComp),
 fkMaquinaTipoComponente INT, CONSTRAINT Dados_FK_MaqTipoComp FOREIGN KEY (fkMaquinaTipoComponente) REFERENCES maquinaTipoComponente(idMaqTipoComp),
 qtdUsoCpu DECIMAL (4, 2),
@@ -68,72 +70,30 @@ memoriaEmUso DECIMAL (2, 1),
 memoriaDisponivel DECIMAL (2, 1),
 usoAtualDisco INT,
 usoDisponivelDisco INT,
-bytesRecebido DECIMAL (6, 2),
-bytesEnviado DECIMAL (6, 2),
+bytesRecebido float,
+bytesEnviado float,
 dtHora datetime DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO AME (idAme, nomeAme, cep) VALUES 
+(NULL, 'AME Campinas', '13087-535'),
+(NULL, 'AME Guarulhos', '07034-911');
 
 INSERT INTO permissao (tipoPermissao) VALUES ('NOC');
 INSERT INTO permissao (tipoPermissao) VALUES ('Visualização');
 
 INSERT INTO tipoComponente (nomeTipoComp) VALUES ('CPU');
-INSERT INTO tipoComponente (nomeTipoComp) VALUES ('Memória RAM');
-INSERT INTO tipoComponente (nomeTipoComp) VALUES ('Disco');
-INSERT INTO tipoComponente (nomeTipoComp) VALUES ('Rede');
+INSERT INTO tipoComponente (nomeTipoComp) VALUES ('RAM');
+INSERT INTO tipoComponente (nomeTipoComp) VALUES ('DISCO');
+INSERT INTO tipoComponente (nomeTipoComp) VALUES ('REDE');
 
-SELECT maquina.sistemaOperacional,
-maquina.arquitetura,
-maquina.fabricante,
-maquina.tempoAtividade,
-maquinaTipoComponente.numProcesLogicos,
-maquinaTipoComponente.numProcesFisicos,
-maquinaTipoComponente.tamanhoTotalRam,
-maquinaTipoComponente.numSerial,
-maquinaTipoComponente.tamanhoTotalDisco,
-maquinaTipoComponente.enderecoMac,
-maquinaTipoComponente.ipv4,
-dadosComponente.bytesRecebido,
-dadosComponente.bytesEnviado,
-dadosComponente.qtdUsoCpu,
-dadosComponente.memoriaEmUso,
-dadosComponente.memoriaDisponivel,
-dadosComponente.usoAtualDisco,
-dadosComponente.usoDisponivelDisco
-FROM maquina JOIN maquinaTipoComponente ON maquina.idMaquina = maquinaTipoComponente.fkMaquina
-JOIN dadosComponente ON maquina.idMaquina = dadosComponente.fkMaquina
-WHERE maquina.idMaquina = 'BFEBFBFF000A0660';
+SELECT dc1.memoriaEmUso, dc2.qtdUsoCpu, TIME_FORMAT(dc1.dtHora, '%H:%i:%s') AS hora_formatada
+FROM dadosComponente dc1
+LEFT JOIN dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
+WHERE dc1.memoriaEmUso IS NOT NULL AND dc2.qtdUsoCpu IS NOT NULL
+ORDER BY dc1.dtHora DESC;
 
--- INSERT INTO tipoComponente (nomeTipoComp) VALUES ("CPU");
--- INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Memória RAM");
--- INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Disco");
--- INSERT INTO tipoComponente (nomeTipoComp) VALUES ("Rede");
--- select maquina.idMaquina from maquina;
--- INSERT INTO maquina (idMaquina) VALUES ('teste');
--- INSERT INTO funcionario (cargo) VALUES ("NOC");
--- INSERT INTO funcionario (cargo) VALUES ("Analista");
-
--- select maquinaTipoComponente.num_ProcesLogicos,
--- maquinaTipoComponente.num_ProcesFisicos,
--- maquinaTipoComponente.tamanhoTotalRam,
--- maquinaTipoComponente.numSerial,
--- maquinaTipoComponente.enderecoMac,
--- maquinaTipoComponente.ipv4
--- from maquinaTipoComponente
--- where idMaqTipoComp = 2;
-
-
--- select maquina.sistemaOperacional,
--- maquina.arquitetura,
--- maquina.fabricante,
--- maquina.tempoAtividade,
--- maquinaTipoComponente.num_ProcesLogicos,
--- maquinaTipoComponente.num_ProcesFisicos,
--- maquinaTipoComponente.tamanhoTotalRam,
--- maquinaTipoComponente.numSerial,
--- maquinaTipoComponente.enderecoMac,
--- maquinaTipoComponente.ipv4
--- from maquina join maquinaTipoComponente on maquina.idMaquina = maquinaTipoComponente.fkMaquina = 1;
-
-insert into ame values
-(null, "Paulista", "0366000");
-select * from usuario;
+SELECT hostName, avg(bytesRecebido) AS medBytesRecebido, avg(bytesEnviado) AS medBytesEnviado FROM dadosComponente join maquina on idMaquina = fkMaquina GROUP BY hostName;
+SELECT hostName, avg(usoAtualDisco) AS medUsoAtualDisco, avg(usoDisponivelDisco) AS medUsoDisponivelDisco FROM dadosComponente join maquina on idMaquina = fkMaquina GROUP BY hostName;
+SELECT hostName, avg(qtdUsoCpu) AS medUsoAtualCpu FROM dadosComponente join maquina on idMaquina = fkMaquina GROUP BY hostName;
+SELECT hostName, avg(memoriaEmUso) AS medMemoriaEmUso, avg(memoriaDisponivel) AS medMemoriaDisponivel FROM dadosComponente join maquina on idMaquina = fkMaquina GROUP BY hostName order by medMemoriaEmUso desc;

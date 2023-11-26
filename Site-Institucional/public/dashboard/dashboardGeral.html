@@ -15,7 +15,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
 </head>
 
-<body onload="cardAlertasCPU(), cardAlertasRAM(),cardAlertasDISCO(), cardAlertasREDE(), obterDadosGrafico(), obterDadosGrafico2(), obterDadosGrafico3(), obterDadosGrafico4()">
+<body onload="cardAlertasCPU(), cardAlertasRAM(),cardAlertasDISCO(), cardAlertasREDE(), obterDadosGrafico2(), obterDadosGrafico3(), obterDadosGrafico4()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -36,27 +36,31 @@
             </div>
         </div>
         <div class="div-principal">
+            <div class="nome-ame">
+                <p>AME:</p>
+                <p id="nomeAme"></p>
+            </div>
             <div class="div-superior">
                 <div class="div-cpu">
                     <h2>CPU</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p style="color:#FFC048;">Preocupante <p style="color:#FFC048;" id="preocupanteCPU"></p> %</p>
+                        <p style="color:#FFC048;">Preocupante <p style="color:#FFC048;" id="preocupanteCPU">%</p></p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Critico <p id="criticoCPU"></p>%</p>
+                        <p>Crítico <p id="criticoCPU">%</p></p>
                     </div>
                 </div>
                 <div class="div-ram">
                     <h2>Memoria RAM</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p style="color:#FFC048;">Preocupante <p style="color:#FFC048;" id="preocupanteRAM">%</p>%</p>
+                        <p style="color:#FFC048;">Preocupante <p style="color:#FFC048;" id="preocupanteRAM">%</p></p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Critico <p id="criticoRAM">%</p>%</p>
+                        <p>Crítico <p id="criticoRAM">%</p></p>
                     </div>
 
                 </div>
@@ -64,11 +68,11 @@
                     <h2>Rede</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p  style="color:#FFC048;" >Preocupante <p  style="color:#FFC048;" id="preocupanteREDE">%</p>%</p>
+                        <p  style="color:#FFC048;" >Preocupante <p id="preocupanteREDE">%</p></p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Critico <p id="criticoREDE"></p>%</p>
+                        <p>Crítico <p id="criticoREDE">%</p></p>
                     </div>
                 </div>
 
@@ -76,11 +80,11 @@
                     <h2>Disco</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p  style="color:#FFC048;">Preocupante <p  style="color:#FFC048;" id="preocupanteDISCO">%</p>%</p>
+                        <p  style="color:#FFC048;">Preocupante <p id="preocupanteDISCO">%</p></p>
                     </div>
-                    <div class="descricao-componente">
+                 <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Critico <p id="criticoDISCO"></p>%</p>
+                        <p>Crítico <p id="criticoDISCO"></p>%</p>
                     </div>
                 </div>
             </div>
@@ -156,7 +160,7 @@
                             <th><a href="">Máquina 3</a></th>
                             <th>16:02</th>
                             <th>CPU: 90%</th>
-                        </tr>
+                        </tr> 
 
                     </table>
                 </div>
@@ -212,7 +216,7 @@
     });
 
     // Alertas
-    function cardAlertasCPU() {
+    function cardAlertasCPU(dados) {
     console.log ("Entrando no cardAlertasCPU()")
 
     fetch("/medidas/cardAlertasCPU").then(function (resposta) {
@@ -283,29 +287,6 @@
         console.error(resposta);
     });
 }
-    function cardAlertasDISCO() {
-    console.log ("Entrando no cardAlertasDISCO()")
-
-    fetch("/medidas/cardAlertasDISCO").then(function (resposta) {
-        if (resposta.ok) {
-            
-            resposta.json().then(function (resposta) {
-                console.log("Dados recebidos: ", JSON.stringify(resposta));
-                
-                for (let i = 0; i < resposta.length; i++) {
-                    var publicacao = resposta[i];
-
-                    preocupanteDISCO.innerHTML = `${publicacao.medio}`
-                    criticoDISCO.innerHTML = `${publicacao.maximo}`
-                }
-            });
-        } else {
-            throw ('Houve um erro na API!');
-        }
-    }).catch(function (resposta) {
-        console.error(resposta);
-    });
-}
 
     function cardAlertasREDE() {
     console.log ("Entrando no cardAlertasREDE()")
@@ -330,6 +311,104 @@
         console.error(resposta);
     });
 }
+
+    function dadosCPU() {
+    console.log ("Entrando no dadosCPU()")
+
+    fetch("/medidas/dadosCPU").then(function (resposta) {
+        if (resposta.ok) {
+            
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+            
+                for (let i = 0; i < resposta.length; i++) {
+                var exibir = resposta[i];
+                }
+                console.log ("Dados CPU:" + exibir.CPU);
+                satisfies
+                }
+            );
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+const intervaloCPU = setInterval(dadosCPU, 3000);
+
+
+    function dadosRAM() {
+    console.log ("Entrando no dadosRAM()")
+
+    fetch("/medidas/dadosRAM").then(function (resposta) {
+        if (resposta.ok) {
+            
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+                
+                for (let i = 0; i < resposta.length; i++) {
+                var exibir = resposta[i];
+                }
+                console.log ("Dados RAM:" + exibir.PorcentagemMemoria);
+                }
+            );
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+const intervaloRAM = setInterval(dadosRAM, 3000);
+
+    function dadosDISCO() {
+    console.log ("Entrando no dadosDISCO()")
+
+    fetch("/medidas/dadosDISCO").then(function (resposta) {
+        if (resposta.ok) {
+            
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+            
+                for (let i = 0; i < resposta.length; i++) {
+                var exibir = resposta[i];
+                }
+                console.log ("Dados Disco:" + exibir.PorcentagemDisco);
+                }
+            );
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+const intervaloDISCO = setInterval(dadosDISCO, 3000);
+
+    function dadosREDE() {
+    console.log ("Entrando no dadosREDE()")
+
+    fetch("/medidas/dadosREDE").then(function (resposta) {
+        if (resposta.ok) {
+            
+            resposta.json().then(function (resposta) {
+                console.log("Dados recebidos: ", JSON.stringify(resposta));
+    
+                for (let i = 0; i < resposta.length; i++) {
+                var exibir = resposta[i];
+                }
+                console.log ("Dados Rede:" + exibir.REDE);
+        });
+        
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    }).catch(function (resposta) {
+        console.error(resposta);
+    });
+}
+const intervaloREDE = setInterval(dadosREDE, 3000);
 
     // Pegar o idMaquina
     var idMaquina = {};
@@ -376,7 +455,28 @@
         }
     // FIM - Pegar o idMaquina
 
+    // Lista Alerta 
+//     function obterdados(idAquario) {
+//     fetch(`/medidas/tempo-real/${idAquario}`)
+//         .then(resposta => {
+//             if (resposta.status == 200) {
+//                 resposta.json().then(resposta => {
 
+//                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+//                     alertar(resposta, idAquario);
+//                 });
+//             } else {
+//                 console.error(`Nenhum dado encontrado para o id ${idAquario} ou erro na API`);
+//             }
+//         })
+//         .catch(function (error) {
+//             console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+//         });
+
+// }
+    // Fim da lista alerta
+    
     // Funções para funcionar a dash
 
     function obterDadosGrafico() {
@@ -412,13 +512,20 @@
                 label: 'Pacotes Recebidos',
                 data: [],
                 fill: false,
-                tension: 0.1
+                tension: 0.1,
+                tension: 0.1,
+                backgroundColor: '#00323c',
+                borderColor: '#00323c',
+                borderWidth: 1
             },
             {
                 label: 'Pacotes Enviados',
                 data: [],
                 fill: false,
-                tension: 0.1
+                tension: 0.1,
+                backgroundColor: '#00d5ffb9',
+                borderColor: '#00d5ffb9',
+                borderWidth: 1
             }]
         };
 
@@ -430,7 +537,7 @@
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             if (registro.medBytesRecebido && registro.medBytesEnviado != "null") {
-                labels.push(registro.fkMaquina);
+                labels.push(registro.hostName);
                 dados.datasets[0].data.push(registro.medBytesRecebido);
                 dados.datasets[1].data.push(registro.medBytesEnviado);
             }
@@ -490,14 +597,20 @@
                     // avisoCaptura.innerHTML = ""
 
                     // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro[0].fkMaquina); // incluir um novo momento
 
-                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[0].data.push(novoRegistro[0].medBytesRecebido); // incluir uma nova medida de umidade
+                    for (i = 0; i < novoRegistro.length; i++) {
+                        var registro = novoRegistro[i];
 
-                    dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                    dados.datasets[1].data.push(novoRegistro[0].medBytesEnviado); // incluir uma nova medida de temperatura
+                        dados.labels.shift(novoRegistro[i].hostName); // apagar o primeiro
+                        dados.labels.push(novoRegistro[i].hostName); // incluir um novo momento
+
+                        dados.datasets[0].data.shift(novoRegistro[i].medBytesRecebido);  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[i].medBytesRecebido); // incluir uma nova medida de umidade
+
+                        dados.datasets[1].data.shift(novoRegistro[i].medBytesEnviado);  // apagar o primeiro de temperatura
+                        dados.datasets[1].data.push(novoRegistro[i].medBytesEnviado); // incluir uma nova medida de temperatura
+                    }
+
                     myChart.update();
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart), 2000);
@@ -550,13 +663,19 @@
                 label: 'Uso atual do disco',
                 data: [],
                 fill: false,
-                tension: 0.1
+                tension: 0.1,
+                backgroundColor: '#00323c',
+                borderColor: '#00323c',
+                borderWidth: 1
             },
             {
                 label: 'Disco disponível',
                 data: [],
                 fill: false,
-                tension: 0.1
+                tension: 0.1,
+                backgroundColor: '#00d5ffb9',
+                borderColor: '#00d5ffb9',
+                borderWidth: 1
             }]
         };
 
@@ -568,7 +687,7 @@
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             if (registro.medUsoAtualDisco && registro.medUsoDisponivelDisco != "null") {
-                labels.push(registro.fkMaquina);
+                labels.push(registro.hostName);
                 dados.datasets[0].data.push(registro.medUsoAtualDisco);
                 dados.datasets[1].data.push(registro.medUsoDisponivelDisco);
             }
@@ -589,6 +708,7 @@
             type: 'bar',
             data: dados,
             options: {
+                indexAxis: 'y',
                 plugins: {
                     legend: {
                         display: true,
@@ -627,15 +747,18 @@
                     // let avisoCaptura = document.getElementById(`avisoCaptura`)
                     // avisoCaptura.innerHTML = ""
 
-                    // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro[0].fkMaquina); // incluir um novo momento
+                    for (i = 0; i < novoRegistro.length; i++) {
+                        var registro = novoRegistro[i];
 
-                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[0].data.push(novoRegistro[0].medUsoAtualDisco); // incluir uma nova medida de umidade
+                        dados.labels.shift(novoRegistro[i].hostName); // apagar o primeiro
+                        dados.labels.push(novoRegistro[i].hostName); // incluir um novo momento
 
-                    dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                    dados.datasets[1].data.push(novoRegistro[0].medUsoDisponivelDisco); // incluir uma nova medida de temperatura
+                        dados.datasets[0].data.shift(novoRegistro[i].medUsoAtualDisco);  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[i].medUsoAtualDisco); // incluir uma nova medida de umidade
+
+                        dados.datasets[1].data.shift(novoRegistro[i].medUsoDisponivelDisco);  // apagar o primeiro de temperatura
+                        dados.datasets[1].data.push(novoRegistro[i].medUsoDisponivelDisco); // incluir uma nova medida de temperatura
+                    }
 
                     myChart2.update();
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
@@ -689,7 +812,10 @@
                 label: 'Uso da CPU',
                 data: [],
                 fill: false,
-                tension: 0.1
+                tension: 0.1,
+                backgroundColor: '#00323c',
+                borderColor: '#00323c',
+                borderWidth: 1
             }]
         };
 
@@ -701,7 +827,7 @@
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             if (registro.medUsoAtualCpu != "null") {
-                labels.push(registro.fkMaquina);
+                labels.push(registro.hostName);
                 dados.datasets[0].data.push(registro.medUsoAtualCpu);
             }
 
@@ -759,12 +885,15 @@
                     // let avisoCaptura = document.getElementById(`avisoCaptura`)
                     // avisoCaptura.innerHTML = ""
 
-                    // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro[0].fkMaquina); // incluir um novo momento
+                    for (i = 0; i < novoRegistro.length; i++) {
+                        var registro = novoRegistro[i];
 
-                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[0].data.push(novoRegistro[0].medUsoAtualCpu); // incluir uma nova medida de umidade
+                        dados.labels.shift(novoRegistro[i].hostName); // apagar o primeiro
+                        dados.labels.push(novoRegistro[i].hostName); // incluir um novo momento
+
+                        dados.datasets[0].data.shift(novoRegistro[i].medUsoAtualCpu);  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[i].medUsoAtualCpu); // incluir uma nova medida de umidade
+                    }
 
                     myChart3.update();
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
@@ -820,13 +949,19 @@
                 label: 'Memoria Em Uso',
                 data: [],
                 fill: false,
-                tension: 0.1
+                tension: 0.1,
+                backgroundColor: '#00323c',
+                borderColor: '#00323c',
+                borderWidth: 1
             },
             {
                 label: 'Memoria Disponível',
                 data: [],
                 fill: false,
-                tension: 0.1
+                tension: 0.1,
+                backgroundColor: '#00d5ffb9',
+                borderColor: '#00d5ffb9',
+                borderWidth: 1
             }]
         };
 
@@ -838,7 +973,7 @@
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             if (registro.medMemoriaEmUso && registro.medMemoriaDisponivel != "null") {
-                labels.push(registro.fkMaquina);
+                labels.push(registro.hostName);
                 dados.datasets[0].data.push(registro.medMemoriaEmUso);
                 dados.datasets[1].data.push(registro.medMemoriaDisponivel);
             }
@@ -897,15 +1032,19 @@
                     // let avisoCaptura = document.getElementById(`avisoCaptura`)
                     // avisoCaptura.innerHTML = ""
 
-                    // tirando e colocando valores no gráfico
-                    dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro[0].fkMaquina); // incluir um novo momento
+                    for (i = 0; i < novoRegistro.length; i++) {
+                        var registro = novoRegistro[i];
 
-                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                    dados.datasets[0].data.push(novoRegistro[0].medMemoriaEmUso); // incluir uma nova medida de umidade
+                        dados.labels.shift(novoRegistro[i].hostName); // apagar o primeiro
+                        dados.labels.push(novoRegistro[i].hostName); // incluir um novo momento
 
-                    dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                    dados.datasets[1].data.push(novoRegistro[0].medMemoriaDisponivel); // incluir uma nova medida de temperatura
+                        dados.datasets[0].data.shift(novoRegistro[i].medMemoriaEmUso);  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[i].medMemoriaEmUso); // incluir uma nova medida de umidade
+
+                        dados.datasets[1].data.shift(novoRegistro[i].medMemoriaDisponivel);  // apagar o primeiro de umidade
+                        dados.datasets[1].data.push(novoRegistro[i].medMemoriaDisponivel); // incluir uma nova medida de umidade
+                    }
+
                     myChart4.update();
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico4(dados, myChart4), 2000);
