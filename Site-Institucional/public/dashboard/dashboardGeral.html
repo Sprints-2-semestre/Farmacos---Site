@@ -46,13 +46,14 @@
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
                         <p style="color:#FFC048;">Preocupante
-                        <p style="color:#FFC048;" id="preocupanteCPU"></p>
+                        <p style="color:#FFC048;" id="preocupanteCPU">%</p>
                         </p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
                         <p>Crítico
-                        <p id="criticoCPU"></p>
+                        <p id="criticoCPU">%</p>
+
                         </p>
                     </div>
                 </div>
@@ -61,13 +62,13 @@
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
                         <p style="color:#FFC048;">Preocupante
-                        <p style="color:#FFC048;" id="preocupanteRAM"></p>
+                        <p style="color:#FFC048;" id="preocupanteRAM">%</p>
                         </p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
                         <p>Crítico
-                        <p id="criticoRAM"></p>
+                        <p id="criticoRAM">%</p>
                         </p>
                     </div>
 
@@ -77,13 +78,13 @@
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
                         <p style="color:#FFC048;">Preocupante
-                        <p id="preocupanteREDE"></p>
+                        <p id="preocupanteREDE">%</p>
                         </p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
                         <p>Crítico
-                        <p id="criticoREDE"></p>
+                        <p id="criticoREDE">%</p>
                         </p>
                     </div>
                 </div>
@@ -93,7 +94,7 @@
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
                         <p style="color:#FFC048;">Preocupante
-                        <p  style="color:#FFC048;" id="preocupanteDISCO"></p>
+                        <p  style="color:#FFC048;" id="preocupanteDISCO">%</p>
                         </p>
                     </div>
                     <div class="descricao-componente">
@@ -1169,5 +1170,5 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-
     }   
+

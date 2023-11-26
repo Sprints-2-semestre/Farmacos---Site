@@ -54,12 +54,15 @@ router.get("/cardAlertasREDE", function (req, res) {
 router.get("/dadosCPU", function (req, res) {
     medidaController.dadosCPU(req, res);
 });
+
 router.get("/dadosRAM", function (req, res) {
     medidaController.dadosRAM(req, res);
-})
+});
+
 router.get("/dadosDISCO", function (req, res) {
     medidaController.dadosDISCO(req, res);
 });
+
 router.get("/dadosREDE", function (req, res) {
     medidaController.dadosREDE(req, res);
 });

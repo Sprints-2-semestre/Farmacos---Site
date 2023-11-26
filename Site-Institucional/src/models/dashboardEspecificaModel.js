@@ -75,8 +75,8 @@ function kpiTempoDisco(fkAme) {
 
 function informacoesMaquina(fkAme) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `SELECT * FROM maquina JOIN ame ON ame.idAme = maquina.idMaquina 
-    WHERE ame.idAme = ${fkAme};`
+    var instrucaoSql = `SELECT * FROM maquina JOIN ame JOIN maquinaTipoComponente ON
+     maquina.idMaquina = maquinaTipoComponente.fkMaquina WHERE ame.idAme = ${fkAme};`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -87,9 +87,10 @@ function obterDadosRede() {
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 4;`;
         instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 5;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 5;`;
+        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 4;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
