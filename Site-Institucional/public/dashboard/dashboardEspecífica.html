@@ -10,7 +10,7 @@
     <link rel="icon" href="../img/logo F png.png">
 </head>
 
-<body onload="exibirNomeDoEstabelecimentoDeTrabalho(),obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2()">
+<body onload="obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2(), chamaTudo()">
     <div class="conteudo">
         <div class="nav-lateral">
             <div class="logo-empresa">
@@ -34,7 +34,6 @@
         </div>
         <div class="div-principal">
             <div class="nome-ame">
-                <p>AME:</p>
                 <p id="teste"></p>
             </div>
 
@@ -43,51 +42,67 @@
                     <h2>CPU</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p>A cpu esteve acima do preocupante por 8 minutos atrás</p>
+                        <p>Preocupante: </p>
+                        <p id="cpuPreocupante"></p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Critico 40min</p>
+                        <p>Critico: </p>
+                        <p id="cpuCritico"></p>
                     </div>
                 </div>
                 <div class="div-ram">
                     <h2>Memoria RAM</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p>Preocupante 16min</p>
+                        <p>Preocupante: </p>
+                        <p id="ramPreocupante"></p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Critico 8min</p>
+                        <p>Critico: </p>
+                        <p id="ramCritico"></p>
                     </div>
 
                 </div>
                 <div class="div-rede">
-                    <h2>Rede</h2>
+                    <h2>REDE</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p>Preocupante 17min</p>
+                        <p>Preocupante: </p>
+                        <p id="redePreocupante"></p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Critico 10min</p>
+                        <p>Critico: </p>
+                        <p id="redeCritico"></p>
                     </div>
                 </div>
                 <div class="div-disco">
-                    <h2>Disco</h2>
+                    <h2>DISCO</h2>
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
-                        <p>Preocupante 10min</p>
+                        <p>Preocupante: </p>
+                        <p id="discoPreocupante"></p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
-                        <p>Critico 5min</p>
+                        <p>Critico: </p>
+                        <p id="discoCritico"></p>
                     </div>
                 </div>
             </div>
             <div class="div-central">
+                <div class="info-maquina">
+                    <div class="titulo-lista-maquina">
+                        Informações da máquina
+                    </div>
+                    <div class="nome-maquina" id="nomeMaquina">
+                    </div>
+                    <div class="conjunto-maquina" id="listagem-info-maquina">
 
-
+                    </div>
+                </div>
                 <div class="div-rede-disco">
                     <div class="uso-sem">
 
@@ -104,46 +119,18 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="temp-osci">
-                        <h3>Tempo em que a internet esteve ociosa</h3>
-                        <p>00:25:06</p>
-                    </div>
+
                 </div>
 
-
                 <div class="div-list-maquinas-esp">
-
                     <h2>Lista de Máquinas</h2>
                     <table>
                         <tr>
                             <th><a href="dashboardGeral.html"> Geral</a></th>
-                            <th></th>
                         </tr>
                         <tr>
-                            <th id="listaDeMaquinas"><a href="dashboardEspecífica.html">Máquina 1</a></th>
-                            <!-- <th>Ativo</th> -->
+                            <th id="listaDeMaquinas"><a href="dashboardEspecífica.html"></a></th>
                         </tr>
-                        <!-- <tr>
-                            <th><a href="dashboardEspecífica.html">Máquina 2</a></th>
-                            <th>Ativo</th>
-                        </tr> -->
-                        <!-- <tr>
-                            <th><a href="dashboardEspecífica.html">Maquina 3</a></th>
-                            <th>Ativo</th>
-                        </tr>
-                        <tr>
-                            <th><a href="dashboardEspecífica.html">Maquina</a></th>
-                            <th>Inativo</th>
-                        </tr>
-                        <tr>
-                            <th><a href="dashboardEspecífica.html">Maquina 5</a></th>
-                            <th>Ativo</th>
-                        </tr>
-                        <tr>
-                            </th>
-                            <th><a href="dashboardEspecífica.html">Máquina 6</a></th>
-                            <th>Ativo</th>
-                        </tr> -->
                     </table>
                 </div>
             </div>
@@ -174,6 +161,20 @@
 
 <script>
     id = (sessionStorage.ID_USUARIO);
+
+    setInterval(
+        function chamaTudo() {
+            kpisParametroCpu(),
+                exibirNomeDoEstabelecimentoDeTrabalho(), listarMaquinas(), kpisParametroCpu(),
+                kpisParametroRam(), kpiTempoDisco(), kpiRede(), informacoesMaquina(), obterDadosCpu(), obterDadosGrafico(), obterDadosGrafico2()
+        }
+    , 4000)
+    
+
+
+
+
+
 
     const btnPrint = document.querySelector(".btn-pdf");
     btnPrint.addEventListener("click", () => {
@@ -294,7 +295,7 @@
             datasets: [{
                 type: 'doughnut',
                 label: 'Uso do disco',
-                data: [12, 19, 15, 12, 17], // captura de rede
+                data: [12, 19, 15, 12, 17],
                 borderWidth: 1,
                 backgroundColor: '#00d5ffb9',
             }],
@@ -322,9 +323,8 @@
 
 <script>
     document.getElementById("nomeUsuario").innerHTML = `Olá, ${sessionStorage.NOME_USUARIO}`
-
+    var fkAme = sessionStorage.FK_AME
     function exibirNomeDoEstabelecimentoDeTrabalho() {
-        var fkAme = sessionStorage.FK_AME
 
         fetch(`/dashboardEspecifica/nomeAme/${fkAme}`,
             { cache: 'no-store' })
@@ -333,7 +333,7 @@
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                        console.log(resposta)
+                        console.log(resposta + "DWAKDGAJDHBAODDWDAWDWSDAWWADA")
                         document.getElementById("teste").innerHTML = resposta[0].nomeAme
                     });
                 } else {
@@ -348,18 +348,238 @@
     function listarMaquinas() {
         var fkAme = sessionStorage.FK_AME
 
-        fetch(`/dashbpardEspecifica/listarMaquinas/${fkAme}`,
+        fetch(`/dashboardEspecifica/listarMaquinas/${fkAme}`,
             { cache: 'no-store' })
             .then(function (response) {
-                console.log("Chegou aqui?")
                 if (response.ok) {
+                    console.log(response)
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                         console.log(resposta);
                         for (var i = 0; i < resposta.length; i++) {
-                            document.getElementById("listaDeMaquinas").innerHTML += `${resposta[i].maquinas} 
-                        ${resposta[i].statusMaquina}`
+                            var idMaquina = sessionStorage.idMaquina = resposta[i].idMaquina
+                            console.log(idMaquina)
+
+                            if (resposta[i].statusMaquina == 1) {
+                                resposta[i].statusMaquina = "Ativada"
+                            } else {
+                                resposta[i].statusMaquina = "Desativada"
+                            }
+                            document.getElementById("listaDeMaquinas").innerHTML += `${resposta[i].idMaquina} 
+                        ${resposta[i].statusMaquina} <br><br>`
                         }
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function kpisParametroCpu() {
+        let segundosCpuMedio = 0;
+        let minutosCpuMedio = 0;
+
+        let segundosCpuMáximo = 0;
+        let minutosCpuMáximo = 0;
+
+        fetch(`/dashboardEspecifica/kpisParametroCpu/${fkAme}`,
+            { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    console.log(response)
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                        // setInterval(function () {
+                        // }, 1000);
+                        for (var i = 0; i < resposta.length; i++) {
+                            if (resposta[i].qtdUsoCpu >= resposta[0].medio && resposta[i].qtdUsoCpu < resposta[0].maximo) {
+                                if ((segundosCpuMedio++) == 60) {
+                                    segundosCpuMedio = 0
+                                    minutosCpuMedio++
+                                    if (minutosCpuMedio == 60) {
+                                        minutosCpuMedio = 0
+                                    }
+                                }
+                            }
+
+                            if (resposta[i].qtdUsoCpu >= resposta[0].maximo) {
+                                segundosCpuMáximo++
+                                if (segundosCpuMáximo == 60) {
+                                    segundosCpuMáximo = 0
+                                    minutosCpuMáximo++
+                                }
+                            }
+
+                        }
+                        document.getElementById("cpuPreocupante").innerHTML = `${minutosCpuMedio} : ${segundosCpuMedio}`
+                        document.getElementById("cpuCritico").innerHTML = `${minutosCpuMáximo} : ${segundosCpuMáximo}`
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function kpisParametroRam() {
+        let segundosRamMedio = 0;
+        let minutosRamMedio = 0;
+
+        let segundosRamMáximo = 0;
+        let minutosRamMáximo = 0;
+
+        fetch(`/dashboardEspecifica/kpisParametroRam/${fkAme}`,
+            { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    console.log(response)
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        for (var i = 0; i < resposta.length; i++) {
+                            if (resposta[i].memoriaEmUso >= resposta[0].medio && resposta[i].memoriaEmUso < resposta[0].maximo) {
+                                if ((segundosRamMedio++) == 60) {
+                                    segundosRamMedio = 0
+                                    minutosRamMedio++
+                                    if (minutosRamMedio == 60) {
+                                        minutosRamMedio = 0
+                                    }
+                                }
+                            }
+
+                            if (resposta[i].memoriaEmUso >= resposta[0].maximo) {
+                                segundosRamMáximo++
+                                if (segundosRamMáximo == 60) {
+                                    segundosRamMáximo = 0
+                                    minutosRamMáximo++
+                                }
+                            }
+                        }
+                        document.getElementById("ramPreocupante").innerHTML = `${minutosRamMedio} : ${segundosRamMedio}`
+                        document.getElementById("ramCritico").innerHTML = `${minutosRamMáximo} : ${segundosRamMáximo}`
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function kpiRede() {
+        let segundosRedeMedio = 0;
+        let minutosRedeMedio = 0;
+        let horasRedeMedio = 0;
+
+        let segundosRedeMaximo = 0;
+        let minutosRedeMaximo = 0;
+        let horasRedeMaximo = 0;
+
+        fetch(`/dashboardEspecifica/kpiRede/${fkAme}`,
+            { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    console.log(response)
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos de rede   : ${JSON.stringify(resposta)}`);
+
+                        for (let i = 0; i < resposta.length; i++) {
+                            if (resposta[i].bytesRecebido >= resposta[0].medio && resposta[i].bytesRecebido < resposta[0].maximo) {
+                                segundosRedeMedio++
+                                if (segundosRedeMedio == 60) {
+                                    segundosRedeMedio = 0
+                                    minutosRedeMedio++
+                                    if (minutosRedeMedio == 60) {
+                                        minutosRedeMedio = 0
+                                        horasRedeMedio++
+                                    }
+                                }
+                            }
+
+                            if (resposta[i].bytesRecebido >= resposta[0].maximo) {
+                                segundosRedeMaximo++
+                                if (segundosRedeMaximo == 60) {
+                                    segundosRedeMaximo = 0
+                                    minutosRedeMaximo++
+                                    if (minutosRedeMaximo == 60) {
+                                        minutosRedeMaximo = 0
+                                        horasRedeMaximo++
+                                    }
+                                }
+                            }
+                        }
+                        document.getElementById("redePreocupante").innerHTML = `${minutosRedeMedio} : ${segundosRedeMedio}`
+                        document.getElementById("redeCritico").innerHTML = `${minutosRedeMaximo} : ${segundosRedeMaximo}`
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function kpiTempoDisco() {
+        let segundosDiscoMedio = 0;
+        let minutosDiscoMedio = 0;
+
+        let segundosDiscoMáximo = 0;
+        let minutosDiscoMáximo = 0;
+
+        fetch(`/dashboardEspecifica/kpiTempoDisco/${fkAme}`,
+            { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    console.log(response)
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        for (var i = 0; i < resposta.length; i++) {
+                            if (resposta[i].usoAtualDisco >= resposta[0].medio && resposta[i].usoAtualDisco < resposta[0].maximo) {
+                                if ((segundosDiscoMedio++) == 60) {
+                                    segundosDiscoMedio = 0
+                                    minutosDiscoMedio++
+                                    if (minutosDiscoMedio == 60) {
+                                        minutosDiscoMedio = 0
+                                    }
+                                }
+                            }
+
+                            if (resposta[i].usoAtualDisco >= resposta[0].maximo) {
+                                segundosDiscoMáximo++
+                                if (segundosDiscoMáximo == 60) {
+                                    segundosDiscoMáximo = 0
+                                    minutosDiscoMáximo++
+                                }
+                            }
+                        }
+                        document.getElementById("discoPreocupante").innerHTML = `${minutosDiscoMedio} : ${segundosDiscoMedio}`
+                        document.getElementById("discoCritico").innerHTML = `${minutosDiscoMáximo} : ${segundosDiscoMáximo}`
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function informacoesMaquina() {
+        fetch(`/dashboardEspecifica/informacoesMaquina/${fkAme}`,
+            { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    console.log(response)
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        document.getElementById("nomeMaquina").innerHTML = resposta[0].hostName
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
@@ -492,43 +712,43 @@
     function atualizarGrafico(dados, myChart) {
 
 
-fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (novoRegistro) {
+        fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
 
-            obterDadosGrafico();
-            // alertar(novoRegistro, idAquario);
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log(`Dados atuais do gráfico:`);
-            console.log(dados);
+                    obterDadosGrafico();
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
 
-            // let avisoCaptura = document.getElementById(`avisoCaptura`)
-            // avisoCaptura.innerHTML = ""
+                    // let avisoCaptura = document.getElementById(`avisoCaptura`)
+                    // avisoCaptura.innerHTML = ""
 
-            // tirando e colocando valores no gráfico
-            dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro[0].HoraCaptura); // incluir um novo momento
+                    // tirando e colocando valores no gráfico
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push(novoRegistro[0].HoraCaptura); // incluir um novo momento
 
-            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[0].data.push(novoRegistro[0].bytesRecebido); // incluir uma nova medida de umidade
+                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[0].data.push(novoRegistro[0].bytesRecebido); // incluir uma nova medida de umidade
 
-            dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-            dados.datasets[1].data.push(novoRegistro[0].bytesEnviado); // incluir uma nova medida de temperatura
-            myChart.update();
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
+                    dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                    dados.datasets[1].data.push(novoRegistro[0].bytesEnviado); // incluir uma nova medida de temperatura
+                    myChart.update();
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
     }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-
-}
 </script>
 
 <script>
@@ -583,8 +803,8 @@ fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(functio
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];  
-            if (registro.qtdUsoCpu  && registro.memoriaEmUso != "null") {
+            var registro = resposta[i];
+            if (registro.qtdUsoCpu && registro.memoriaEmUso != "null") {
                 labels.push(registro.dtHora);
                 dados.datasets[0].data.push(registro.qtdUsoCpu);
                 dados.datasets[1].data.push(registro.memoriaEmUso);
@@ -631,44 +851,44 @@ fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(functio
     function atualizarGraficoCpu(dados, myChartCpu) {
 
 
-fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (novoRegistro2) {
+        fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro2) {
 
-            obterDadosCpu();
-            // alertar(novoRegistro, idAquario);
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro2)}`);
-            console.log(`Dados atuais do gráfico:`);
-            console.log(dados);
+                    obterDadosCpu();
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro2)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
 
-            // let avisoCaptura = document.getElementById(`avisoCaptura`)
-            // avisoCaptura.innerHTML = ""
+                    // let avisoCaptura = document.getElementById(`avisoCaptura`)
+                    // avisoCaptura.innerHTML = ""
 
-            // tirando e colocando valores no gráfico
-            dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro2[0].dtHora); // incluir um novo momento
+                    // tirando e colocando valores no gráfico
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push(novoRegistro2[0].dtHora); // incluir um novo momento
 
-            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[0].data.push(novoRegistro2[0].qtdUsoCpu); // incluir uma nova medida de umidade
-            
-            dados.datasets[1].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[1].data.push(novoRegistro2[0].memoriaEmUso); // incluir uma nova medida de umidade
-            
-            myChartCpu.update();
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
+                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[0].data.push(novoRegistro2[0].qtdUsoCpu); // incluir uma nova medida de umidade
+
+                    dados.datasets[1].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[1].data.push(novoRegistro2[0].memoriaEmUso); // incluir uma nova medida de umidade
+
+                    myChartCpu.update();
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
     }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-
-}
 </script>
 
 <script>
@@ -789,17 +1009,17 @@ fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function
                     // let avisoCaptura = document.getElementById(`avisoCaptura`)
                     // avisoCaptura.innerHTML = ""
 
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push("USO ATUAL: " + novoRegistro[0].usoAtualDisco + " GB"); // incluir um novo momento
-                        
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push("USO DISPONIVEL: " + novoRegistro[0].usoDisponivelDisco + " GB"); // incluir um novo momento
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push("USO ATUAL: " + novoRegistro[0].usoAtualDisco + " GB"); // incluir um novo momento
 
-                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[0].data.push(novoRegistro[0].usoAtualDisco); // incluir uma nova medida de umidade
+                    dados.labels.shift(); // apagar o primeiro
+                    dados.labels.push("USO DISPONIVEL: " + novoRegistro[0].usoDisponivelDisco + " GB"); // incluir um novo momento
 
-                        dados.datasets[1].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[1].data.push(novoRegistro[0].usoDisponivelDisco); // incluir uma nova medida de umidade
+                    dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[0].data.push(novoRegistro[0].usoAtualDisco); // incluir uma nova medida de umidade
+
+                    dados.datasets[1].data.shift();  // apagar o primeiro de umidade
+                    dados.datasets[1].data.push(novoRegistro[0].usoDisponivelDisco); // incluir uma nova medida de umidade
 
 
 
