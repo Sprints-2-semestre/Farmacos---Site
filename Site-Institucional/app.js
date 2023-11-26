@@ -10,6 +10,7 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
+var alertaRouter = require("./src/routes/alerta");
 var medidaRouter = require("./src/routes/medidas");
 var usuarioDashboardRouter = require("./src/routes/usuarioDashboard")
 var dashboardEspecificaRouter = require("./src/routes/dashboardEspecifica")
@@ -19,11 +20,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
-
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
+app.use("/", indexRouter);  
+app.use("/usuario", usuarioRouter);
 app.use("/usuarioDashboard", usuarioDashboardRouter)
-// app.use("/avisos", avisosRouter);
+app.use("/alerta", alertaRouter)
 app.use("/medidas", medidaRouter);
 app.use("/dashboardEspecifica", dashboardEspecificaRouter)
 

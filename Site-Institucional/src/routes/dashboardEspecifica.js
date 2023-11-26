@@ -32,4 +32,16 @@ router.get("/informacoesMaquina/:fkAme", function (req, res) {
     dashboardEspecificaController.informacoesMaquina(req, res);
 })
 
+router.get("/obterDadosRede", function (req, res) {
+    dashboardEspecificaController.obterDadosRede(req, res);
+});
+
+router.get("/obterDadosCpu", function (req, res) {
+    dashboardEspecificaController.obterDadosCpu(req, res);
+});
+
+router.get("/obterDadosDiscoEspecifica", function (req, res) {
+    dashboardEspecificaController.obterDadosDiscoEspecifica(req, res);
+});
+
 module.exports = router;

@@ -48,6 +48,18 @@ function kpisParametroCpu(req, res) {
     }
 
     dashboardEspecificaModel.kpisParametroCpu(fkAme)
+      .then((response) => {
+            res.json(response);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function obterDadosRede(req, res) {
+
+    dashboardEspecificaModel.obterDadosRede()
         .then((response) => {
             res.json(response);
         })
@@ -82,6 +94,19 @@ function kpiRede(req, res) {
     }
 
     dashboardEspecificaModel.kpiRede(fkAme)
+      .then((response) => {
+            res.json(response);
+        })
+        .catch((erro) => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+  
+function obterDadosCpu(req, res) {
+
+    dashboardEspecificaModel.obterDadosCpu()
         .then((response) => {
             res.json(response);
         })
@@ -107,15 +132,11 @@ function kpiTempoDisco(req, res) {
             res.status(500).json(erro.sqlMessage)
         })
 }
+  
+function obterDadosDiscoEspecifica(req, res) {
 
-function informacoesMaquina(req, res) {
-    var fkAme = req.params.fkAme
+    dashboardEspecificaModel.obterDadosDiscoEspecifica()
 
-    if (fkAme == undefined) {
-        console.log("fkAme está undefined");
-    }
-
-    dashboardEspecificaModel.informacoesMaquina(fkAme)
         .then((response) => {
             res.json(response);
         })
@@ -132,5 +153,8 @@ module.exports = {
     kpisParametroRam,
     kpiRede,
     kpiTempoDisco,
-    informacoesMaquina
+    informacoesMaquina,
+    obterDadosRede,
+    obterDadosCpu,
+    obterDadosDiscoEspecifica
 }
