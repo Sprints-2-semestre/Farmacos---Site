@@ -55,9 +55,9 @@ function obter_dados_rede() {
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT hostName, avg(bytesRecebido) AS medBytesRecebido, avg(bytesEnviado) AS medBytesEnviado FROM dadosComponente join maquina on idMaquina = fkMaquina GROUP BY hostName;`;
+        instrucaoSql = `SELECT hostName, avg(bytesRecebido) AS medBytesRecebido, avg(bytesEnviado) AS medBytesEnviado FROM dadosComponente join maquina on sistemaOperacional = 'Ubuntu' GROUP BY hostName;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT hostName, avg(bytesRecebido) AS medBytesRecebido, avg(bytesEnviado) AS medBytesEnviado FROM dadosComponente join maquina on idMaquina = fkMaquina GROUP BY hostName;`;
+        instrucaoSql = `SELECT hostName, avg(bytesRecebido) AS medBytesRecebido, avg(bytesEnviado) AS medBytesEnviado FROM dadosComponente join maquina on sistemaOperacional = 'Ubuntu' GROUP BY hostName;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
