@@ -137,12 +137,12 @@ function obterNomeAme(IdUserVar) {
 }
 
 
-function obterIdMaquina() {
+function obterIdMaquina(fkAme) {
 
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select idMaquina from maquina;`;
+        instrucaoSql = `select idMaquina from maquina JOIN ame ON maquina.fkAme = ame.idAme = ${fkAme};`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select idMaquina from maquina;`;
     } else {

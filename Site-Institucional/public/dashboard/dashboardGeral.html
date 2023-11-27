@@ -581,7 +581,7 @@
     // FIM - Pegar o nomeAme
     var idMaquina = {};
     var listaID = [];
-    fetch(`/medidas/obterIdMaquina`, {
+    fetch(`/medidas/obterIdMaquina/${FK_AME}`, {
         cache: 'no-store',
         method: "GET",
     }).then(function (response) {
@@ -642,7 +642,7 @@
                 console.error('Nenhum dado encontrado ou erro na API');
             }
         })
-            .catch(function (error) {
+            .catch(function (error) {   
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
