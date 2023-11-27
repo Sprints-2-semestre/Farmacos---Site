@@ -128,8 +128,8 @@ function obterNomeAme(req, res) {
 
 
 function obterIdMaquina(req, res) {
-
-    medidaModel.obterIdMaquina().then(function (resultado) {
+    var fkAme = req.params.fkAme;
+    medidaModel.obterIdMaquina().then(function (resultado,fkAme) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

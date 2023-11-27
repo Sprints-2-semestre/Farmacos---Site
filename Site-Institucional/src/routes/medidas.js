@@ -7,7 +7,7 @@ router.get("/ultimas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
 
-router.get("/obterIdMaquina", function (req, res) {
+router.get("/obterIdMaquina/:fkAme", function (req, res) {
     medidaController.obterIdMaquina(req, res);
 });
 

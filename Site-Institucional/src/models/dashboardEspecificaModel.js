@@ -10,8 +10,7 @@ function nomeAme(idNoc) {
 
 function listarMaquinas(fkAme) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `select *
-    from maquina join ame WHERE idAme = ${fkAme};`
+    var instrucaoSql = `select * from maquina join ame ON ame.idAme = maquina.fkAme WHERE idAme = ${fkAme};`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -21,11 +20,12 @@ function kpisParametroCpu(fkAme, idMaquina) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `SELECT DC.qtdUsoCpu, P.medio, P.maximo, A.idAme, M.idMaquina, DC.dtHora
     FROM dadosComponente DC
-    JOIN ame AS A
-    JOIN maquina AS M
+    JOIN maquina AS M ON DC.fkMaquina = M.idMaquina
+	JOIN ame AS A ON A.idAme = M.fkAme
     JOIN tipoComponente TC ON DC.fkTipoComponente = TC.idTipoComp
     LEFT JOIN parametro P ON TC.idTipoComp = P.fkTipoComponente
-    WHERE DC.qtdUsoCpu IS NOT NULL AND DATE(DC.dtHora) = curdate() AND A.idAme = ${fkAme} AND p.fkTipoComponente = 1 AND M.idMaquina = ${idMaquina};`
+    WHERE DC.qtdUsoCpu IS NOT NULL AND CONVERT(DATE, DC.dtHora) = CONVERT(DATE, GETDATE())
+ AND A.idAme = ${fkAme} AND p.fkTipoComponente = 1 AND M.idMaquina = ${idMaquina};`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -35,11 +35,12 @@ function kpisParametroRam(fkAme, idMaquina) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `SELECT DC.memoriaEmUso, P.medio, P.maximo, A.idAme, M.idMaquina, DC.dtHora
     FROM dadosComponente DC
-    JOIN ame AS A
-    JOIN maquina AS M
+    JOIN maquina AS M ON DC.fkMaquina = M.idMaquina
+	JOIN ame AS A ON A.idAme = M.fkAme
     JOIN tipoComponente TC ON DC.fkTipoComponente = TC.idTipoComp
     LEFT JOIN parametro P ON TC.idTipoComp = P.fkTipoComponente
-    WHERE DC.memoriaEmUso IS NOT NULL AND DATE(DC.dtHora) = curdate() AND A.idAme = ${fkAme} AND p.fkTipoComponente = 2 AND M.idMaquina = ${idMaquina};`
+    WHERE DC.memoriaEmUso IS NOT NULL AND CONVERT(DATE, DC.dtHora) = CONVERT(DATE, GETDATE())
+ AND A.idAme = ${fkAme} AND p.fkTipoComponente = 2 AND M.idMaquina = ${idMaquina};`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -49,11 +50,12 @@ function kpiRede(fkAme, idMaquina) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `SELECT DC.bytesRecebido, P.medio, P.maximo, A.idAme, M.idMaquina, DC.dtHora
     FROM dadosComponente DC
-    JOIN ame AS A
-    JOIN maquina AS M
+    JOIN maquina AS M ON DC.fkMaquina = M.idMaquina
+	JOIN ame AS A ON A.idAme = M.fkAme
     JOIN tipoComponente TC ON DC.fkTipoComponente = TC.idTipoComp
     LEFT JOIN parametro P ON TC.idTipoComp = P.fkTipoComponente
-    WHERE DC.bytesRecebido IS NOT NULL AND DATE(DC.dtHora) = curdate() AND A.idAme = ${fkAme} AND p.fkTipoComponente = 4 AND M.idMaquina = ${idMaquina} ORDER BY DC.dtHora DESC;`
+    WHERE DC.bytesRecebido IS NOT NULL AND CONVERT(DATE, DC.dtHora) = CONVERT(DATE, GETDATE())
+ AND A.idAme = ${fkAme} AND p.fkTipoComponente = 4 AND M.idMaquina = ${idMaquina} AND bytesRecebido IS NOT NULL;`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -63,11 +65,12 @@ function kpiTempoDisco(fkAme, idMaquina) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucaoSql = `SELECT DC.usoAtualDisco, P.medio, P.maximo, A.idAme, M.idMaquina, DC.dtHora
     FROM dadosComponente DC
-    JOIN ame AS A
-    JOIN maquina AS M
+    JOIN maquina AS M ON DC.fkMaquina = M.idMaquina
+	JOIN ame AS A ON A.idAme = M.fkAme
     JOIN tipoComponente TC ON DC.fkTipoComponente = TC.idTipoComp
     LEFT JOIN parametro P ON TC.idTipoComp = P.fkTipoComponente
-    WHERE DC.usoAtualDisco IS NOT NULL AND DATE(DC.dtHora) = curdate() AND A.idAme = ${fkAme} AND p.fkTipoComponente = 3 AND M.idMaquina = ${idMaquina};`
+    WHERE DC.usoAtualDisco IS NOT NULL AND CONVERT(DATE, DC.dtHora) = CONVERT(DATE, GETDATE())
+ AND A.idAme = ${fkAme} AND p.fkTipoComponente = 3 AND M.idMaquina = ${idMaquina};`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
