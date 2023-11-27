@@ -42,12 +42,13 @@ function listarMaquinas(req, res) {
 
 function kpisParametroCpu(req, res) {
     var fkAme = req.params.fkAme
+    var idMaquina = req.params.idMaquina
 
     if (fkAme == undefined) {
         console.log("fkAme está undefined");
     }
 
-    dashboardEspecificaModel.kpisParametroCpu(fkAme)
+    dashboardEspecificaModel.kpisParametroCpu(fkAme, idMaquina)
       .then((response) => {
             res.json(response);
         })
@@ -58,8 +59,8 @@ function kpisParametroCpu(req, res) {
 }
 
 function obterDadosRede(req, res) {
-
-    dashboardEspecificaModel.obterDadosRede()
+    var idMaquina = req.params.idMaquina
+    dashboardEspecificaModel.obterDadosRede(idMaquina)
         .then((response) => {
             res.json(response);
         })
@@ -71,12 +72,13 @@ function obterDadosRede(req, res) {
 
 function kpisParametroRam(req, res) {
     var fkAme = req.params.fkAme
+    var idMaquina = req.params.idMaquina
 
     if (fkAme == undefined) {
         console.log("fkAme está undefined");
     }
 
-    dashboardEspecificaModel.kpisParametroRam(fkAme)
+    dashboardEspecificaModel.kpisParametroRam(fkAme, idMaquina)
         .then((response) => {
             res.json(response);
         })
@@ -88,12 +90,13 @@ function kpisParametroRam(req, res) {
 
 function kpiRede(req, res) {
     var fkAme = req.params.fkAme
+    var idMaquina = req.params.idMaquina
 
     if (fkAme == undefined) {
         console.log("fkAme está undefined");
     }
 
-    dashboardEspecificaModel.kpiRede(fkAme)
+    dashboardEspecificaModel.kpiRede(fkAme, idMaquina)
       .then((response) => {
             res.json(response);
         })
@@ -105,8 +108,8 @@ function kpiRede(req, res) {
 
   
 function obterDadosCpu(req, res) {
-
-    dashboardEspecificaModel.obterDadosCpu()
+    var idMaquina = req.params.idMaquina
+    dashboardEspecificaModel.obterDadosCpu(idMaquina)
         .then((response) => {
             res.json(response);
         })
@@ -118,12 +121,13 @@ function obterDadosCpu(req, res) {
 
 function kpiTempoDisco(req, res) {
     var fkAme = req.params.fkAme
+    var idMaquina = req.params.idMaquina
 
     if (fkAme == undefined) {
         console.log("fkAme está undefined");
     }
 
-    dashboardEspecificaModel.kpiTempoDisco(fkAme)
+    dashboardEspecificaModel.kpiTempoDisco(fkAme, idMaquina)
         .then((response) => {
             res.json(response);
         })
@@ -134,8 +138,8 @@ function kpiTempoDisco(req, res) {
 }
   
 function obterDadosDiscoEspecifica(req, res) {
-
-    dashboardEspecificaModel.obterDadosDiscoEspecifica()
+    var idMaquina = req.params.idMaquina
+    dashboardEspecificaModel.obterDadosDiscoEspecifica(idMaquina)
 
         .then((response) => {
             res.json(response);
@@ -148,12 +152,13 @@ function obterDadosDiscoEspecifica(req, res) {
 
 function informacoesMaquina(req, res) {
     var fkAme = req.params.fkAme
+    var idMaquina = req.params.idMaquina
 
     if (fkAme == undefined) {
         console.log("fkAme está undefined");
     }
 
-    dashboardEspecificaModel.informacoesMaquina(fkAme)
+    dashboardEspecificaModel.informacoesMaquina(fkAme, idMaquina)
         .then((response) => {
             res.json(response);
         })
@@ -161,6 +166,20 @@ function informacoesMaquina(req, res) {
             console.log(erro);
             res.status(500).json(erro.sqlMessage)
         })
+}
+
+function listagemAlerta(req, res) {
+    medidaModel.listagemAlerta().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
 
 module.exports = {
@@ -173,5 +192,6 @@ module.exports = {
     obterDadosRede,
     obterDadosCpu,
     obterDadosDiscoEspecifica,
-    informacoesMaquina
+    informacoesMaquina,
+    listagemAlerta
 }

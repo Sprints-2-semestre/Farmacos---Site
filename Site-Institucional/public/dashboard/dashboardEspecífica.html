@@ -302,6 +302,8 @@
 <script>
     document.getElementById("nomeUsuario").innerHTML = `Olá, ${sessionStorage.NOME_USUARIO}`
     var fkAme = sessionStorage.FK_AME
+    var idMaquina = sessionStorage.idMaquina
+
     function exibirNomeDoEstabelecimentoDeTrabalho() {
 
         fetch(`/dashboardEspecifica/nomeAme/${fkAme}`,
@@ -328,16 +330,9 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
+                        console.log(resposta)
                         for (var i = 0; i < resposta.length; i++) {
-                            var idMaquina = sessionStorage.idMaquina = resposta[i].idMaquina
-
-                            if (resposta[i].statusMaquina == 1) {
-                                resposta[i].statusMaquina = "Ativada"
-                            } else {
-                                resposta[i].statusMaquina = "Desativada"
-                            }
-                            document.getElementById("listaDeMaquinas").innerHTML += `${resposta[i].idMaquina} 
-                        ${resposta[i].statusMaquina} <br><br>`
+                            document.getElementById("listaDeMaquinas").innerHTML = `${resposta[i].idMaquina} <br><br>`
                         }
                     });
                 } else {
@@ -356,7 +351,7 @@
         let segundosCpuMáximo = 0;
         let minutosCpuMáximo = 0;
 
-        fetch(`/dashboardEspecifica/kpisParametroCpu/${fkAme}`,
+        fetch(`/dashboardEspecifica/kpisParametroCpu/${fkAme}/${idMaquina}`,
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
@@ -401,7 +396,7 @@
         let segundosRamMáximo = 0;
         let minutosRamMáximo = 0;
 
-        fetch(`/dashboardEspecifica/kpisParametroRam/${fkAme}`,
+        fetch(`/dashboardEspecifica/kpisParametroRam/${fkAme}/${idMaquina}`,
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
@@ -446,7 +441,7 @@
         let minutosRedeMaximo = 0;
         let horasRedeMaximo = 0;
 
-        fetch(`/dashboardEspecifica/kpiRede/${fkAme}`,
+        fetch(`/dashboardEspecifica/kpiRede/${fkAme}/${idMaquina}`,
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
@@ -496,7 +491,7 @@
         let segundosDiscoMáximo = 0;
         let minutosDiscoMáximo = 0;
 
-        fetch(`/dashboardEspecifica/kpiTempoDisco/${fkAme}`,
+        fetch(`/dashboardEspecifica/kpiTempoDisco/${fkAme}/${idMaquina}`,
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
@@ -533,7 +528,7 @@
     }
 
     function informacoesMaquina() {
-        fetch(`/dashboardEspecifica/informacoesMaquina/${fkAme}`,
+        fetch(`/dashboardEspecifica/informacoesMaquina/${fkAme}/${idMaquina}`,
             { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
@@ -553,14 +548,68 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
+
+    function listagemAlerta() {
+        console.log("Entrando no listarAlertas()")
+
+        fetch(`/dashBoardEspecifica/listagemAlerta/:${idMaquina}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container1");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = ""
+                    feed.appendChild(mensagem);
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    var feed = document.getElementById("feed_container1");
+                    var colunas = document.getElementById("colunas-container1");
+                    feed.appendChild(colunas);
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        var linha = document.createElement("tr");
+                        var idMaquina = document.createElement("td");
+                        var dtHoraAlerta = document.createElement("td");
+                        var nomeComponente = document.createElement("td");
+                        var porcentagem = document.createElement("td");
+
+                        idMaquina.innerHTML = `<span>${publicacao.idMaquinaAlerta}</span>`
+                        dtHoraAlerta.innerHTML = `<span>${publicacao.dtHoraAlerta}</span>`
+                        nomeComponente.innerHTML = `<span>${publicacao.nomeComponente}</span>`
+                        porcentagem.innerHTML = `<span>${publicacao.porcentagem}</span>`
+
+                        feed.appendChild(linha);
+                        linha.appendChild(idMaquina);
+                        linha.appendChild(dtHoraAlerta);
+                        linha.appendChild(nomeComponente);
+                        linha.appendChild(porcentagem);
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+
 </script>
 
+
+
 <script>
-    function obterDadosGrafico() {
-        fetch(`/dashboardEspecifica/obterDadosRede`, {
+    console.log(idMaquina)
+    function obterDadosGrafico(idMaquina) {
+        var idMaquina = sessionStorage.idMaquina
+        console.log(idMaquina)
+        fetch(`/dashboardEspecifica/obterDadosRede/${idMaquina}`, {
             cache: 'no-store',
             method: "GET",
         }).then(function (response) {
+            
             if (response.ok) {
                 response.json().then(function (resposta) {
                     dadosBytes = { resposta }
@@ -635,10 +684,10 @@
         setTimeout(() => atualizarGrafico(dados, myChartRede), 4000);
     }
 
-    function atualizarGrafico(dados, myChart) {
+    function atualizarGrafico(dados, myChart, idMaquina) {
+        var idMaquina = sessionStorage.idMaquina
 
-
-        fetch(`/dashboardEspecifica/obterDadosRede`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboardEspecifica/obterDadosRede/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
@@ -676,18 +725,19 @@
 
 <script>
     // GRÁFICO DE CPU E RAM
-
-    function obterDadosCpu() {
-        fetch(`/dashboardEspecifica/obterDadosCpu`, {
+    
+    function obterDadosCpu(idMaquina) {
+        var idMaquina = sessionStorage.idMaquina
+        fetch(`/dashboardEspecifica/obterDadosCpu/${idMaquina}`, {
             cache: 'no-store',
             method: "GET",
         }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     dadosBytes = { resposta }
-
+                    
                     plotarGraficoCpu(resposta);
-
+                    
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -750,15 +800,15 @@
         myChartCpu = new Chart(
             document.getElementById(`myChart1`),
             config
-        );
+            );
         myChartCpu.update();
         setTimeout(() => atualizarGraficoCpu(dados, myChartCpu), 4000);
     }
 
-    function atualizarGraficoCpu(dados, myChartCpu) {
+    function atualizarGraficoCpu(dados, myChartCpu, idMaquina) {
+        var idMaquina = sessionStorage.idMaquina
 
-
-        fetch(`/dashboardEspecifica/obterDadosCpu`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboardEspecifica/obterDadosCpu/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro2) {
 
@@ -799,7 +849,8 @@
     // DASH DISCO
 
     function obterDadosGrafico2() {
-        fetch(`/dashboardEspecifica/obterDadosDiscoEspecifica`, {
+        var idMaquina = sessionStorage.idMaquina
+        fetch(`/dashboardEspecifica/obterDadosDiscoEspecifica/${idMaquina}`, {
             cache: 'no-store',
             method: "GET",
         }).then(function (response) {
@@ -816,7 +867,7 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-    }
+        }
 
     function plotarGrafico2(resposta) {
         // Criando estrutura para plotar gráfico - labels
@@ -870,20 +921,21 @@
                 }
             }
         };
-
+        
         // Adicionando gráfico criado em div na tela
         myChart2 = new Chart(
             document.getElementById(`myChart3`),
             config
-        );
-        myChart2.update();
+            );
+            myChart2.update();
         setTimeout(() => atualizarGrafico2(dados, myChart2), 4000);
     }
 
-
+    
     function atualizarGrafico2(dados, myChart2) {
+        var idMaquina = sessionStorage.idMaquina
 
-        fetch(`/dashboardEspecifica/obterDadosDiscoEspecifica`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboardEspecifica/obterDadosDiscoEspecifica/${idMaquina}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 

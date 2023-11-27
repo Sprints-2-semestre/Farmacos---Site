@@ -254,7 +254,7 @@ function dadosCPU(req, res) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("dadosRAM não encontrado");s
+            res.status(204).send("dadosRAM não encontrado");
         }
     }).catch(function (erro) {
         console.log(erro);
@@ -269,7 +269,7 @@ function dadosRAM(req, res) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("dadosRAM não encontrado");s
+            res.status(204).send("dadosRAM não encontrado");
         }
     }).catch(function (erro) {
         console.log(erro);
@@ -284,7 +284,7 @@ function dadosDISCO(req, res) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("dadosDISCO não encontrado");s
+            res.status(204).send("dadosDISCO não encontrado");
         }
     }).catch(function (erro) {
         console.log(erro);

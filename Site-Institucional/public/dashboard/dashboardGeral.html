@@ -93,19 +93,20 @@
                     <div class="descricao-componente">
                         <img src="../img/aviso (1).png" alt="">
                         <p style="color:#FFC048;">Preocupante
-                        <p  style="color:#FFC048;" id="preocupanteDISCO"></p>
+                        <p style="color:#FFC048;" id="preocupanteDISCO"></p>
                         </p>
                     </div>
                     <div class="descricao-componente">
                         <img src="../img/aviso.png" alt="">
                         <p>Crítico
-                        <p id="criticoDISCO"></p></p>
+                        <p id="criticoDISCO"></p>
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="div-central">
                 <div class="div-tab-ram">
-                   
+
                     <canvas id="myChart4" style="width: 400px; height: 220px;"></canvas>
                 </div>
                 <div class="div-graf-disco">
@@ -292,11 +293,12 @@
             if (resposta.ok) {
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    if(resposta[0].CPU >= Number(preocupanteCPU.innerHTML)){
+                    if (resposta[0].CPU >= Number(preocupanteCPU.innerHTML)) {
                         inserirAlertaCPU(resposta)
                     } else if (resposta[0].CPU >= Number(criticoCPU.innerHTML)) {
                         inserirAlertaCPU(resposta)
-                    }});
+                    }
+                });
             } else {
                 throw ('Houve um erro na API!');
             }
@@ -336,7 +338,7 @@
             console.log(`#ERRO: ${resposta}`);
         });
     };
-const intervaloCPU = setInterval(dadosCPU, 3000);
+    const intervaloCPU = setInterval(dadosCPU, 3000);
 
     // MEMÓRIA RAM
     function dadosRAM() {
@@ -346,9 +348,10 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
             if (resposta.ok) {
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-                    if(resposta[0].RAM >= Number(preocupanteRAM.innerHTML)){
+                    if (resposta[0].RAM >= Number(preocupanteRAM.innerHTML)) {
                         inserirAlertaRAM(resposta)
-                    }});
+                    }
+                });
             } else {
                 throw ('Houve um erro na API!');
             }
@@ -386,7 +389,7 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
-};
+    };
     const intervaloRAM = setInterval(dadosRAM, 2000);
 
     // DISCO
@@ -397,9 +400,10 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
             if (resposta.ok) {
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos DISCO: ", JSON.stringify(resposta));
-                    if(resposta[0].usoAtualDisco >= Number(preocupanteDISCO.innerHTML)){
+                    if (resposta[0].usoAtualDisco >= Number(preocupanteDISCO.innerHTML)) {
                         inserirAlertaDISCO(resposta)
-                    }});
+                    }
+                });
             } else {
                 throw ('Houve um erro na API!');
             }
@@ -437,7 +441,7 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
-};
+    };
     const intervaloDISCO = setInterval(dadosDISCO, 2000);
 
     // REDE
@@ -450,9 +454,10 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                    if(resposta[0].REDE >= Number(preocupanteREDE.innerHTML)){
+                    if (resposta[0].REDE >= Number(preocupanteREDE.innerHTML)) {
                         inserirAlertaREDE(resposta)
-                    }});
+                    }
+                });
             } else {
                 throw ('Houve um erro na API!');
             }
@@ -490,60 +495,60 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
-};
+    };
     const intervaloREDE = setInterval(dadosREDE, 3000);
 
     // LISTAGEM ALERTAS
 
-    function listagemAlerta () {
-    console.log ("Entrando no listarAlertas()")
+    function listagemAlerta() {
+        console.log("Entrando no listarAlertas()")
 
-    fetch("/medidas/listagemAlerta/").then(function (resposta) {
-    if (resposta.ok) {
-        if (resposta.status == 204) {
-            var feed = document.getElementById("feed_container1");
-            var mensagem = document.createElement("span");
-            mensagem.innerHTML = ""
-            feed.appendChild(mensagem);
-        }
+        fetch("/medidas/listagemAlerta/").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container1");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = ""
+                    feed.appendChild(mensagem);
+                }
 
-        resposta.json().then(function (resposta) {
-            console.log("Dados recebidos: ", JSON.stringify(resposta));
-            var feed = document.getElementById("feed_container1");
-            var colunas = document.getElementById("colunas-container1");
-            feed.appendChild(colunas);
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    var feed = document.getElementById("feed_container1");
+                    var colunas = document.getElementById("colunas-container1");
+                    feed.appendChild(colunas);
+                    
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
 
-            for (let i = 0; i < resposta.length; i++) {
-                var publicacao = resposta[i];
+                        var linha = document.createElement("tr");
+                        var idMaquina = document.createElement("td");
+                        var dtHoraAlerta = document.createElement("td");
+                        var nomeComponente = document.createElement("td");
+                        var porcentagem = document.createElement("td");
 
-                var linha = document.createElement("tr");
-                var idMaquina = document.createElement("td");
-                var dtHoraAlerta = document.createElement("td");
-                var nomeComponente = document.createElement("td");
-                var porcentagem = document.createElement("td");
+                        idMaquina.innerHTML = `<span>${publicacao.idMaquinaAlerta}</span>`
+                        dtHoraAlerta.innerHTML = `<span>${publicacao.dtHoraAlerta}</span>`
+                        nomeComponente.innerHTML = `<span>${publicacao.nomeComponente}</span>`
+                        porcentagem.innerHTML = `<span>${publicacao.porcentagem}</span>`
 
-                idMaquina.innerHTML = `<span>${publicacao.idMaquinaAlerta}</span>`
-                dtHoraAlerta.innerHTML = `<span>${publicacao.dtHoraAlerta}</span>`
-                nomeComponente.innerHTML = `<span>${publicacao.nomeComponente}</span>`
-                porcentagem.innerHTML = `<span>${publicacao.porcentagem}</span>`
-
-                feed.appendChild(linha);
-                linha.appendChild(idMaquina);
-                linha.appendChild(dtHoraAlerta);
-                linha.appendChild(nomeComponente);
-                linha.appendChild(porcentagem);
+                        feed.appendChild(linha);
+                        linha.appendChild(idMaquina);
+                        linha.appendChild(dtHoraAlerta);
+                        linha.appendChild(nomeComponente);
+                        linha.appendChild(porcentagem);
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
             }
+        }).catch(function (resposta) {
+            console.error(resposta);
         });
-    } else {
-        throw ('Houve um erro na API!');
-    }
-}).catch(function (resposta) {
-    console.error(resposta);
-});
     }
 
     // FIM LISTAGEM ALERTA
-    
+
     // Pegar o idMaquina
     // Pegar nome do ame
     var IdUserVar = sessionStorage.ID_USUARIO;
@@ -1201,4 +1206,4 @@ const intervaloCPU = setInterval(dadosCPU, 3000);
             });
 
     }
-    </script>
+</script>
