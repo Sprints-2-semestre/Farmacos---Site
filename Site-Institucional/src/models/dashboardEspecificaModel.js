@@ -78,8 +78,11 @@ function kpiTempoDisco(fkAme, idMaquina) {
 
 function informacoesMaquina(fkAme, idMaquina) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `SELECT * FROM maquina JOIN ame JOIN maquinaTipoComponente ON
-     maquina.idMaquina = maquinaTipoComponente.fkMaquina WHERE ame.idAme = ${fkAme} AND maquina.idMaquina = ${idMaquina};`
+    var instrucaoSql = `SELECT *
+FROM
+    maquina
+WHERE
+    maquina.idMaquina = ${idMaquina};`
 
     console.log("Executando a instrução do SQL " + instrucaoSql)
     return database.executar(instrucaoSql)
@@ -91,8 +94,28 @@ function obterDadosRede(idMaquina) {
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 4;`;
-        instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente WHERE bytesRecebido AND bytesEnviado is not null ORDER BY (dtHora) DESC LIMIT 4;`;
+        instrucaoSql = `SELECT
+    bytesRecebido,
+    bytesEnviado,
+    FORMAT(dtHora, 'HH:mm:ss') AS HoraCaptura
+FROM
+    dadosComponente
+WHERE
+    bytesRecebido IS NOT NULL AND bytesEnviado IS NOT NULL
+ORDER BY
+    dtHora DESC
+OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY;`;
+        instrucaoSql = `SELECT
+    bytesRecebido,
+    bytesEnviado,
+    FORMAT(dtHora, 'HH:mm:ss') AS HoraCaptura
+FROM
+    dadosComponente
+WHERE
+    bytesRecebido IS NOT NULL AND bytesEnviado IS NOT NULL
+ORDER BY
+    dtHora DESC
+OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select bytesRecebido, bytesEnviado, date_format(dtHora, '%T') as HoraCaptura from dadosComponente JOIN maquina WHERE bytesRecebido IS NOT NULL
         AND bytesEnviado IS NOT NULL 
@@ -111,19 +134,37 @@ function obterDadosCpu(idMaquina) {
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT dc1.memoriaEmUso, dc2.qtdUsoCpu, TIME_FORMAT(dc1.dtHora, '%H:%i:%s') AS dtHora
-        FROM dadosComponente dc1
-        LEFT JOIN dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
-        WHERE dc1.memoriaEmUso IS NOT NULL AND dc2.qtdUsoCpu IS NOT NULL
-        ORDER BY dc1.dtHora DESC LIMIT 5;`;
+        instrucaoSql = `SELECT
+    dc1.memoriaEmUso,
+    dc2.qtdUsoCpu,
+    FORMAT(dc1.dtHora, 'HH:mm:ss') AS dtHora
+FROM
+    dadosComponente dc1
+LEFT JOIN
+    dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
+WHERE
+    dc1.memoriaEmUso IS NOT NULL
+    AND dc2.qtdUsoCpu IS NOT NULL
+ORDER BY
+    dc1.dtHora DESC
+OFFSET 0 ROWS -- OFFSET e FETCH são usados para paginar resultados
+FETCH FIRST 5 ROWS ONLY;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT dc1.memoriaEmUso, dc2.qtdUsoCpu, TIME_FORMAT(dc1.dtHora, '%H:%i:%s') AS dtHora
-        FROM dadosComponente dc1
-        LEFT JOIN dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
-        JOIN maquina
-        WHERE dc1.memoriaEmUso IS NOT NULL AND dc2.qtdUsoCpu IS NOT NULL 
-        AND maquina.idMaquina = ${idMaquina}
-        ORDER BY dc1.dtHora DESC LIMIT 5;`;
+        instrucaoSql = `SELECT
+    dc1.memoriaEmUso,
+    dc2.qtdUsoCpu,
+    FORMAT(dc1.dtHora, 'HH:mm:ss') AS dtHora
+FROM
+    dadosComponente dc1
+LEFT JOIN
+    dadosComponente dc2 ON dc1.dtHora = dc2.dtHora
+WHERE
+    dc1.memoriaEmUso IS NOT NULL
+    AND dc2.qtdUsoCpu IS NOT NULL
+ORDER BY
+    dc1.dtHora DESC
+OFFSET 0 ROWS -- OFFSET e FETCH são usados para paginar resultados
+FETCH FIRST 5 ROWS ONLY;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -138,7 +179,17 @@ function obterDadosDiscoEspecifica(idMaquina) {
     instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT hostName, usoAtualDisco, usoDisponivelDisco FROM dadosComponente join maquina on idMaquina = fkMaquina WHERE usoAtualDisco AND usoDisponivelDisco IS NOT NULL LIMIT 1;`;
+        instrucaoSql = `SELECT TOP 1
+    maquina.hostName,
+    dadosComponente.usoAtualDisco,
+    dadosComponente.usoDisponivelDisco
+FROM
+    dadosComponente
+JOIN
+    maquina ON dadosComponente.fkMaquina = maquina.idMaquina
+WHERE
+    dadosComponente.usoAtualDisco IS NOT NULL
+    AND dadosComponente.usoDisponivelDisco IS NOT NULL;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT hostName, usoAtualDisco, usoDisponivelDisco FROM dadosComponente join maquina on idMaquina = fkMaquina WHERE maquina.idMaquina = ${idMaquina} AND usoAtualDisco AND usoDisponivelDisco IS NOT NULL LIMIT 1;`;
     } else {
@@ -152,7 +203,15 @@ function obterDadosDiscoEspecifica(idMaquina) {
 
 function listagemAlerta() {
     console.log("Function listagemAlertas():");
-    var instrucao = `SELECT DISTINCT idMaquinaAlerta, dtHoraAlerta, nomeComponente, porcentagem FROM historicoAlerta ORDER BY dtHoraAlerta DESC;`
+    var instrucao = `SELECT DISTINCT
+    idMaquinaAlerta,
+    dtHoraAlerta,
+    nomeComponente,
+    porcentagem
+FROM
+    historicoAlerta
+ORDER BY
+    dtHoraAlerta DESC;`
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);  
 }
